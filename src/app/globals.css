@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #FBF7EE;
+  --teal-light: #7FA8AD;
+  --teal-dark: #4F7C81;
+  --gold: #E8AE3F;
+  --orange: #D97B2B;
+  --rust: #A8472A;
+  --background: var(--cream);
+  --foreground: #1a1a1a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* ── Mascot animations ── */
+@keyframes bird-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes bird-fly {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+@keyframes bird-land {
+  0% { transform: translateY(-12px) rotate(-8deg); }
+  60% { transform: translateY(2px) rotate(3deg); }
+  80% { transform: translateY(-2px) rotate(-1deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+@keyframes bird-sing {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-3px) rotate(-4deg); }
+  75% { transform: translateY(-3px) rotate(4deg); }
+}
+
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+@keyframes wing-flap {
+  0%, 100% { transform: rotate(0); }
+  50% { transform: rotate(-25deg); }
+}
+
+@keyframes wing-rest {
+  0%, 80%, 100% { transform: rotate(0); }
+  90% { transform: rotate(-8deg); }
+}
+
+@keyframes note-rise-1 {
+  0% { opacity: 0; transform: translateY(0); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-14px); }
+}
+
+@keyframes note-rise-2 {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-18px); }
+}
+
+.animate-bird-bob {
+  animation: bird-bob 2.4s ease-in-out infinite;
+}
+.animate-bird-fly {
+  animation: bird-fly 0.4s ease-in-out infinite;
+}
+.animate-bird-land {
+  animation: bird-land 0.6s ease-out forwards;
+}
+.animate-bird-sing {
+  animation: bird-sing 0.5s ease-in-out infinite;
+}
+.animate-blink {
+  animation: blink 4s ease-in-out infinite;
+  transform-origin: center;
+}
+.animate-wing-flap {
+  animation: wing-flap 0.3s ease-in-out infinite alternate;
+  transform-origin: 26px 32px;
+}
+.animate-wing-rest {
+  animation: wing-rest 5s ease-in-out infinite;
+  transform-origin: 26px 32px;
+}
+.animate-note-1 {
+  animation: note-rise-1 1.2s ease-out infinite;
+}
+.animate-note-2 {
+  animation: note-rise-2 1.2s ease-out 0.3s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-bird-bob,
+  .animate-bird-fly,
+  .animate-bird-land,
+  .animate-bird-sing,
+  .animate-blink,
+  .animate-wing-flap,
+  .animate-wing-rest,
+  .animate-note-1,
+  .animate-note-2 {
+    animation: none !important;
+  }
+}
