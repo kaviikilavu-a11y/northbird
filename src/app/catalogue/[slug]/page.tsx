@@ -77,27 +77,37 @@ export default async function CategoryPage({ params }: Props) {
               return (
                 <article
                   key={product.id}
-                  className="rounded-2xl border flex flex-col overflow-hidden transition-shadow hover:shadow-md"
+                  className="group rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]"
                   style={{ borderColor: "var(--teal-light)", background: "white" }}
                 >
                   {product.imageUrl ? (
                     <div className="aspect-square overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+                      <img
+                        src={product.imageUrl}
+                        alt={product.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                      />
                     </div>
                   ) : (
                     <div
-                      className="aspect-square flex items-center justify-center text-5xl"
+                      className="aspect-square flex items-center justify-center text-5xl overflow-hidden"
                       style={{ background: "var(--cream-deep)" }}
                       aria-hidden="true"
                     >
-                      {cat.emoji}
+                      <span className="inline-block transition-transform duration-500 ease-out group-hover:scale-110">
+                        {cat.emoji}
+                      </span>
                     </div>
                   )}
 
                   <div className="p-4 flex flex-col flex-1 gap-2">
                     <div className="flex items-start justify-between gap-2">
-                      <h2 className="font-semibold text-sm leading-snug flex-1" style={{ color: "var(--teal-dark)" }}>
+                      <h2
+                        className="font-semibold text-sm leading-snug flex-1 transition-colors duration-200 group-hover:[color:var(--rust)]"
+                        style={{ color: "var(--teal-dark)" }}
+                      >
                         {product.name}
                       </h2>
                       {product.bestValue && (
@@ -122,7 +132,7 @@ export default async function CategoryPage({ params }: Props) {
                           <span
                             key={c}
                             title={c}
-                            className="w-3.5 h-3.5 rounded-full border"
+                            className="w-3.5 h-3.5 rounded-full border transition-transform duration-200 hover:scale-125"
                             style={{ background: swatchColor(c), borderColor: "rgba(0,0,0,0.12)" }}
                           />
                         ))}
@@ -137,7 +147,7 @@ export default async function CategoryPage({ params }: Props) {
                       href={waLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-2 flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl font-semibold text-xs transition-colors"
+                      className="btn-press mt-2 flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl font-semibold text-xs transition-all duration-200 hover:shadow-[0_4px_16px_-4px_rgba(37,211,102,0.55)] hover:-translate-y-0.5"
                       style={{ background: "#25D366", color: "white" }}
                     >
                       <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
@@ -170,7 +180,7 @@ export default async function CategoryPage({ params }: Props) {
             href={getWhatsAppLink(`Hi! I'd like pricing on ${cat.name}.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-transform hover:scale-105"
+            className="btn-press inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm hover:shadow-[0_4px_16px_-4px_rgba(37,211,102,0.55)] hover:-translate-y-0.5 transition-all"
             style={{ background: "#25D366", color: "white" }}
           >
             Ask about {cat.name} on WhatsApp

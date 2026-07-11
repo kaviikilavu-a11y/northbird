@@ -1,3 +1,5 @@
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+
 const STEPS = [
   {
     n: "01",
@@ -19,18 +21,22 @@ const STEPS = [
 export default function OrderingProcess() {
   return (
     <section className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
-      <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--orange)" }}>
-        WhatsApp Ordering Journey
-      </p>
-      <h2 className="font-display text-3xl md:text-4xl font-medium mb-2" style={{ color: "var(--teal-dark)" }}>
-        No cart. No account. Just WhatsApp.
-      </h2>
-      <p className="text-sm max-w-xl mb-12" style={{ color: "#666" }}>
-        A deliberate choice, not a placeholder waiting for checkout — the way Kenyan businesses already buy.
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <Reveal variant="up">
+        <div>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--orange)" }}>
+            WhatsApp Ordering Journey
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-medium mb-2" style={{ color: "var(--teal-dark)" }}>
+            No cart. No account. Just WhatsApp.
+          </h2>
+          <p className="text-sm max-w-xl mb-12" style={{ color: "#666" }}>
+            A deliberate choice, not a placeholder waiting for checkout — the way Kenyan businesses already buy.
+          </p>
+        </div>
+      </Reveal>
+      <StaggerGroup className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {STEPS.map((s) => (
-          <div key={s.n} className="relative">
+          <StaggerItem key={s.n} variant="up" className="relative">
             <span
               className="font-display text-4xl font-medium block mb-3"
               style={{ color: "var(--teal-light)" }}
@@ -44,9 +50,9 @@ export default function OrderingProcess() {
             <p className="text-sm leading-relaxed" style={{ color: "#666" }}>
               {s.body}
             </p>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerGroup>
     </section>
   );
 }

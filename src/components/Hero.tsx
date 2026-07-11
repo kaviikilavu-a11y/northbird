@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { BRAND, PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/site-config";
 
 // Placeholder product visuals — replace src with real Canva/Adobe Express mockup URLs
@@ -31,14 +32,34 @@ const SLIDES: { gradient: string; label: string; imageUrl?: string }[] = [
 
 const SLIDE_DURATION = 5000; // ms per slide
 const TRANSITION_DURATION = 900; // ms crossfade
+const IDLE_PULSE_DELAY = 4000; // ms before the primary CTA pulses if untouched
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const textStagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+const textItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } },
+};
 
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [idlePulse, setIdlePulse] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const mvX = useMotionValue(0);
+  const mvY = useMotionValue(0);
+  const parallaxX = useSpring(mvX, { stiffness: 60, damping: 20 });
+  const parallaxY = useSpring(mvY, { stiffness: 60, damping: 20 });
+  const bgX = useTransform(parallaxX, (v) => v * -14);
+  const bgY = useTransform(parallaxY, (v) => v * -14);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -58,15 +79,39 @@ export default function Hero() {
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [paused, reducedMotion]);
 
+  // Idle pulse on the primary CTA if the visitor hasn't interacted yet.
+  useEffect(() => {
+    if (reducedMotion) return;
+    idleTimerRef.current = setTimeout(() => setIdlePulse(true), IDLE_PULSE_DELAY);
+    return () => { if (idleTimerRef.current) clearTimeout(idleTimerRef.current); };
+  }, [reducedMotion]);
+
+  const stopIdlePulse = () => {
+    setIdlePulse(false);
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+  };
+
+  const handlePointerMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (reducedMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    mvX.set(((e.clientX - rect.left) / rect.width - 0.5) * 2);
+    mvY.set(((e.clientY - rect.top) / rect.height - 0.5) * 2);
+  };
+
   return (
     <section
-      className="relative overflow-hidden min-h-[92vh] flex items-center"
+      className="relative overflow-hidden min-h-[92vh] flex items-center -mt-20"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onMouseMove={handlePointerMove}
       aria-label="Hero"
     >
       {/* Background slide stack */}
-      <div className="absolute inset-0" aria-hidden="true">
+      <motion.div
+        className="absolute inset-[-3%]"
+        aria-hidden="true"
+        style={reducedMotion ? undefined : { x: bgX, y: bgY }}
+      >
         {SLIDES.map((slide, i) => {
           const isActive = reducedMotion ? i === 0 : i === activeIndex;
           return (
@@ -91,12 +136,17 @@ export default function Hero() {
               "linear-gradient(to right, rgba(31,42,46,0.82) 0%, rgba(31,42,46,0.55) 55%, rgba(31,42,46,0.15) 100%)",
           }}
         />
-      </div>
+      </motion.div>
 
       {/* Text content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
-        <div className="max-w-2xl">
-          <div className="flex items-center gap-3 mb-6">
+        <motion.div
+          className="max-w-2xl"
+          initial={reducedMotion ? undefined : "hidden"}
+          animate={reducedMotion ? undefined : "visible"}
+          variants={textStagger}
+        >
+          <motion.div className="flex items-center gap-3 mb-6" variants={textItem}>
             <span className="h-px w-10" style={{ background: "var(--gold)" }} aria-hidden="true" />
             <p
               className="text-xs font-semibold tracking-[0.15em] uppercase"
@@ -104,29 +154,41 @@ export default function Hero() {
             >
               {BRAND.eyebrow}
             </p>
-          </div>
-          <h1
+          </motion.div>
+          <motion.h1
             className="font-display font-medium leading-[1.05] mb-7"
             style={{ color: "var(--cream)", fontSize: "clamp(2.75rem, 6.5vw, 5.5rem)" }}
+            variants={textItem}
           >
             Merch people<br />actually keep.
-          </h1>
-          <p
+          </motion.h1>
+          <motion.p
             className="text-lg mb-10 leading-relaxed max-w-lg"
             style={{ color: "rgba(251,247,238,0.75)" }}
+            variants={textItem}
           >
             {BRAND.subhead}
-          </p>
-          <div className="flex flex-wrap items-center gap-6">
-            <a
+          </motion.p>
+          <motion.div className="flex flex-wrap items-center gap-6" variants={textItem}>
+            <motion.a
               href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-full font-semibold text-sm transition-opacity hover:opacity-90"
+              className="px-8 py-4 rounded-full font-semibold text-sm"
               style={{ background: "var(--rust)", color: "var(--cream)" }}
+              onMouseEnter={stopIdlePulse}
+              onFocus={stopIdlePulse}
+              whileHover={{ boxShadow: "0 0 0 8px rgba(168,71,42,0.22)" }}
+              whileTap={{ scale: 0.96 }}
+              animate={
+                idlePulse
+                  ? { boxShadow: ["0 0 0 0px rgba(168,71,42,0.28)", "0 0 0 10px rgba(168,71,42,0)"] }
+                  : { boxShadow: "0 0 0 0px rgba(168,71,42,0)" }
+              }
+              transition={idlePulse ? { duration: 1.4, repeat: Infinity, ease: "easeOut" } : { duration: 0.25 }}
             >
               {PRIMARY_CTA}
-            </a>
+            </motion.a>
             <Link
               href="/catalogue/"
               className="text-sm font-semibold tracking-wide border-b pb-0.5 transition-opacity hover:opacity-70"
@@ -134,8 +196,8 @@ export default function Hero() {
             >
               Browse Collections →
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Slide index + dots */}
         <div className="absolute bottom-10 left-6 flex items-center gap-4">
