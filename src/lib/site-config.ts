@@ -23,6 +23,16 @@ export const BRAND = {
 
 export const PRIMARY_CTA = "Talk to Northbird";
 
+// Only non-empty for the GitHub Pages preview build, which serves from a /northbird
+// subpath. next/link and next/navigation handle this automatically via next.config.ts's
+// basePath, but raw <img src> tags for product photos (sourced from catalogue-data.ts)
+// need it applied manually.
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+export function assetPath(path: string): string {
+  return `${BASE_PATH}${path}`;
+}
+
 export function getWhatsAppLink(message: string = "Hi! I'd like to inquire about your products."): string {
   const encoded = encodeURIComponent(message);
   const number = BRAND.whatsapp.replace(/\D/g, "");

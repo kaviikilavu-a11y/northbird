@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useBundle, buildBundleWhatsAppMessage } from "@/lib/bundle-context";
-import { getWhatsAppLink } from "@/lib/site-config";
+import { getWhatsAppLink, assetPath } from "@/lib/site-config";
 import QuantityStepper from "./QuantityStepper";
 
 function BagIcon() {
@@ -114,7 +114,7 @@ export default function BundlePanel() {
                       <li key={item.id} className="flex gap-3 pb-4 border-b" style={{ borderColor: "var(--cream-deep)" }}>
                         {item.imageUrl ? (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={item.imageUrl} alt={item.name} className="w-14 h-14 rounded-lg object-cover shrink-0" style={{ background: "var(--cream-deep)" }} />
+                          <img src={assetPath(item.imageUrl)} alt={item.name} className="w-14 h-14 rounded-lg object-cover shrink-0" style={{ background: "var(--cream-deep)" }} />
                         ) : (
                           <div className="w-14 h-14 rounded-lg flex items-center justify-center text-2xl shrink-0" style={{ background: "var(--cream-deep)" }} aria-hidden="true">
                             {item.emoji}

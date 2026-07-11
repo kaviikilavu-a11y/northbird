@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { formatKES, type ProductVariant } from "@/lib/catalogue-data";
-import { getWhatsAppLink } from "@/lib/site-config";
+import { getWhatsAppLink, assetPath } from "@/lib/site-config";
 import { useBundle } from "@/lib/bundle-context";
 import QuantityStepper from "@/components/bundle/QuantityStepper";
 
@@ -58,7 +58,7 @@ export default function ProductCard({
         <div className="aspect-square overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={product.imageUrl}
+            src={assetPath(product.imageUrl)}
             alt={product.name}
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
