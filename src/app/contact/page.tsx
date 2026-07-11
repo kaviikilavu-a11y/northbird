@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BRAND, getWhatsAppLink } from "@/lib/site-config";
+import { BRAND, PRIMARY_CTA, getWhatsAppLink } from "@/lib/site-config";
 import WhatsAppSection from "@/components/WhatsAppSection";
 
 export const metadata: Metadata = {
@@ -11,11 +11,12 @@ export default function ContactPage() {
   return (
     <>
       <div className="max-w-2xl mx-auto px-4 py-16">
-        <h1 className="text-3xl font-extrabold mb-4" style={{ color: "var(--teal-dark)" }}>
+        <h1 className="font-display text-3xl md:text-4xl font-semibold mb-4" style={{ color: "var(--teal-dark)" }}>
           Get in touch
         </h1>
         <p className="text-sm mb-10" style={{ color: "#666" }}>
           The fastest way to reach us is WhatsApp — we typically respond within a few hours during business hours.
+          {BRAND.parent} · {BRAND.location}.
         </p>
 
         <div className="space-y-4">
@@ -35,7 +36,7 @@ export default function ContactPage() {
               className="px-4 py-2 rounded-full text-xs font-semibold"
               style={{ background: "#25D366", color: "white" }}
             >
-              Chat now
+              {PRIMARY_CTA}
             </a>
           </div>
 
@@ -61,7 +62,7 @@ export default function ContactPage() {
 
       <WhatsAppSection
         heading="Start your order today"
-        sub="Tell us what you need — product type, quantity, and deadline. We&apos;ll take it from there."
+        sub="Tell us what you need — product type, quantity, and deadline. We'll take it from there."
       />
     </>
   );

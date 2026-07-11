@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useReducer } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/site-config";
+import { BRAND, PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/site-config";
 
 // Placeholder product visuals — replace src with real Canva/Adobe Express mockup URLs
 // Each uses Northbird brand colors as gradient backgrounds until real images exist
@@ -35,12 +35,13 @@ const TRANSITION_DURATION = 900; // ms crossfade
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
@@ -99,10 +100,10 @@ export default function Hero() {
             className="text-xs font-semibold tracking-widest uppercase mb-4"
             style={{ color: "var(--gold)" }}
           >
-            East Africa&apos;s Branded Merchandise Studio
+            {BRAND.eyebrow}
           </p>
           <h1
-            className="text-5xl md:text-6xl font-extrabold leading-tight mb-6"
+            className="font-display text-5xl md:text-6xl font-semibold leading-tight mb-6"
             style={{ color: "var(--cream)" }}
           >
             Merch people<br />actually keep.
@@ -111,25 +112,25 @@ export default function Hero() {
             className="text-lg mb-8 leading-relaxed"
             style={{ color: "rgba(251,247,238,0.8)" }}
           >
-            Premium branded merchandise for East African businesses — from first sample to final delivery.
+            {BRAND.subhead}
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link
-              href="/catalogue"
-              className="px-7 py-3.5 rounded-full font-semibold text-sm transition-transform hover:scale-105"
-              style={{ background: "var(--gold)", color: "#1a1a1a" }}
-            >
-              Browse Catalogue
-            </Link>
             <a
               href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
+              className="px-7 py-3.5 rounded-full font-semibold text-sm transition-transform hover:scale-105"
+              style={{ background: "var(--rust)", color: "var(--cream)" }}
+            >
+              {PRIMARY_CTA}
+            </a>
+            <Link
+              href="/catalogue/"
               className="px-7 py-3.5 rounded-full font-semibold text-sm border transition-transform hover:scale-105"
               style={{ borderColor: "var(--cream)", color: "var(--cream)" }}
             >
-              Get a Quote
-            </a>
+              Browse Collections
+            </Link>
           </div>
         </div>
 

@@ -2,13 +2,17 @@
 
 :root {
   --cream: #FBF7EE;
+  --cream-deep: #F2EBD9;
   --teal-light: #7FA8AD;
   --teal-dark: #4F7C81;
   --gold: #E8AE3F;
   --orange: #D97B2B;
   --rust: #A8472A;
+  --charcoal: #1F2A2E;
   --background: var(--cream);
-  --foreground: #1a1a1a;
+  --foreground: var(--charcoal);
+  --font-display: serif;
+  --font-body: system-ui, -apple-system, sans-serif;
 }
 
 html {
@@ -18,7 +22,32 @@ html {
 body {
   background: var(--cream);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display), "Georgia", serif;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }
 
 /* ── Mascot animations ── */
