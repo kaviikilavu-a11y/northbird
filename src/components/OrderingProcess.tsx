@@ -18,21 +18,21 @@ const STEPS = [
 
 export default function OrderingProcess() {
   return (
-    <section className="py-16 md:py-20 px-4 max-w-6xl mx-auto">
+    <section className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
       <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--orange)" }}>
-        How ordering works
+        WhatsApp Ordering Journey
       </p>
-      <h2 className="font-display text-2xl md:text-3xl font-semibold mb-2" style={{ color: "var(--teal-dark)" }}>
+      <h2 className="font-display text-3xl md:text-4xl font-medium mb-2" style={{ color: "var(--teal-dark)" }}>
         No cart. No account. Just WhatsApp.
       </h2>
-      <p className="text-sm max-w-xl mb-10" style={{ color: "#666" }}>
+      <p className="text-sm max-w-xl mb-12" style={{ color: "#666" }}>
         A deliberate choice, not a placeholder waiting for checkout — the way Kenyan businesses already buy.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {STEPS.map((s) => (
           <div key={s.n} className="relative">
             <span
-              className="font-display text-4xl font-semibold block mb-3"
+              className="font-display text-4xl font-medium block mb-3"
               style={{ color: "var(--teal-light)" }}
               aria-hidden="true"
             >

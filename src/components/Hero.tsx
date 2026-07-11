@@ -60,7 +60,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden min-h-[88vh] flex items-center"
+      className="relative overflow-hidden min-h-[92vh] flex items-center"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-label="Hero"
@@ -88,75 +88,85 @@ export default function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, rgba(26,26,26,0.72) 0%, rgba(26,26,26,0.45) 60%, transparent 100%)",
+              "linear-gradient(to right, rgba(31,42,46,0.82) 0%, rgba(31,42,46,0.55) 55%, rgba(31,42,46,0.15) 100%)",
           }}
         />
       </div>
 
       {/* Text content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 w-full">
-        <div className="max-w-xl">
-          <p
-            className="text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: "var(--gold)" }}
-          >
-            {BRAND.eyebrow}
-          </p>
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
+        <div className="max-w-2xl">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="h-px w-10" style={{ background: "var(--gold)" }} aria-hidden="true" />
+            <p
+              className="text-xs font-semibold tracking-[0.15em] uppercase"
+              style={{ color: "var(--gold)" }}
+            >
+              {BRAND.eyebrow}
+            </p>
+          </div>
           <h1
-            className="font-display text-5xl md:text-6xl font-semibold leading-tight mb-6"
-            style={{ color: "var(--cream)" }}
+            className="font-display font-medium leading-[1.05] mb-7"
+            style={{ color: "var(--cream)", fontSize: "clamp(2.75rem, 6.5vw, 5.5rem)" }}
           >
             Merch people<br />actually keep.
           </h1>
           <p
-            className="text-lg mb-8 leading-relaxed"
-            style={{ color: "rgba(251,247,238,0.8)" }}
+            className="text-lg mb-10 leading-relaxed max-w-lg"
+            style={{ color: "rgba(251,247,238,0.75)" }}
           >
             {BRAND.subhead}
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap items-center gap-6">
             <a
               href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-7 py-3.5 rounded-full font-semibold text-sm transition-transform hover:scale-105"
+              className="px-8 py-4 rounded-full font-semibold text-sm transition-opacity hover:opacity-90"
               style={{ background: "var(--rust)", color: "var(--cream)" }}
             >
               {PRIMARY_CTA}
             </a>
             <Link
               href="/catalogue/"
-              className="px-7 py-3.5 rounded-full font-semibold text-sm border transition-transform hover:scale-105"
-              style={{ borderColor: "var(--cream)", color: "var(--cream)" }}
+              className="text-sm font-semibold tracking-wide border-b pb-0.5 transition-opacity hover:opacity-70"
+              style={{ borderColor: "rgba(251,247,238,0.4)", color: "var(--cream)" }}
             >
-              Browse Collections
+              Browse Collections →
             </Link>
           </div>
         </div>
 
-        {/* Slide dots */}
-        {!reducedMotion && (
-          <div className="absolute bottom-8 left-6 flex gap-2" aria-hidden="true">
-            {SLIDES.map((slide, i) => (
-              <button
-                key={i}
-                onClick={() => { setActiveIndex(i); setPaused(true); }}
-                className="w-2 h-2 rounded-full transition-all"
-                style={{
-                  background: i === activeIndex ? "var(--gold)" : "rgba(251,247,238,0.4)",
-                  width: i === activeIndex ? "24px" : "8px",
-                }}
-                aria-label={slide.label}
-              />
-            ))}
-          </div>
-        )}
+        {/* Slide index + dots */}
+        <div className="absolute bottom-10 left-6 flex items-center gap-4">
+          <span
+            className="text-xs tabular-nums tracking-wide"
+            style={{ color: "rgba(251,247,238,0.5)" }}
+            aria-live="polite"
+          >
+            {String((reducedMotion ? 0 : activeIndex) + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
+          </span>
+          {!reducedMotion && (
+            <div className="flex gap-2" aria-hidden="true">
+              {SLIDES.map((slide, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setActiveIndex(i); setPaused(true); }}
+                  className="h-px transition-all"
+                  style={{
+                    background: i === activeIndex ? "var(--gold)" : "rgba(251,247,238,0.35)",
+                    width: i === activeIndex ? "28px" : "14px",
+                  }}
+                  aria-label={slide.label}
+                />
+              ))}
+            </div>
+          )}
+        </div>
 
-        {/* Active slide label */}
         <p
-          className="absolute bottom-8 right-6 text-xs font-medium tracking-wide"
-          style={{ color: "rgba(251,247,238,0.5)" }}
-          aria-live="polite"
+          className="absolute bottom-10 right-6 text-xs font-medium tracking-wide uppercase"
+          style={{ color: "rgba(251,247,238,0.45)" }}
         >
           {reducedMotion ? SLIDES[0].label : SLIDES[activeIndex].label}
         </p>
