@@ -32,6 +32,8 @@ jobs:
           # Truhost production builds don't set this, so they stay root-relative.
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
