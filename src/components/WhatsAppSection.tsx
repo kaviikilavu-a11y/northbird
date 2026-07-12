@@ -15,6 +15,7 @@ export default function WhatsAppSection({
 }: Props) {
   return (
     <section
+      data-mascot-station="whatsapp"
       className="py-16 px-4"
       style={{ background: "var(--teal-dark)" }}
     >
