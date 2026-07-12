@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CATEGORIES, categoryStartingPrice, type Category } from "@/lib/catalogue-data";
+import { CATEGORIES, categoryStartingPrice, categoryCoverImage, type Category } from "@/lib/catalogue-data";
+import { assetPath } from "@/lib/site-config";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import SectionLabel from "@/components/motion/SectionLabel";
 
@@ -25,14 +26,24 @@ const TINTS: Record<string, string> = {
 };
 
 function HighlightedCard({ cat }: { cat: Category }) {
+  const cover = categoryCoverImage(cat);
   return (
     <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.3, ease: "easeOut" }}>
       <Link
         href={`/catalogue/${cat.slug}/`}
-        className="group block rounded-2xl p-8 flex flex-col justify-between min-h-[220px]"
+        className="group relative block rounded-2xl overflow-hidden p-8 flex flex-col justify-between min-h-[220px]"
         style={{ background: TINTS[cat.slug] ?? "var(--teal-dark)" }}
       >
-        <div>
+        {cover && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={assetPath(cover)}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover opacity-30 transition-transform duration-500 group-hover:scale-110"
+          />
+        )}
+        <div className="relative">
           <p className="text-[11px] font-semibold tracking-widest uppercase mb-3" style={{ color: "rgba(251,247,238,0.7)" }}>
             {cat.bestValue ? "Best value" : "Highlighted"}
           </p>
@@ -40,7 +51,7 @@ function HighlightedCard({ cat }: { cat: Category }) {
             {cat.name}
           </h3>
         </div>
-        <div className="flex items-end justify-between mt-6">
+        <div className="relative flex items-end justify-between mt-6">
           <span className="text-sm" style={{ color: "rgba(251,247,238,0.7)" }}>
             {cat.itemized ? `${cat.products.length} products` : "On request"}
           </span>
@@ -79,19 +90,42 @@ export default function CuratedCollections() {
               className="group block rounded-3xl p-10 md:p-16 mb-6 relative overflow-hidden"
               style={{ background: "var(--charcoal)" }}
             >
-              <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "var(--gold)" }}>
+              {(() => {
+                const featuredCover = categoryCoverImage(FEATURED);
+                return (
+                  featuredCover && (
+                    <>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={assetPath(featuredCover)}
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background:
+                            "linear-gradient(to right, rgba(31,42,46,0.95) 0%, rgba(31,42,46,0.8) 45%, rgba(31,42,46,0.35) 100%)",
+                        }}
+                      />
+                    </>
+                  )
+                );
+              })()}
+              <p className="relative text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "var(--gold)" }}>
                 Featured Collection
               </p>
               <h3
-                className="font-display font-medium mb-4 max-w-lg"
+                className="relative font-display font-medium mb-4 max-w-lg"
                 style={{ color: "var(--cream)", fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
               >
                 {FEATURED.name}
               </h3>
-              <p className="text-sm md:text-base max-w-md mb-8" style={{ color: "rgba(251,247,238,0.7)" }}>
+              <p className="relative text-sm md:text-base max-w-md mb-8" style={{ color: "rgba(251,247,238,0.7)" }}>
                 {FEATURED.description}
               </p>
-              <div className="flex items-center gap-6">
+              <div className="relative flex items-center gap-6">
                 <span
                   className="inline-block px-6 py-3 rounded-full text-sm font-semibold transition-opacity group-hover:opacity-90"
                   style={{ background: "var(--gold)", color: "var(--charcoal)" }}

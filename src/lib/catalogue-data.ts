@@ -185,9 +185,10 @@ export const CATEGORIES: Category[] = [
     name: "Business Cards",
     emoji: "💼",
     description: "Matte, gloss or textured finishes — first impressions on paper.",
-    itemized: false,
-    startingPriceLabel: "From KES 1,500 / 100",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "bc-standard", name: "Business Cards (100pc)", price: 1500, colors: ["Custom"], description: "Full-colour double-sided business cards, matte or gloss finish.", imageUrl: "/products/business-card.jpg" },
+    ],
   },
   {
     id: "flyers-brochures",
@@ -195,9 +196,10 @@ export const CATEGORIES: Category[] = [
     name: "Flyers & Brochures",
     emoji: "📄",
     description: "Print collateral for launches, campaigns and in-store promotions.",
-    itemized: false,
-    startingPriceLabel: "From KES 25 / pc",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "fb-trifold", name: "Tri-Fold Brochure", price: 25, colors: ["Custom"], description: "Full-colour tri-fold brochure printing, priced per piece.", imageUrl: "/products/brochure-tryfold.jpg" },
+    ],
   },
   {
     id: "apparel",
@@ -225,9 +227,10 @@ export const CATEGORIES: Category[] = [
     name: "Stickers & Labels",
     emoji: "🏷️",
     description: "Die-cut stickers and product labels, matte or gloss finish.",
-    itemized: false,
-    startingPriceLabel: "From KES 50 / pc",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "sl-roll", name: "Branded Stickers (Roll)", price: 50, colors: ["Custom"], description: "Round or square logo stickers, supplied on a roll or as individual sheets.", imageUrl: "/products/stickers-roll.jpg" },
+    ],
   },
   {
     id: "stationery",
@@ -266,9 +269,10 @@ export const CATEGORIES: Category[] = [
     name: "Promotional Giveaways",
     emoji: "🎉",
     description: "Small-format branded giveaways for high-volume distribution.",
-    itemized: false,
-    startingPriceLabel: "From KES 95",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "pg-giveaway-set", name: "Giveaway Set (Tote, Pen, Stress Ball, Flash Drive)", price: 95, colors: ["Custom"], description: "Mix-and-match small giveaways — canvas tote, pen, stress ball and flash drive, priced from the entry item.", imageUrl: "/products/giveaways-set.jpg" },
+    ],
   },
   {
     id: "umbrellas",
@@ -297,4 +301,9 @@ export function categoryStartingPrice(cat: Category): string | undefined {
   if (priced.length === 0) return "Custom quote";
   const min = Math.min(...priced.map((p) => p.price));
   return `From ${formatKES(min)}`;
+}
+
+/** First real product photo in the category, if any — used as the card's cover image. */
+export function categoryCoverImage(cat: Category): string | undefined {
+  return cat.products.find((p) => p.imageUrl)?.imageUrl;
 }

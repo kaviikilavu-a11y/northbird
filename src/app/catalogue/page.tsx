@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CATEGORIES, categoryStartingPrice } from "@/lib/catalogue-data";
+import { CATEGORIES, categoryStartingPrice, categoryCoverImage } from "@/lib/catalogue-data";
+import { assetPath } from "@/lib/site-config";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import type { Metadata } from "next";
 
@@ -30,43 +31,68 @@ export default function CataloguePage() {
         className="grid gap-4 pb-4 grid-cols-[repeat(auto-fill,minmax(220px,1fr))]"
         stagger={0.04}
       >
-        {CATEGORIES.map((cat) => (
-          <StaggerItem key={cat.id} variant="up">
-            <Link
-              href={`/catalogue/${cat.slug}/`}
-              className="group block rounded-2xl border p-6 flex flex-col gap-3 transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
-              style={{ borderColor: "var(--teal-light)", background: "white" }}
-            >
-              <div className="flex items-start justify-between gap-2">
-                <span className="text-4xl inline-block transition-transform duration-300 group-hover:scale-110">
-                  {cat.emoji}
-                </span>
-                {cat.bestValue && (
-                  <span
-                    className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full"
-                    style={{ background: "var(--gold)", color: "var(--charcoal)" }}
-                  >
-                    Best value
-                  </span>
+        {CATEGORIES.map((cat) => {
+          const cover = categoryCoverImage(cat);
+          return (
+            <StaggerItem key={cat.id} variant="up">
+              <Link
+                href={`/catalogue/${cat.slug}/`}
+                className="group block rounded-2xl border overflow-hidden flex flex-col transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
+                style={{ borderColor: "var(--teal-light)", background: "white" }}
+              >
+                {cover ? (
+                  <div className="h-36 overflow-hidden relative">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={assetPath(cover)}
+                      alt={cat.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    />
+                    {cat.bestValue && (
+                      <span
+                        className="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded-full"
+                        style={{ background: "var(--gold)", color: "var(--charcoal)" }}
+                      >
+                        Best value
+                      </span>
+                    )}
+                  </div>
+                ) : (
+                  <div className="pt-6 px-6 flex items-start justify-between gap-2">
+                    <span className="text-4xl inline-block transition-transform duration-300 group-hover:scale-110">
+                      {cat.emoji}
+                    </span>
+                    {cat.bestValue && (
+                      <span
+                        className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full"
+                        style={{ background: "var(--gold)", color: "var(--charcoal)" }}
+                      >
+                        Best value
+                      </span>
+                    )}
+                  </div>
                 )}
-              </div>
-              <div>
-                <h2
-                  className="font-semibold text-sm leading-snug transition-colors duration-200 group-hover:[color:var(--rust)]"
-                  style={{ color: "var(--teal-dark)" }}
-                >
-                  {cat.name}
-                </h2>
-                <p className="text-xs mt-1" style={{ color: "#888" }}>
-                  {cat.itemized ? `${cat.products.length} product${cat.products.length === 1 ? "" : "s"}` : "Ask us on WhatsApp"}
-                </p>
-                <p className="text-xs mt-1.5 font-semibold" style={{ color: "var(--rust)" }}>
-                  {categoryStartingPrice(cat)}
-                </p>
-              </div>
-            </Link>
-          </StaggerItem>
-        ))}
+                <div className="p-6 pt-4 flex-1 flex flex-col gap-3">
+                  <div>
+                    <h2
+                      className="font-semibold text-sm leading-snug transition-colors duration-200 group-hover:[color:var(--rust)]"
+                      style={{ color: "var(--teal-dark)" }}
+                    >
+                      {cat.name}
+                    </h2>
+                    <p className="text-xs mt-1" style={{ color: "#888" }}>
+                      {cat.itemized ? `${cat.products.length} product${cat.products.length === 1 ? "" : "s"}` : "Ask us on WhatsApp"}
+                    </p>
+                    <p className="text-xs mt-1.5 font-semibold" style={{ color: "var(--rust)" }}>
+                      {categoryStartingPrice(cat)}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            </StaggerItem>
+          );
+        })}
       </StaggerGroup>
     </div>
   );
