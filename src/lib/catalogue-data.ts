@@ -20,6 +20,8 @@ export interface Category {
   itemized: boolean;
   startingPriceLabel?: string;
   products: ProductVariant[];
+  /** Overrides the auto-picked (first product's) cover image shown on category cards. */
+  coverImage?: string;
 }
 
 export const CATEGORIES: Category[] = [
@@ -149,6 +151,7 @@ export const CATEGORIES: Category[] = [
     emoji: "🎁",
     description: "Curated sets that arrive gift-ready — matched colourways, zero assembly.",
     itemized: true,
+    coverImage: "/products/gift-set-box.jpg",
     products: [
       { id: "gs-flask-power-flash-pen", name: "Gift Set with Flask, Power Bank, Flash Drive & Pen", price: 5880, colors: ["Black", "Green"], description: "Flask, wireless mouse, 8GB flash drive, power bank and pen in a branded box.", imageUrl: "/products/gs-flask-power-flash-pen.jpg" },
       { id: "gs-flask-pen-notebook", name: "Gift Set with Flask, Pen & Executive Notebook", customQuote: true, colors: ["Black"], description: "Flask, pen and executive notebook, gift-boxed together.", imageUrl: "/products/gs-flask-pen-notebook.jpg" },
@@ -207,9 +210,10 @@ export const CATEGORIES: Category[] = [
     name: "Branded Apparel",
     emoji: "👕",
     description: "T-shirts, polos and staff uniforms that actually look good.",
-    itemized: false,
-    startingPriceLabel: "From KES 950 / pc",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "ap-tee", name: "Branded T-Shirt", customQuote: true, description: "Embroidered or screen-printed crew-neck tee — chest and sleeve placement shown.", imageUrl: "/products/apparel-tee.jpg" },
+    ],
   },
   {
     id: "caps",
@@ -217,9 +221,10 @@ export const CATEGORIES: Category[] = [
     name: "Caps",
     emoji: "🧢",
     description: "Six-panel and trucker caps for outdoor events and trade shows.",
-    itemized: false,
-    startingPriceLabel: "KES 450 / pc",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "cp-embroidered", name: "Embroidered Cap", customQuote: true, description: "Structured six-panel cap with embroidered logo on the front panel.", imageUrl: "/products/caps-esp.jpg" },
+    ],
   },
   {
     id: "stickers-labels",
@@ -283,9 +288,9 @@ export function categoryStartingPrice(cat: Category): string | undefined {
   return `From ${formatKES(min)}`;
 }
 
-/** First real product photo in the category, if any — used as the card's cover image. */
+/** The category's chosen cover image, if any — an explicit override or the first product's photo. */
 export function categoryCoverImage(cat: Category): string | undefined {
-  return cat.products.find((p) => p.imageUrl)?.imageUrl;
+  return cat.coverImage ?? cat.products.find((p) => p.imageUrl)?.imageUrl;
 }
 
 // Branding methods that are actually possible on each category's material — embroidery only

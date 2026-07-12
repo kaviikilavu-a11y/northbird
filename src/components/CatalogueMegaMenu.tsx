@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { CATEGORIES } from "@/lib/catalogue-data";
+import { CATEGORIES, categoryCoverImage } from "@/lib/catalogue-data";
 import { assetPath } from "@/lib/site-config";
 
 const GROUPS: { label: string; slugs: string[] }[] = [
@@ -42,7 +42,7 @@ export default function CatalogueMegaMenu({ open, onClose }: { open: boolean; on
                     {group.slugs.map((slug) => {
                       const cat = byslug(slug);
                       if (!cat) return null;
-                      const thumb = cat.products.find((p) => p.imageUrl)?.imageUrl;
+                      const thumb = categoryCoverImage(cat);
                       return (
                         <li key={slug}>
                           <Link

@@ -8,9 +8,9 @@ import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import SectionLabel from "@/components/motion/SectionLabel";
 
 // Brand-bible "Collection-flow" homepage concept: one large featured collection,
-// three tinted highlighted collections, then everything else in a scannable grid.
+// tinted highlighted collections, then everything else in a scannable grid.
 const FEATURED_SLUG = "notebooks";
-const HIGHLIGHTED_SLUGS = ["flasks", "keyholders", "mugs-tumblers"];
+const HIGHLIGHTED_SLUGS = ["flasks", "keyholders", "mugs-tumblers", "gift-sets"];
 
 const byslug = (slug: string) => CATEGORIES.find((c) => c.slug === slug)!;
 const FEATURED = byslug(FEATURED_SLUG);
@@ -23,6 +23,7 @@ const TINTS: Record<string, string> = {
   flasks: "var(--teal-dark)",
   keyholders: "var(--rust)",
   "mugs-tumblers": "var(--orange)",
+  "gift-sets": "var(--gold)",
 };
 
 function HighlightedCard({ cat }: { cat: Category }) {
