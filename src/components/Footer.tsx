@@ -12,7 +12,7 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer data-mascot-station="footer" style={{ background: "var(--charcoal)", color: "var(--teal-light)" }}>
+    <footer style={{ background: "var(--charcoal)", color: "var(--teal-light)" }}>
       <Reveal variant="up">
         <div className="max-w-3xl mx-auto text-center px-4 pt-20 pb-16 md:pt-28 md:pb-20">
           <p className="font-display text-4xl md:text-6xl font-medium leading-tight" style={{ color: "var(--cream)" }}>
