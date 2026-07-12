@@ -16,7 +16,7 @@ export const BRAND = {
     rust: "#A8472A",
     charcoal: "#1F2A2E",
   },
-  whatsapp: "+254700000000", // placeholder — replace with the confirmed Northbird business WhatsApp number
+  whatsapp: "+254748277623",
   email: "hello@northbirdandco.com",
   location: "Nairobi, Kenya",
 };
