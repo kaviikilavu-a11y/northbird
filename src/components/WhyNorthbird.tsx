@@ -35,7 +35,7 @@ export default function WhyNorthbird() {
               Why Northbird
             </p>
             <h2 className="font-display text-3xl md:text-4xl font-medium leading-tight" style={{ color: "var(--teal-dark)" }}>
-              Warm, direct, and confident — never boastful.
+              Thoughtfully made. Easy to work with.
             </h2>
           </div>
         </Reveal>
