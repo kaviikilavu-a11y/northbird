@@ -7,9 +7,9 @@ import { assetPath } from "@/lib/site-config";
 
 const GROUPS: { label: string; slugs: string[] }[] = [
   { label: "Drinkware", slugs: ["water-bottles", "flasks", "mugs-tumblers"] },
-  { label: "Office & Print", slugs: ["notebooks", "pens", "business-cards", "stationery", "flyers-brochures"] },
+  { label: "Office & Print", slugs: ["notebooks", "pens", "business-cards", "flyers-brochures"] },
   { label: "Apparel & Accessories", slugs: ["apparel", "caps", "wristbands", "lanyards"] },
-  { label: "Display & Events", slugs: ["signage-display", "spin-wheels", "posters", "umbrellas"] },
+  { label: "Display & Events", slugs: ["signage-display", "spin-wheels", "umbrellas"] },
   { label: "Gifting", slugs: ["gift-sets", "keyholders", "promotional-giveaways", "stickers-labels"] },
 ];
 
@@ -27,7 +27,6 @@ export default function CatalogueMegaMenu({ open, onClose }: { open: boolean; on
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: reduceMotion ? 0 : 0.2, ease: "easeOut" }}
-          onMouseLeave={onClose}
         >
           <div
             className="border-t shadow-xl"

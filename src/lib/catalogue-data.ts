@@ -116,8 +116,8 @@ export const CATEGORIES: Category[] = [
     description: "Tabletop prize wheels for activations, launches and trade-show booths.",
     itemized: true,
     products: [
-      { id: "sw-table-30", name: "Table Spin Wheel", price: 11900, colors: ["Custom"], description: "30cm diameter tabletop prize wheel with pointer and stand.", imageUrl: "/products/sw-table-30.jpg" },
-      { id: "sw-big-table-42", name: "Big Table Spin Wheel", price: 16100, colors: ["Custom"], description: "42cm diameter tabletop prize wheel — bigger footprint for busier activations.", imageUrl: "/products/sw-big-table-42.jpg" },
+      { id: "sw-table-30", name: "Table Spin Wheel", customQuote: true, description: "30cm diameter tabletop prize wheel with pointer and stand.", imageUrl: "/products/sw-table-30.jpg" },
+      { id: "sw-big-table-42", name: "Big Table Spin Wheel", customQuote: true, description: "42cm diameter tabletop prize wheel — bigger footprint for busier activations.", imageUrl: "/products/sw-big-table-42.jpg" },
     ],
   },
   {
@@ -233,26 +233,6 @@ export const CATEGORIES: Category[] = [
     ],
   },
   {
-    id: "stationery",
-    slug: "stationery",
-    name: "Stationery",
-    emoji: "✏️",
-    description: "Everyday branded office stationery essentials.",
-    itemized: false,
-    startingPriceLabel: "From KES 45 / pc",
-    products: [],
-  },
-  {
-    id: "posters",
-    slug: "posters",
-    name: "Posters",
-    emoji: "🖼️",
-    description: "Large-format printed posters for offices, retail and events.",
-    itemized: false,
-    startingPriceLabel: "From KES 350 / pc",
-    products: [],
-  },
-  {
     id: "lanyards",
     slug: "lanyards",
     name: "Lanyards & ID Holders",
@@ -306,4 +286,34 @@ export function categoryStartingPrice(cat: Category): string | undefined {
 /** First real product photo in the category, if any — used as the card's cover image. */
 export function categoryCoverImage(cat: Category): string | undefined {
   return cat.products.find((p) => p.imageUrl)?.imageUrl;
+}
+
+// Branding methods that are actually possible on each category's material — embroidery only
+// works on fabric, laser engraving needs a rigid heat-resistant surface (not cloth), UV/pad
+// print suits rigid plastics/metal/glass, and paper goods are just full-colour print. Source:
+// https://www.qualitylogoproducts.com/blog/imprint-processes-best-for-promo-items/
+const BRANDING_METHODS_BY_CATEGORY: Record<string, string[]> = {
+  "water-bottles": ["Laser engraving", "Screen print", "UV print"],
+  flasks: ["Laser engraving", "Screen print", "UV print"],
+  "mugs-tumblers": ["Laser engraving", "Screen print", "UV print"],
+  keyholders: ["Laser engraving", "UV print"],
+  notebooks: ["Debossing", "Foil stamp", "Screen print"],
+  "gift-sets": ["Mixed methods depending on item — ask us"],
+  pens: ["Laser engraving", "Screen print"],
+  wristbands: ["Debossed & colour-filled", "Screen print"],
+  "business-cards": ["Full-colour print"],
+  "flyers-brochures": ["Full-colour print"],
+  "stickers-labels": ["Full-colour print"],
+  "signage-display": ["Full-colour print"],
+  apparel: ["Embroidery", "Screen print"],
+  caps: ["Embroidery", "Screen print"],
+  lanyards: ["Dye-sublimation", "Screen print"],
+  "spin-wheels": ["Full-colour print", "UV print"],
+  "promotional-giveaways": ["Mixed methods depending on item — ask us"],
+  umbrellas: ["Screen print"],
+};
+
+/** Real, material-appropriate branding methods for a category — not a one-size-fits-all list. */
+export function brandingMethodsForCategory(slug: string): string[] {
+  return BRANDING_METHODS_BY_CATEGORY[slug] ?? ["Screen print", "UV print"];
 }

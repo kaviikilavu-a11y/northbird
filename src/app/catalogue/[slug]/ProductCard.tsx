@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { formatKES, type ProductVariant } from "@/lib/catalogue-data";
-import { getWhatsAppLink, assetPath, BRANDING_METHODS } from "@/lib/site-config";
+import { formatKES, brandingMethodsForCategory, type ProductVariant } from "@/lib/catalogue-data";
+import { getWhatsAppLink, assetPath } from "@/lib/site-config";
 import { useBundle } from "@/lib/bundle-context";
 import QuantityStepper from "@/components/bundle/QuantityStepper";
 import ProductDetailModal from "./ProductDetailModal";
@@ -131,7 +131,7 @@ export default function ProductCard({
         </p>
 
         <p className="text-[10px] leading-snug" style={{ color: "#999" }}>
-          Branding: {BRANDING_METHODS.join(" · ")}
+          Branding: {brandingMethodsForCategory(categorySlug).join(" · ")}
         </p>
 
         <div className="flex items-center justify-between mt-2 gap-2">
@@ -168,6 +168,7 @@ export default function ProductCard({
         <ProductDetailModal
           product={detailProduct}
           categoryName={categoryName}
+          categorySlug={categorySlug}
           categoryEmoji={categoryEmoji}
           related={related}
           onClose={() => setDetailProduct(null)}

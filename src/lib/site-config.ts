@@ -23,11 +23,6 @@ export const BRAND = {
 
 export const PRIMARY_CTA = "Talk to Northbird";
 
-// General branding capabilities offered across the catalogue — shown as informational
-// context on product cards/detail views, not a per-SKU guarantee (ask on WhatsApp to
-// confirm which method suits a specific item and quantity).
-export const BRANDING_METHODS = ["Screen print", "Embroidery", "Laser engraving", "UV print"];
-
 // Only non-empty for the GitHub Pages preview build, which serves from a /northbird
 // subpath. next/link and next/navigation handle this automatically via next.config.ts's
 // basePath, but raw <img src> tags for product photos (sourced from catalogue-data.ts)

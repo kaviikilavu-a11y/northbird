@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { formatKES, type ProductVariant } from "@/lib/catalogue-data";
+import { formatKES, brandingMethodsForCategory, type ProductVariant } from "@/lib/catalogue-data";
 import { getWhatsAppLink, assetPath } from "@/lib/site-config";
-import { BRANDING_METHODS } from "@/lib/site-config";
 
 function ProductDetailModal({
   product,
   categoryName,
+  categorySlug,
   categoryEmoji,
   related,
   onClose,
@@ -17,6 +17,7 @@ function ProductDetailModal({
 }: {
   product: ProductVariant;
   categoryName: string;
+  categorySlug: string;
   categoryEmoji: string;
   related: ProductVariant[];
   onClose: () => void;
@@ -116,7 +117,7 @@ function ProductDetailModal({
                   Branding methods
                 </p>
                 <p className="text-sm" style={{ color: "var(--teal-dark)" }}>
-                  {BRANDING_METHODS.join(" · ")}
+                  {brandingMethodsForCategory(categorySlug).join(" · ")}
                 </p>
               </div>
 

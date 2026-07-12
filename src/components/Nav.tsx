@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
@@ -49,8 +49,23 @@ export default function Nav() {
   const mounted = useMounted();
   const { scrollY } = useScroll();
   const reduceMotion = useReducedMotion();
+  const navRef = useRef<HTMLElement>(null);
 
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 40));
+
+  // Click-to-toggle is the reliable mechanism (hover alone doesn't work on touch and can
+  // close the menu the instant a finger lifts). Close on an outside click instead of on
+  // mouseleave, so the menu doesn't vanish the moment the cursor crosses into it.
+  useEffect(() => {
+    if (!megaOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setMegaOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [megaOpen]);
 
   // Transparent-on-dark-hero only applies on the homepage before scrolling.
   const onHomeHero = mounted && pathname === "/" && !scrolled;
@@ -59,6 +74,7 @@ export default function Nav() {
 
   return (
     <motion.nav
+      ref={navRef}
       className="fixed top-0 left-0 right-0 z-40"
       animate={{
         backgroundColor: onHomeHero && !menuOpen ? "rgba(31,42,46,0)" : "rgba(251,247,238,0.92)",
@@ -88,19 +104,26 @@ export default function Nav() {
             const active = href === "/" ? pathname === "/" : pathname.startsWith(href.replace(/\/$/, ""));
             const isCatalogue = href === "/catalogue/";
             return (
-              <li
-                key={href}
-                className="relative"
-                onMouseEnter={isCatalogue ? () => setMegaOpen(true) : undefined}
-                onMouseLeave={isCatalogue ? () => setMegaOpen(false) : undefined}
-              >
-                <Link
-                  href={href}
-                  className="transition-colors pb-1 block"
-                  style={{ color: active ? activeColor : textColor }}
-                >
-                  {label}
-                </Link>
+              <li key={href} className="relative">
+                {isCatalogue ? (
+                  <button
+                    type="button"
+                    className="transition-colors pb-1 block"
+                    style={{ color: active || megaOpen ? activeColor : textColor }}
+                    onClick={() => setMegaOpen((v) => !v)}
+                    aria-expanded={megaOpen}
+                  >
+                    {label}
+                  </button>
+                ) : (
+                  <Link
+                    href={href}
+                    className="transition-colors pb-1 block"
+                    style={{ color: active ? activeColor : textColor }}
+                  >
+                    {label}
+                  </Link>
+                )}
                 {active && (
                   <motion.span
                     layoutId="nav-active-underline"
