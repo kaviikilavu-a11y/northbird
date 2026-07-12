@@ -4,7 +4,7 @@ import WhyNorthbird from "@/components/WhyNorthbird";
 import CuratedCollections from "@/components/CuratedCollections";
 import Industries from "@/components/Industries";
 import BrandInspiration from "@/components/BrandInspiration";
-import SelectedWork from "@/components/SelectedWork";
+import MadeForEveryBrand from "@/components/MadeForEveryBrand";
 import OrderingProcess from "@/components/OrderingProcess";
 import WhatsAppSection from "@/components/WhatsAppSection";
 
@@ -17,7 +17,7 @@ export default function HomePage() {
       <CuratedCollections />
       <Industries />
       <BrandInspiration />
-      <SelectedWork />
+      <MadeForEveryBrand />
       <OrderingProcess />
       <WhatsAppSection />
     </>

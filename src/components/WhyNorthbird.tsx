@@ -4,23 +4,23 @@ import SectionLabel from "@/components/motion/SectionLabel";
 const REASONS = [
   {
     n: "01",
-    title: "Warm, not corporate",
-    body: "No inquiry forms or procurement portals. You message a real person on WhatsApp and get a real answer.",
+    title: "Real Conversations",
+    body: "Speak directly with our team, not a call centre.",
   },
   {
     n: "02",
-    title: "Direct pricing",
-    body: "Real prices on the site, not “contact us for pricing” games. What you see is what you pay.",
+    title: "Everything In-House",
+    body: "Branding, production, and quality control managed by Northbird.",
   },
   {
     n: "03",
-    title: "Sourced in Kenya",
-    body: "Produced and finished locally, so lead times stay short and quality stays checkable.",
+    title: "Clear Pricing",
+    body: "Transparent pricing with tailored quotes when your project calls for it.",
   },
   {
     n: "04",
-    title: "Same-day quotes",
-    body: "Send your logo and quantity, get a price back the same day — from first sample to final delivery.",
+    title: "Built Around Deadlines",
+    body: "Fast quotations. Reliable production. On-time delivery.",
   },
 ];
 
