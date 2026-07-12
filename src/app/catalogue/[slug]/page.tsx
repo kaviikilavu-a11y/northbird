@@ -66,6 +66,7 @@ export default async function CategoryPage({ params }: Props) {
                 categorySlug={cat.slug}
                 categoryName={cat.name}
                 categoryEmoji={cat.emoji}
+                siblingProducts={cat.products}
               />
             ))}
           </div>

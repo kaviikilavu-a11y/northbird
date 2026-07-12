@@ -163,9 +163,10 @@ export const CATEGORIES: Category[] = [
     emoji: "🖊️",
     description: "Ballpoint and rollerball pens that write on first click.",
     bestValue: true,
-    itemized: false,
-    startingPriceLabel: "From KES 36 / pc",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "pn-ballpoint-gold", name: "Branded Ballpoint Pen", price: 36, colors: ["Black/Gold"], description: "Matte-black barrel with a gold clip and trim, logo engraved or printed along the body.", imageUrl: "/products/pen-black-gold.jpg" },
+    ],
   },
   {
     id: "wristbands",
@@ -173,9 +174,10 @@ export const CATEGORIES: Category[] = [
     name: "Wristbands",
     emoji: "🎗️",
     description: "Silicone and fabric wristbands for events, fun-runs and campaigns.",
-    itemized: false,
-    startingPriceLabel: "From KES 52 / pc",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "wr-silicone", name: "Silicone Wristband", price: 52, colors: ["Teal", "Rust", "Cream", "Black"], description: "Debossed or printed silicone wristband, sized for events and campaign giveaways.", imageUrl: "/products/wristbands-stack.jpg" },
+    ],
   },
   {
     id: "business-cards",
@@ -253,9 +255,10 @@ export const CATEGORIES: Category[] = [
     name: "Lanyards & ID Holders",
     emoji: "🪪",
     description: "Event essentials: lanyards, badge holders, and retractable reels.",
-    itemized: false,
-    startingPriceLabel: "From KES 140",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "ln-lanyard-id-set", name: "Lanyard & ID Card Holder Set", price: 140, colors: ["Cream/Teal"], description: "Woven lanyard with a leather-look ID card holder — logo printed along the strap.", imageUrl: "/products/lanyard-id-holder.jpg" },
+    ],
   },
   {
     id: "promotional-giveaways",
@@ -273,9 +276,10 @@ export const CATEGORIES: Category[] = [
     name: "Umbrellas",
     emoji: "☂️",
     description: "Golf and compact umbrellas — visible from across the car park.",
-    itemized: false,
-    startingPriceLabel: "From KES 440",
-    products: [],
+    itemized: true,
+    products: [
+      { id: "um-golf-compact", name: "Branded Golf Umbrella", price: 440, colors: ["Navy/Cream/Teal", "Black (Compact)"], description: "Large golf umbrella with a panelled canopy, plus a black compact folding option — both logo-branded.", imageUrl: "/products/umbrella-branded.jpg" },
+    ],
   },
 ];
 

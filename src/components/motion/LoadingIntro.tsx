@@ -55,9 +55,6 @@ export default function LoadingIntro() {
           role="presentation"
         >
           <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center gap-4">
-            <motion.div variants={item}>
-              <NorthbirdMascot size={56} />
-            </motion.div>
             <motion.p
               className="font-display text-2xl font-medium"
               style={{ color: "var(--cream)" }}
@@ -65,6 +62,9 @@ export default function LoadingIntro() {
             >
               {BRAND.name}
             </motion.p>
+            <motion.div variants={item}>
+              <NorthbirdMascot size={56} flapOnce />
+            </motion.div>
             <motion.p
               className="font-display italic text-sm"
               style={{ color: "var(--teal-light)" }}

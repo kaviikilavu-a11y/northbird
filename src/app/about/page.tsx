@@ -38,8 +38,9 @@ export default function AboutPage() {
         <ol className="list-decimal list-inside space-y-2 leading-relaxed">
           <li>Browse the catalogue and pick the products you need.</li>
           <li>Send your logo, PDF, or brand guidelines on WhatsApp.</li>
-          <li>We come back with pricing and, where possible, a sample — the same day.</li>
-          <li>You approve the artwork, we go to production, and we deliver.</li>
+          <li>Receive your quotation the very same day, complete with pricing, branding recommendations, and estimated production timelines.</li>
+          <li>Review and approve your branded artwork before production begins.</li>
+          <li>Production under strict quality control, then safe, on-schedule delivery.</li>
         </ol>
       </div>
     </div>

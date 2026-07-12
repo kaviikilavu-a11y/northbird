@@ -1,4 +1,5 @@
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import SectionLabel from "@/components/motion/SectionLabel";
 
 const REASONS = [
   {
@@ -29,6 +30,7 @@ export default function WhyNorthbird() {
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_2fr] gap-10 lg:gap-16">
         <Reveal variant="right">
           <div>
+            <SectionLabel n="02" color="var(--orange)" />
             <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--orange)" }}>
               Why Northbird
             </p>

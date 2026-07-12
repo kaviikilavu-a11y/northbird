@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { CATEGORIES, categoryStartingPrice, type Category } from "@/lib/catalogue-data";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import SectionLabel from "@/components/motion/SectionLabel";
 
 // Brand-bible "Collection-flow" homepage concept: one large featured collection,
 // three tinted highlighted collections, then everything else in a scannable grid.
@@ -60,11 +61,12 @@ export default function CuratedCollections() {
       <div className="max-w-6xl mx-auto px-4">
         <Reveal variant="up">
           <div>
+            <SectionLabel n="03" color="var(--orange)" />
             <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--orange)" }}>
               Curated Collections
             </p>
             <h2 className="font-display text-3xl md:text-4xl font-medium mb-12 max-w-xl" style={{ color: "var(--teal-dark)" }}>
-              Real products, real Kenyan pricing.
+              Premium merchandise selected for brands that expect more.
             </h2>
           </div>
         </Reveal>

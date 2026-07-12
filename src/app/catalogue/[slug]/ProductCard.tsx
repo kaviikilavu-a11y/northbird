@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { formatKES, type ProductVariant } from "@/lib/catalogue-data";
-import { getWhatsAppLink, assetPath } from "@/lib/site-config";
+import { getWhatsAppLink, assetPath, BRANDING_METHODS } from "@/lib/site-config";
 import { useBundle } from "@/lib/bundle-context";
 import QuantityStepper from "@/components/bundle/QuantityStepper";
+import ProductDetailModal from "./ProductDetailModal";
 
 const COLOR_SWATCH: Record<string, string> = {
   black: "#1a1a1a", white: "#f5f5f5", red: "#c0392b", blue: "#2c5f8a", silver: "#c9cdd1",
@@ -23,16 +24,21 @@ export default function ProductCard({
   categorySlug,
   categoryName,
   categoryEmoji,
+  siblingProducts = [],
 }: {
   product: ProductVariant;
   categorySlug: string;
   categoryName: string;
   categoryEmoji: string;
+  /** Other products in the same category, used for the detail modal's "Related products" row. */
+  siblingProducts?: ProductVariant[];
 }) {
   const [qty, setQty] = useState(1);
+  const [detailProduct, setDetailProduct] = useState<ProductVariant | null>(null);
   const { addItem } = useBundle();
   const waMessage = `Hi! I'd like to order the ${product.name}.`;
   const waLink = getWhatsAppLink(waMessage);
+  const related = siblingProducts.filter((p) => p.id !== product.id);
 
   const handleAddToBundle = () => {
     addItem(
@@ -54,27 +60,34 @@ export default function ProductCard({
       className="group rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]"
       style={{ borderColor: "var(--teal-light)", background: "white" }}
     >
-      {product.imageUrl ? (
-        <div className="aspect-square overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={assetPath(product.imageUrl)}
-            alt={product.name}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-          />
-        </div>
-      ) : (
-        <div
-          className="aspect-square flex items-center justify-center text-5xl overflow-hidden"
-          style={{ background: "var(--cream-deep)" }}
-          aria-hidden="true"
-        >
-          <span className="inline-block transition-transform duration-500 ease-out group-hover:scale-110">
-            {categoryEmoji}
-          </span>
-        </div>
-      )}
+      <button
+        type="button"
+        onClick={() => setDetailProduct(product)}
+        className="block w-full text-left cursor-zoom-in"
+        aria-label={`View details for ${product.name}`}
+      >
+        {product.imageUrl ? (
+          <div className="aspect-square overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={assetPath(product.imageUrl)}
+              alt={product.name}
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+            />
+          </div>
+        ) : (
+          <div
+            className="aspect-square flex items-center justify-center text-5xl overflow-hidden"
+            style={{ background: "var(--cream-deep)" }}
+            aria-hidden="true"
+          >
+            <span className="inline-block transition-transform duration-500 ease-out group-hover:scale-110">
+              {categoryEmoji}
+            </span>
+          </div>
+        )}
+      </button>
 
       <div className="p-4 flex flex-col flex-1 gap-2">
         <div className="flex items-start justify-between gap-2">
@@ -117,6 +130,10 @@ export default function ProductCard({
           {product.customQuote || product.price === undefined ? "Request a Quote" : formatKES(product.price)}
         </p>
 
+        <p className="text-[10px] leading-snug" style={{ color: "#999" }}>
+          Branding: {BRANDING_METHODS.join(" · ")}
+        </p>
+
         <div className="flex items-center justify-between mt-2 gap-2">
           <span className="text-[11px] font-medium" style={{ color: "#888" }}>
             Qty
@@ -146,6 +163,17 @@ export default function ProductCard({
           Order via WhatsApp
         </a>
       </div>
+
+      {detailProduct && (
+        <ProductDetailModal
+          product={detailProduct}
+          categoryName={categoryName}
+          categoryEmoji={categoryEmoji}
+          related={related}
+          onClose={() => setDetailProduct(null)}
+          onSelectRelated={(p) => setDetailProduct(p)}
+        />
+      )}
     </article>
   );
 }

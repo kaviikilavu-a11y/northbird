@@ -5,6 +5,7 @@ import CuratedCollections from "@/components/CuratedCollections";
 import Industries from "@/components/Industries";
 import BrandInspiration from "@/components/BrandInspiration";
 import SelectedWork from "@/components/SelectedWork";
+import TypographyMoment from "@/components/TypographyMoment";
 import OrderingProcess from "@/components/OrderingProcess";
 import WhatsAppSection from "@/components/WhatsAppSection";
 
@@ -18,6 +19,7 @@ export default function HomePage() {
       <Industries />
       <BrandInspiration />
       <SelectedWork />
+      <TypographyMoment />
       <OrderingProcess />
       <WhatsAppSection />
     </>

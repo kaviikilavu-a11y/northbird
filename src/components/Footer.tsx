@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { BRAND } from "@/lib/site-config";
+import { BRAND, PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/site-config";
 import { Reveal } from "@/components/motion/Reveal";
+import NorthbirdMascot from "@/components/mascot/NorthbirdMascot";
 
 const LINKS = [
   { href: "/catalogue/", label: "Catalogue" },
@@ -10,19 +11,41 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer
-      data-mascot-station="footer"
-      className="pt-16 pb-8 px-4 border-t"
-      style={{ background: "var(--charcoal)", borderColor: "#333", color: "var(--teal-light)" }}
-    >
+    <footer data-mascot-station="footer" style={{ background: "var(--charcoal)", color: "var(--teal-light)" }}>
       <Reveal variant="up">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr] gap-10 pb-12">
+        <div className="max-w-3xl mx-auto text-center px-4 pt-20 pb-16 md:pt-28 md:pb-20">
+          <p className="font-display text-4xl md:text-6xl font-medium leading-tight" style={{ color: "var(--cream)" }}>
+            Ready to Build Your Brand?
+          </p>
+          <p className="text-base md:text-lg mt-5 mb-10 opacity-70">
+            Let&apos;s create merchandise your customers will remember.
+          </p>
+          <a
+            href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group btn-press inline-flex items-center gap-2 px-9 py-4 rounded-full font-semibold text-sm hover:shadow-[0_0_0_8px_rgba(168,71,42,0.22)] transition-all"
+            style={{ background: "var(--rust)", color: "var(--cream)" }}
+          >
+            {PRIMARY_CTA}
+            <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true">
+              →
+            </span>
+          </a>
+        </div>
+      </Reveal>
+
+      <div className="border-t" style={{ borderColor: "#333" }}>
+        <div className="max-w-6xl mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr] gap-10 pb-10">
             <div>
-              <p className="font-display text-2xl font-medium" style={{ color: "var(--cream)" }}>
-                {BRAND.name}
-              </p>
-              <p className="font-display italic text-base mt-2 opacity-70">{BRAND.slogan}</p>
+              <div className="flex items-center gap-2.5">
+                <NorthbirdMascot size={28} />
+                <p className="font-display text-xl font-medium" style={{ color: "var(--cream)" }}>
+                  {BRAND.name}
+                </p>
+              </div>
+              <p className="font-display italic text-sm mt-2 opacity-70">{BRAND.slogan}</p>
               <p className="text-xs opacity-40 mt-3">{BRAND.parent} · {BRAND.location}</p>
             </div>
             <div>
@@ -66,7 +89,7 @@ export default function Footer() {
             <p>Designed and built for East African businesses.</p>
           </div>
         </div>
-      </Reveal>
+      </div>
     </footer>
   );
 }

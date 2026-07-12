@@ -1,4 +1,5 @@
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import SectionLabel from "@/components/motion/SectionLabel";
 
 const WORK = [
   {
@@ -20,6 +21,7 @@ export default function SelectedWork() {
     <section className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
       <Reveal variant="up">
         <div>
+          <SectionLabel n="06" color="var(--orange)" />
           <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--orange)" }}>
             Selected Work
           </p>

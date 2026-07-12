@@ -174,7 +174,7 @@ export default function Hero() {
               href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-full font-semibold text-sm"
+              className="group px-8 py-4 rounded-full font-semibold text-sm inline-flex items-center gap-2"
               style={{ background: "var(--rust)", color: "var(--cream)" }}
               onMouseEnter={stopIdlePulse}
               onFocus={stopIdlePulse}
@@ -188,6 +188,9 @@ export default function Hero() {
               transition={idlePulse ? { duration: 1.4, repeat: Infinity, ease: "easeOut" } : { duration: 0.25 }}
             >
               {PRIMARY_CTA}
+              <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true">
+                →
+              </span>
             </motion.a>
             <Link
               href="/catalogue/"
@@ -232,6 +235,20 @@ export default function Hero() {
         >
           {reducedMotion ? SLIDES[0].label : SLIDES[activeIndex].label}
         </p>
+
+        <div
+          className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
+          style={{ color: "rgba(251,247,238,0.55)" }}
+          aria-hidden="true"
+        >
+          <span className="text-[10px] font-semibold tracking-[0.25em] uppercase">Scroll</span>
+          <motion.span
+            animate={reducedMotion ? undefined : { y: [0, 6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          >
+            ↓
+          </motion.span>
+        </div>
       </div>
     </section>
   );

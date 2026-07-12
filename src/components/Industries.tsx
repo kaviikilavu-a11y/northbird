@@ -1,4 +1,5 @@
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import SectionLabel from "@/components/motion/SectionLabel";
 
 const INDUSTRIES = [
   { name: "NGOs & Foundations", supply: "Event merchandise, branded giveaways, field-team apparel." },
@@ -14,6 +15,7 @@ export default function Industries() {
     <section className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
       <Reveal variant="up">
         <div>
+          <SectionLabel n="04" color="var(--orange)" />
           <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--orange)" }}>
             Industries
           </p>

@@ -1,5 +1,6 @@
 import { PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/site-config";
 import { Reveal } from "@/components/motion/Reveal";
+import SectionLabel from "@/components/motion/SectionLabel";
 
 interface Props {
   message?: string;
@@ -20,6 +21,7 @@ export default function WhatsAppSection({
     >
       <Reveal variant="scale">
         <div className="max-w-2xl mx-auto text-center">
+          <SectionLabel n="08" color="var(--cream)" />
           <h2 className="text-2xl font-bold mb-3" style={{ color: "var(--cream)" }}>
             {heading}
           </h2>
