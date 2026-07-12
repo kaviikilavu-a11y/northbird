@@ -15,6 +15,8 @@ interface Collection {
   tag: string;
   primarySlug: string;
   slugs: string[];
+  /** Explicit real-photo list for the hover preview cycle — overrides the one-per-category default. */
+  images?: string[];
 }
 
 // Each collection maps to real catalogue categories (mirrors the mega menu's
@@ -37,6 +39,13 @@ const COLLECTIONS: Collection[] = [
     tag: "Lanyards · Wristbands · Signage & Display",
     primarySlug: "lanyards",
     slugs: ["lanyards", "wristbands", "signage-display", "promotional-giveaways"],
+    images: [
+      "/products/lanyard-id-holder.jpg",
+      "/products/wristbands-stack.jpg",
+      "/products/sd-s-banner.jpg",
+      "/products/sd-broadbase.jpg",
+      "/products/giveaways-set.jpg",
+    ],
   },
   {
     title: "Executive Gifts",
@@ -56,12 +65,13 @@ function CollectionCard({ collection }: { collection: Collection }) {
 
   const images = useMemo(
     () =>
+      collection.images ??
       collection.slugs
         .map(bySlug)
         .filter((c): c is NonNullable<typeof c> => !!c)
         .map(categoryCoverImage)
         .filter((src): src is string => !!src),
-    [collection.slugs]
+    [collection.images, collection.slugs]
   );
 
   const startCycle = useCallback(() => {
