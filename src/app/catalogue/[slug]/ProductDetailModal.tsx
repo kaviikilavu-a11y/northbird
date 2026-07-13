@@ -63,17 +63,20 @@ function ProductDetailModal({
           </button>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            <div className="aspect-square md:aspect-auto md:h-full overflow-hidden" style={{ background: "var(--cream-deep)" }}>
+            <div className="relative aspect-square md:aspect-auto md:h-full overflow-hidden" style={{ background: "var(--cream-deep)" }}>
               {product.imageUrl ? (
-                <motion.img
-                  key={product.id}
-                  src={assetPath(product.imageUrl)}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                  initial={{ opacity: 0, scale: 1.03 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.4, ease: "easeOut" }}
-                />
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={product.id}
+                    src={assetPath(product.imageUrl)}
+                    alt={product.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                </AnimatePresence>
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-7xl" aria-hidden="true">
                   {categoryEmoji}

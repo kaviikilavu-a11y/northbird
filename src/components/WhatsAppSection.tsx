@@ -16,9 +16,14 @@ export default function WhatsAppSection({
   return (
     <section
       data-mascot-station="whatsapp"
-      className="py-16 px-4"
+      className="relative py-16 px-4"
       style={{ background: "var(--teal-dark)" }}
     >
+      <div
+        className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
+        aria-hidden="true"
+        style={{ background: "linear-gradient(to bottom, var(--cream), transparent)" }}
+      />
       <Reveal variant="scale">
         <div className="max-w-2xl mx-auto text-center">
           <SectionLabel n="08" color="var(--cream)" />
