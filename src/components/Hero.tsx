@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { BRAND, PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/site-config";
-import Magnetic from "@/components/motion/Magnetic";
 
 // Placeholder product visuals — replace src with real Canva/Adobe Express mockup URLs
 // Each uses Northbird brand colors as gradient backgrounds until real images exist
@@ -171,30 +170,28 @@ export default function Hero() {
             {BRAND.subhead}
           </motion.p>
           <motion.div className="flex flex-wrap items-center gap-6" variants={textItem}>
-            <Magnetic strength={0.25}>
-              <motion.a
-                href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group px-8 py-4 rounded-full font-semibold text-sm inline-flex items-center gap-2"
-                style={{ background: "var(--rust)", color: "var(--cream)" }}
-                onMouseEnter={stopIdlePulse}
-                onFocus={stopIdlePulse}
-                whileHover={{ boxShadow: "0 0 0 8px rgba(168,71,42,0.22)" }}
-                whileTap={{ scale: 0.96 }}
-                animate={
-                  idlePulse
-                    ? { boxShadow: ["0 0 0 0px rgba(168,71,42,0.28)", "0 0 0 10px rgba(168,71,42,0)"] }
-                    : { boxShadow: "0 0 0 0px rgba(168,71,42,0)" }
-                }
-                transition={idlePulse ? { duration: 1.4, repeat: Infinity, ease: "easeOut" } : { duration: 0.25 }}
-              >
-                {PRIMARY_CTA}
-                <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true">
-                  →
-                </span>
-              </motion.a>
-            </Magnetic>
+            <motion.a
+              href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group px-8 py-4 rounded-full font-semibold text-sm inline-flex items-center gap-2"
+              style={{ background: "var(--rust)", color: "var(--cream)" }}
+              onMouseEnter={stopIdlePulse}
+              onFocus={stopIdlePulse}
+              whileHover={{ boxShadow: "0 0 0 8px rgba(168,71,42,0.22)" }}
+              whileTap={{ scale: 0.96 }}
+              animate={
+                idlePulse
+                  ? { boxShadow: ["0 0 0 0px rgba(168,71,42,0.28)", "0 0 0 10px rgba(168,71,42,0)"] }
+                  : { boxShadow: "0 0 0 0px rgba(168,71,42,0)" }
+              }
+              transition={idlePulse ? { duration: 1.4, repeat: Infinity, ease: "easeOut" } : { duration: 0.25 }}
+            >
+              {PRIMARY_CTA}
+              <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1" aria-hidden="true">
+                →
+              </span>
+            </motion.a>
             <Link
               href="/catalogue/"
               className="text-sm font-semibold tracking-wide border-b pb-0.5 transition-opacity hover:opacity-70"

@@ -39,21 +39,14 @@ export default function BundlePanel() {
       >
         <BagIcon />
         <span className="text-sm font-semibold">Bundle</span>
-        <AnimatePresence mode="wait" initial={false}>
-          {totalQuantity > 0 && (
-            <motion.span
-              key={totalQuantity}
-              initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.5 }}
-              transition={{ duration: reduceMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center justify-center min-w-[20px] h-5 px-1 rounded-full text-[11px] font-bold"
-              style={{ background: "var(--gold)", color: "var(--charcoal)" }}
-            >
-              {totalQuantity}
-            </motion.span>
-          )}
-        </AnimatePresence>
+        {totalQuantity > 0 && (
+          <span
+            className="flex items-center justify-center min-w-[20px] h-5 px-1 rounded-full text-[11px] font-bold"
+            style={{ background: "var(--gold)", color: "var(--charcoal)" }}
+          >
+            {totalQuantity}
+          </span>
+        )}
       </motion.button>
 
       <AnimatePresence>

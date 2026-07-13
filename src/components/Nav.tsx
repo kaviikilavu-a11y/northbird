@@ -8,7 +8,6 @@ import { PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/si
 import NorthbirdMascot from "@/components/mascot/NorthbirdMascot";
 import CatalogueMegaMenu from "@/components/CatalogueMegaMenu";
 import MobileNavPanel from "@/components/MobileNavPanel";
-import Magnetic from "@/components/motion/Magnetic";
 
 const links = [
   { href: "/", label: "Home" },
@@ -139,19 +138,15 @@ export default function Nav() {
           })}
         </ul>
 
-        <span className="hidden sm:inline-block shrink-0">
-          <Magnetic strength={0.25}>
-            <a
-              href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-4 py-2 rounded-full text-xs font-semibold transition-all hover:shadow-[0_0_0_4px_rgba(168,71,42,0.18)] active:scale-95"
-              style={{ background: "var(--rust)", color: "var(--cream)" }}
-            >
-              {PRIMARY_CTA}
-            </a>
-          </Magnetic>
-        </span>
+        <a
+          href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden sm:inline-block shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all hover:shadow-[0_0_0_4px_rgba(168,71,42,0.18)] active:scale-95"
+          style={{ background: "var(--rust)", color: "var(--cream)" }}
+        >
+          {PRIMARY_CTA}
+        </a>
 
         <button
           type="button"
