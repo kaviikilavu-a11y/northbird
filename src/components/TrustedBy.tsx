@@ -1,10 +1,11 @@
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import SectionLabel from "@/components/motion/SectionLabel";
 import CountUp from "@/components/motion/CountUp";
-import { CATEGORIES } from "@/lib/catalogue-data";
+import { CATEGORIES, publishedProducts } from "@/lib/catalogue-data";
 
 // Derived from the live catalogue data, not hardcoded — stays accurate as products/categories change.
-const PRODUCT_COUNT = CATEGORIES.reduce((sum, c) => sum + c.products.length, 0);
+// Only counts products with a real photo, matching what's actually visible in the catalogue.
+const PRODUCT_COUNT = CATEGORIES.reduce((sum, c) => sum + publishedProducts(c).length, 0);
 const CATEGORY_COUNT = CATEGORIES.length;
 const STATS = [
   { value: PRODUCT_COUNT, suffix: "+", label: "Itemized products" },

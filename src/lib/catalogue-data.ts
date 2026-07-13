@@ -38,6 +38,9 @@ export const CATEGORIES: Category[] = [
       { id: "wb-silver-sub-750", name: "750ml Silver Sublimation Bottle", price: 560, colors: ["Silver"], description: "Sublimation-ready surface for full-colour, edge-to-edge branding.", imageUrl: "/products/wb-silver-sub-750.jpg" },
       { id: "wb-ring-750", name: "Small Ring Bottles 750ml", price: 658, colors: ["Black", "Blue", "Red"], description: "Ring-top carry handle, matte finish.", imageUrl: "/products/wb-ring-750.jpg" },
       { id: "wb-thermal", name: "Thermal Bottles", price: 1260, colors: ["Black"], description: "Double-wall insulation, keeps drinks cold through the workday." },
+      { id: "wb-plastic-1000", name: "Plastic Water Bottle 1000ml", price: 980, colors: ["Red", "Orange", "Grey", "White", "Royal Blue"], description: "Large-capacity flip-lid sports bottle, six colourways.", imageUrl: "/products/wb-plastic-1000.jpg" },
+      { id: "wb-plastic-750", name: "Sports Water Bottle 750ml", price: 840, colors: ["Blue", "Red", "Grey", "Green", "White"], description: "Flip-straw sports bottle with carry strap.", imageUrl: "/products/wb-plastic-750.jpg" },
+      { id: "wb-plastic-800", name: "Plastic Water Bottle 800ml", price: 840, colors: ["Blue", "Orange", "Red", "White", "Teal", "Black"], description: "Flip-lid sports bottle, wide colour range.", imageUrl: "/products/wb-plastic-800.jpg" },
     ],
   },
   {
@@ -56,6 +59,10 @@ export const CATEGORIES: Category[] = [
       { id: "fl-kids-350", name: "Kids Flask 350ml", price: 1050, colors: ["Blue", "Pink", "Yellow", "Orange", "Black"], description: "Right-sized for school runs, five bright colourways.", imageUrl: "/products/fl-kids-350.jpg" },
       { id: "fl-stainless", name: "Stainless Flask", price: 1400, colors: ["Blue", "White", "Red", "Silver"], description: "Food-grade stainless steel, keeps hot 6+ hours.", imageUrl: "/products/fl-stainless.jpg" },
       { id: "fl-bamboo", name: "Bamboo Flask", price: 1400, colors: ["Black", "White", "Silver"], description: "Bamboo-accented lid for an eco-forward gifting story.", bestValue: true, imageUrl: "/products/fl-bamboo.jpg" },
+      { id: "fl-metallic-800", name: "Metallic Water Bottle 800ml", price: 672, colors: ["Black", "Blue", "Grey", "White", "Red"], description: "Steel bottle with carabiner strap, bamboo-effect base.", imageUrl: "/products/fl-metallic-800.jpg" },
+      { id: "fl-wooden-thermal", name: "Thermal Flask (Wooden Finish)", price: 1470, colors: ["Wooden Brown"], description: "Wood-grain steel flask, warm desk presence.", imageUrl: "/products/fl-wooden-thermal.jpg" },
+      { id: "fl-tf014-550", name: "Thermal Flask TF014 550ml", price: 1260, colors: ["Black", "Blue", "Green", "Grey", "White", "Red"], description: "Bamboo-base steel flask, six colourways.", imageUrl: "/products/fl-tf014-550.jpg" },
+      { id: "fl-magnetic-750", name: "Magnetic Flask 750ml", price: 1680, colors: ["Blue", "Red", "White", "Black"], description: "Steel flask with magnetic ring-pull lid.", imageUrl: "/products/fl-magnetic-750.jpg" },
     ],
   },
   {
@@ -66,11 +73,15 @@ export const CATEGORIES: Category[] = [
     description: "The daily ritual — your logo in every morning coffee.",
     itemized: true,
     products: [
-      { id: "mt-led-510", name: "LED Tumbler 510ml", price: 1260, colors: ["Black", "White"], description: "Light-up base, a genuine stand-out at evening events." },
+      { id: "mt-led-510", name: "LED Tumbler 510ml", price: 1190, colors: ["White", "Cream"], description: "Light-up base, a genuine stand-out at evening events.", imageUrl: "/products/mt-led-510.jpg" },
       { id: "mt-stanley-1200", name: "Stanley Mugs 1.2L", price: 1820, colors: ["Black", "Pink", "Blue", "White", "Orange", "Red"], description: "Large-format insulated mug, six colourways to match any brand palette.", bestValue: true, imageUrl: "/products/mt-stanley-1200.jpg" },
-      { id: "mt-thermal", name: "Thermal Tumbler", price: 1120, colors: ["White", "Black"], description: "Double-wall tumbler, condensation-free exterior." },
+      { id: "mt-thermal", name: "Thermal Tumbler", price: 910, colors: ["Black", "Pink", "Gold", "White", "Yellow", "Dark Green", "Dark Pink"], description: "Double-wall tumbler, condensation-free exterior.", imageUrl: "/products/mt-thermal.jpg" },
       { id: "mt-300", name: "Tumblers 300ml", price: 1162, colors: ["Gold"], description: "Compact gold-finish tumbler, premium gift-set anchor.", imageUrl: "/products/mt-300.jpg" },
       { id: "mt-long-650", name: "Long Tumblers 650ml", price: 1190, colors: ["White", "Black"], description: "Tall-format tumbler, straw-lid compatible." },
+      { id: "mt-concave-magic", name: "Concave Magic Mug", price: 336, colors: ["Blue", "Red", "Black"], description: "Colour-change ceramic mug, concave grip." , imageUrl: "/products/mt-concave-magic.jpg" },
+      { id: "mt-enamel-500", name: "Enamel Mug 500ml", price: 560, colors: ["Black", "Red", "Cyan", "Yellow", "White"], description: "Camp-style enamel mug with coloured rim." , imageUrl: "/products/mt-enamel-500.jpg" },
+      { id: "mt-magic-mug", name: "Magic Mug (Colour-Change)", price: 280, colors: ["Black"], description: "Heat-reveal colour-change ceramic mug." , imageUrl: "/products/mt-magic-mug.jpg" },
+      { id: "mt-insulated-travel", name: "Insulated Travel Mug", price: 1260, colors: ["Black", "Pink", "Blue", "Cream"], description: "Tapered steel travel mug with flip-straw lid." , imageUrl: "/products/mt-insulated-travel.jpg" },
     ],
   },
   {
@@ -108,6 +119,10 @@ export const CATEGORIES: Category[] = [
       { id: "sd-s-banner", name: "S-Banner", price: 37800, colors: ["Custom"], description: "Tall S-curve banner for rooftop and outdoor activations — stand and print included.", imageUrl: "/products/sd-s-banner.jpg" },
       { id: "sd-teardrop-flags", name: "Teardrop Feather Flags", customQuote: true, colors: ["Multiple sizes"], description: "Feather-flag signage in multiple sizes — priced to your exact spec." },
       { id: "sd-popup", name: "Pop Up Banners", customQuote: true, colors: ["Custom sizes"], description: "Curved pop-up banner walls for exhibitions and trade shows." },
+      { id: "sd-gazebo-white-2x2", name: "White Gazebo Tent (2m x 2m)", price: 25900, colors: ["White"], description: "Foldable event gazebo, aluminium frame — branding priced separately.", imageUrl: "/products/sd-gazebo-white-2x2.jpg" },
+      { id: "sd-gazebo-black-3x3", name: "Gazebo Tent (3m x 3m, Black Frame)", price: 28000, colors: ["White canopy / Black frame"], description: "Foldable event gazebo, steel frame — branding priced separately.", imageUrl: "/products/sd-gazebo-black-3x3.jpg" },
+      { id: "sd-gazebo-white-3x3", name: "White Gazebo Tent (3m x 3m)", price: 31500, colors: ["White"], description: "Foldable event gazebo, aluminium frame — branding priced separately.", imageUrl: "/products/sd-gazebo-white-3x3.jpg" },
+      { id: "sd-gazebo-aluminium", name: "Aluminium Gazebo Tent (3m x 3m)", price: 42000, colors: ["White"], description: "Premium aluminium-frame event gazebo — branding priced separately.", imageUrl: "/products/sd-gazebo-aluminium.jpg" },
     ],
   },
   {
@@ -157,6 +172,10 @@ export const CATEGORIES: Category[] = [
       { id: "gs-flask-pen-notebook", name: "Gift Set with Flask, Pen & Executive Notebook", customQuote: true, colors: ["Black"], description: "Flask, pen and executive notebook, gift-boxed together." },
       { id: "gs-notebook-pen-powerbank", name: "Gift Set with Notebook, Pen & Power Bank", customQuote: true, colors: ["Black", "Blue"], description: "Notebook, pen and power bank in a matched colourway, gift-boxed.", imageUrl: "/products/gs-notebook-pen-powerbank.jpg" },
       { id: "gs-exec-a5-organiser", name: "Executive A5 Organiser", price: 5600, colors: ["Custom"], description: "A5 organiser gift set for executive orders." },
+      { id: "gs-013", name: "Executive Gift Set 013", price: 2520, colors: ["Green"], description: "Notebook, business cardholder, keyholder & pen, gift-boxed.", imageUrl: "/products/gs-013.jpg" },
+      { id: "gs-gf028", name: "Executive Gift Set GF028", price: 3500, colors: ["Black / Bamboo"], description: "Thermal mug, notebook, pen & keyholder, gift-boxed.", imageUrl: "/products/gs-gf028.jpg" },
+      { id: "gs-021", name: "Executive Gift Set 021", price: 3640, colors: ["Black / Bamboo"], description: "Thermal tumbler, notebook, pen & keyholder, gift-boxed.", imageUrl: "/products/gs-021.jpg" },
+      { id: "gs-011", name: "Executive Gift Set 011", price: 4900, colors: ["Blue"], description: "Thermal flask, notebook, business cardholder, pen & keyholder, gift-boxed.", imageUrl: "/products/gs-011.jpg" },
     ],
   },
   {
@@ -169,6 +188,11 @@ export const CATEGORIES: Category[] = [
     itemized: true,
     products: [
       { id: "pn-ballpoint-gold", name: "Branded Ballpoint Pen", price: 36, colors: ["Black/Gold"], description: "Matte-black barrel with a gold clip and trim, logo engraved or printed along the body.", imageUrl: "/products/pen-black-gold.jpg" },
+      { id: "pn-mp08", name: "Metal Pens MP08", price: 140, colors: ["Black", "Gold", "Silver", "White", "Red"], description: "Fountain-style metal pen, five colourways.", imageUrl: "/products/pn-mp08.jpg" },
+      { id: "pn-mp15", name: "Metal Pens MP15", price: 280, colors: ["White", "Blue", "Black"], description: "Gold-trim metal ballpoint pen.", imageUrl: "/products/pn-mp15.jpg" },
+      { id: "pn-mp17", name: "Metal Pens MP17", price: 350, colors: ["Black", "Navy", "Teal", "Grey", "White"], description: "Slim clip-top metal pen, five colourways.", imageUrl: "/products/pn-mp17.jpg" },
+      { id: "pn-mp01", name: "Metal Pens MP01", price: 378, colors: ["White", "Red", "Blue", "Silver", "Gold"], description: "Fountain-style metal pen, seven colourways.", imageUrl: "/products/pn-mp01.jpg" },
+      { id: "pn-mp07", name: "Metal Pens MP07", price: 560, colors: ["Black/Gold"], description: "Premium fountain-style metal pen, gold trim.", imageUrl: "/products/pn-mp07.jpg" },
     ],
   },
   {
@@ -180,6 +204,8 @@ export const CATEGORIES: Category[] = [
     itemized: true,
     products: [
       { id: "wr-silicone", name: "Silicone Wristband", price: 52, colors: ["Teal", "Rust", "Cream", "Black"], description: "Debossed or printed silicone wristband, sized for events and campaign giveaways.", imageUrl: "/products/wristbands-stack.jpg" },
+      { id: "wr-event-tyvek", name: "Event Wristband (Tyvek)", price: 14, colors: ["Gold", "Silver", "Green", "Teal", "Pink", "Purple", "Blue"], description: "Paper-style tear-resistant event wristband, seven colourways.", imageUrl: "/products/wr-event-tyvek.jpg" },
+      { id: "wr-plastic-snap", name: "Plastic Event Wristband (Snap)", price: 21, colors: ["Purple", "Pink", "Cyan", "Orange", "Red"], description: "Adjustable vinyl snap-closure event wristband.", imageUrl: "/products/wr-plastic-snap.jpg" },
     ],
   },
   {
@@ -280,9 +306,15 @@ export function formatKES(n: number): string {
   return `KES ${n.toLocaleString("en-KE")}`;
 }
 
+// Northbird catalogue policy: a product with no genuine photo is not shown anywhere on the
+// public site (listings, cover images, counts, starting prices) — no placeholder/emoji stand-ins.
+export function publishedProducts(cat: Category): ProductVariant[] {
+  return cat.products.filter((p) => !!p.imageUrl);
+}
+
 export function categoryStartingPrice(cat: Category): string | undefined {
   if (!cat.itemized) return cat.startingPriceLabel;
-  const priced = cat.products.filter((p) => typeof p.price === "number") as (ProductVariant & { price: number })[];
+  const priced = publishedProducts(cat).filter((p) => typeof p.price === "number") as (ProductVariant & { price: number })[];
   if (priced.length === 0) return "Custom quote";
   const min = Math.min(...priced.map((p) => p.price));
   return `From ${formatKES(min)}`;

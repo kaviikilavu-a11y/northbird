@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CATEGORIES, categoryStartingPrice, categoryCoverImage } from "@/lib/catalogue-data";
+import { CATEGORIES, categoryStartingPrice, categoryCoverImage, publishedProducts } from "@/lib/catalogue-data";
 import { assetPath } from "@/lib/site-config";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import type { Metadata } from "next";
@@ -33,6 +33,7 @@ export default function CataloguePage() {
       >
         {CATEGORIES.map((cat) => {
           const cover = categoryCoverImage(cat);
+          const publishedCount = publishedProducts(cat).length;
           return (
             <StaggerItem key={cat.id} variant="up">
               <Link
@@ -82,7 +83,9 @@ export default function CataloguePage() {
                       {cat.name}
                     </h2>
                     <p className="text-xs mt-1" style={{ color: "#888" }}>
-                      {cat.itemized ? `${cat.products.length} product${cat.products.length === 1 ? "" : "s"}` : "Ask us on WhatsApp"}
+                      {cat.itemized && publishedCount > 0
+                        ? `${publishedCount} product${publishedCount === 1 ? "" : "s"}`
+                        : "Ask us on WhatsApp"}
                     </p>
                     <p className="text-xs mt-1.5 font-semibold" style={{ color: "var(--rust)" }}>
                       {categoryStartingPrice(cat)}

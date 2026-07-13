@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CATEGORIES, categoryStartingPrice, categoryCoverImage, type Category } from "@/lib/catalogue-data";
+import { CATEGORIES, categoryStartingPrice, categoryCoverImage, publishedProducts, type Category } from "@/lib/catalogue-data";
 import { assetPath } from "@/lib/site-config";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import SectionLabel from "@/components/motion/SectionLabel";
@@ -54,7 +54,7 @@ function HighlightedCard({ cat }: { cat: Category }) {
         </div>
         <div className="relative flex items-end justify-between mt-6">
           <span className="text-sm" style={{ color: "rgba(251,247,238,0.7)" }}>
-            {cat.itemized ? `${cat.products.length} products` : "On request"}
+            {cat.itemized && publishedProducts(cat).length > 0 ? `${publishedProducts(cat).length} products` : "On request"}
           </span>
           <span className="text-sm font-semibold" style={{ color: "var(--cream)" }}>
             {categoryStartingPrice(cat)}
@@ -131,7 +131,7 @@ export default function CuratedCollections() {
                   className="inline-block px-6 py-3 rounded-full text-sm font-semibold transition-opacity group-hover:opacity-90"
                   style={{ background: "var(--gold)", color: "var(--charcoal)" }}
                 >
-                  Explore {FEATURED.products.length} products
+                  Explore {publishedProducts(FEATURED).length} products
                 </span>
                 <span className="text-sm font-semibold" style={{ color: "var(--cream)" }}>
                   {categoryStartingPrice(FEATURED)}

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { CATEGORIES, getCategoryBySlug } from "@/lib/catalogue-data";
+import { CATEGORIES, getCategoryBySlug, publishedProducts, categoryStartingPrice } from "@/lib/catalogue-data";
 import { getWhatsAppLink } from "@/lib/site-config";
 import ProductCard from "./ProductCard";
 import type { Metadata } from "next";
@@ -28,6 +28,8 @@ export default async function CategoryPage({ params }: Props) {
   const cat = getCategoryBySlug(slug);
   if (!cat) notFound();
 
+  const products = publishedProducts(cat);
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
       {/* Breadcrumb */}
@@ -52,21 +54,21 @@ export default async function CategoryPage({ params }: Props) {
         </div>
       </div>
 
-      {cat.itemized ? (
+      {cat.itemized && products.length > 0 ? (
         <>
           <p className="text-xs mb-10" style={{ color: "#aaa" }}>
             All prices in KES. Minimum order quantities and bulk pricing available — ask us on WhatsApp.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {cat.products.map((product) => (
+            {products.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
                 categorySlug={cat.slug}
                 categoryName={cat.name}
                 categoryEmoji={cat.emoji}
-                siblingProducts={cat.products}
+                siblingProducts={products}
               />
             ))}
           </div>
@@ -80,7 +82,7 @@ export default async function CategoryPage({ params }: Props) {
             Full range available on request
           </p>
           <p className="font-bold text-2xl mb-3" style={{ color: "var(--rust)" }}>
-            {cat.startingPriceLabel}
+            {categoryStartingPrice(cat)}
           </p>
           <p className="text-sm leading-relaxed mb-8" style={{ color: "#666" }}>
             We haven&apos;t photographed and itemised every {cat.name.toLowerCase()} option yet — but the range is real
