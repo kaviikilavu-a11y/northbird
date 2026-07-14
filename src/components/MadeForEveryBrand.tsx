@@ -95,17 +95,9 @@ function CollectionCard({ collection }: { collection: Collection }) {
       href={`/catalogue/${collection.primarySlug}/`}
       onMouseEnter={startCycle}
       onMouseLeave={stopCycle}
-      className="group block rounded-2xl overflow-hidden border transition-[border-color,box-shadow] duration-300"
-      style={{
-        borderColor: hovered ? "var(--rust)" : "var(--cream-deep)",
-        boxShadow: hovered
-          ? "0 20px 44px -20px rgba(31,42,46,0.22)"
-          : "0 1px 0 0 rgba(0,0,0,0.02)",
-        transform: hovered && !reduceMotion ? "translateY(-7px)" : "translateY(0)",
-        transitionProperty: "border-color, box-shadow, transform",
-      }}
+      className="group relative block rounded-2xl overflow-hidden min-h-[280px] md:min-h-0 h-full"
     >
-      <div className="relative aspect-[4/3] overflow-hidden" style={{ background: "var(--cream-deep)" }}>
+      <div className="collections-accordion-image absolute inset-0" style={{ background: "var(--cream-deep)" }}>
         <AnimatePresence mode="wait">
           {activeImage && (
             <motion.img
@@ -121,15 +113,16 @@ function CollectionCard({ collection }: { collection: Collection }) {
             />
           )}
         </AnimatePresence>
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(31,42,46,0.85) 0%, rgba(31,42,46,0.15) 55%, transparent 100%)" }}
+        />
       </div>
-      <div className="p-6 md:p-7">
-        <h3
-          className="font-display text-xl md:text-2xl font-medium mb-1.5 transition-colors duration-300"
-          style={{ color: hovered ? "var(--rust)" : "var(--teal-dark)" }}
-        >
+      <div className="collections-accordion-title relative h-full flex flex-col justify-end p-5 md:p-6">
+        <h3 className="font-display text-lg md:text-xl font-medium mb-1" style={{ color: "var(--cream)" }}>
           {collection.title}
         </h3>
-        <p className="text-xs tracking-wide" style={{ color: "#8a8a8a" }}>
+        <p className="text-xs tracking-wide" style={{ color: "rgba(251,247,238,0.75)" }}>
           {collection.tag}
         </p>
       </div>
@@ -156,9 +149,12 @@ export default function MadeForEveryBrand() {
         </div>
       </Reveal>
 
-      <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8" stagger={0.13}>
+      <StaggerGroup
+        className="collections-accordion flex flex-col gap-3 md:gap-2 md:h-[60vh] md:max-h-[460px]"
+        stagger={0.1}
+      >
         {COLLECTIONS.map((c) => (
-          <StaggerItem key={c.title} variant="up">
+          <StaggerItem key={c.title} variant="up" className="collections-accordion-item md:h-full">
             <CollectionCard collection={c} />
           </StaggerItem>
         ))}

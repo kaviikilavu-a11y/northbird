@@ -154,3 +154,51 @@ h1, h2, h3, .font-display {
     transform: none;
   }
 }
+
+/* ── BorderBeam accent (used on "Best value" cards) ── */
+@keyframes northbird-border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+.northbird-border-beam {
+  animation-name: northbird-border-beam;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* ── "Our Collections" hover-accordion (desktop only; mobile stays a static stack) ── */
+@media (min-width: 768px) {
+  .collections-accordion {
+    display: flex;
+    flex-direction: row;
+  }
+  .collections-accordion .collections-accordion-item {
+    flex: 1 1 0%;
+    min-width: 0;
+    overflow: hidden;
+    transition: flex-grow 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .collections-accordion:has(.collections-accordion-item:hover) .collections-accordion-item:hover {
+    flex-grow: 3.4;
+  }
+  .collections-accordion:has(.collections-accordion-item:hover) .collections-accordion-item:not(:hover) {
+    flex-grow: 0.7;
+  }
+  .collections-accordion:has(.collections-accordion-item:hover) .collections-accordion-item:not(:hover) .collections-accordion-image {
+    filter: blur(1.5px) brightness(0.65);
+  }
+  .collections-accordion:has(.collections-accordion-item:hover) .collections-accordion-item:not(:hover) .collections-accordion-title {
+    opacity: 0.55;
+  }
+  .collections-accordion-item,
+  .collections-accordion-image {
+    transition: flex-grow 0.7s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease, opacity 0.5s ease;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collections-accordion .collections-accordion-item,
+  .collections-accordion-image {
+    transition: none !important;
+  }
+}
