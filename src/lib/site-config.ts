@@ -16,7 +16,7 @@ export const BRAND = {
     rust: "#A8472A",
     charcoal: "#1F2A2E",
   },
-  whatsapp: "+254748277623",
+  whatsapp: "+254764092265",
   email: "hello@northbirdandco.com",
   location: "Nairobi, Kenya",
 };
