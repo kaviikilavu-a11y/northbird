@@ -214,7 +214,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Slide index + dots */}
+        {/* Slide index + dots + current label */}
         <div className="absolute bottom-10 left-6 flex items-center gap-4">
           <span
             className="text-xs tabular-nums tracking-wide"
@@ -239,14 +239,10 @@ export default function Hero() {
               ))}
             </div>
           )}
+          <p className="text-xs font-medium tracking-wide uppercase hidden sm:block" style={{ color: "rgba(251,247,238,0.45)" }}>
+            {reducedMotion ? SLIDES[0].label : SLIDES[activeIndex].label}
+          </p>
         </div>
-
-        <p
-          className="absolute bottom-10 right-6 text-xs font-medium tracking-wide uppercase"
-          style={{ color: "rgba(251,247,238,0.45)" }}
-        >
-          {reducedMotion ? SLIDES[0].label : SLIDES[activeIndex].label}
-        </p>
 
         <div
           className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
@@ -261,6 +257,55 @@ export default function Hero() {
             ↓
           </motion.span>
         </div>
+      </div>
+
+      {/* Inverted-corner cutout — a physical "notch" cut into the hero's own corner,
+          not a card floating on top of it. The two small radial-gradient divs carve a
+          smooth concave curve where the cutout's straight edges meet the hero's. */}
+      <div className="hidden sm:block absolute bottom-0 right-0 z-20">
+        <div
+          className="absolute bottom-full right-0 w-8 h-8 pointer-events-none"
+          aria-hidden="true"
+          style={{ background: "radial-gradient(circle at 0 0, transparent 32px, var(--cream) 32px)" }}
+        />
+        <div
+          className="absolute bottom-0 right-full w-8 h-8 pointer-events-none"
+          aria-hidden="true"
+          style={{ background: "radial-gradient(circle at 0 0, transparent 32px, var(--cream) 32px)" }}
+        />
+        <Link
+          href="/catalogue/"
+          className="group flex items-center gap-4 pl-8 pr-7 py-6"
+          style={{ background: "var(--cream)", borderTopLeftRadius: 32 }}
+        >
+          <div>
+            <p className="text-base font-medium" style={{ color: "var(--teal-dark)" }}>
+              Browse the Catalogue
+            </p>
+            <p className="text-xs mt-0.5" style={{ color: "#999" }}>
+              18 collections →
+            </p>
+          </div>
+          <span
+            className="shrink-0 w-11 h-11 rounded-full flex items-center justify-center transition-colors duration-200"
+            style={{ background: "var(--rust)", color: "var(--cream)" }}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden="true"
+            >
+              <path d="M7 17 17 7M7 7h10v10" />
+            </svg>
+          </span>
+        </Link>
       </div>
     </section>
   );

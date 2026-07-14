@@ -15,15 +15,8 @@ export default function Footer() {
   return (
     <footer
       data-mascot-station="footer"
-      className="relative"
       style={{ background: "var(--charcoal)", color: "var(--teal-light)" }}
     >
-      {/* Soft seam so the cream page doesn't cut abruptly into the dark footer */}
-      <div
-        className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
-        aria-hidden="true"
-        style={{ background: "linear-gradient(to bottom, var(--cream-deep), transparent)" }}
-      />
       <Reveal variant="up">
         <div className="max-w-3xl mx-auto text-center px-4 pt-20 pb-16 md:pt-28 md:pb-20">
           <p className="font-display text-4xl md:text-6xl font-medium leading-tight" style={{ color: "var(--cream)" }}>
