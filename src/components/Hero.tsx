@@ -3,31 +3,40 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { BRAND, PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/site-config";
+import { BRAND, PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE, assetPath } from "@/lib/site-config";
 import Magnetic from "@/components/motion/Magnetic";
 
-// Placeholder product visuals — replace src with real Canva/Adobe Express mockup URLs
-// Each uses Northbird brand colors as gradient backgrounds until real images exist
+// Real branded product photography — gradient is the fallback while an image loads/if missing.
 const SLIDES: { gradient: string; label: string; imageUrl?: string }[] = [
   {
-    label: "Branded Mug",
-    gradient: "linear-gradient(135deg, #4F7C81 0%, #7FA8AD 50%, #FBF7EE 100%)",
-  },
-  {
-    label: "Hardcover Notebook",
-    gradient: "linear-gradient(135deg, #1a1a1a 0%, #4F7C81 60%, #E8AE3F 100%)",
-  },
-  {
-    label: "Canvas Tote Bag",
-    gradient: "linear-gradient(135deg, #D97B2B 0%, #E8AE3F 50%, #FBF7EE 100%)",
-  },
-  {
-    label: "Water Bottle",
-    gradient: "linear-gradient(135deg, #4F7C81 0%, #A8472A 60%, #FBF7EE 100%)",
-  },
-  {
-    label: "Gift Set Flat-lay",
+    label: "Executive Gift Box",
     gradient: "linear-gradient(135deg, #A8472A 0%, #D97B2B 40%, #E8AE3F 100%)",
+    imageUrl: "/hero/gift-box.jpg",
+  },
+  {
+    label: "Employee Welcome Kit",
+    gradient: "linear-gradient(135deg, #D97B2B 0%, #E8AE3F 50%, #FBF7EE 100%)",
+    imageUrl: "/hero/welcome-kit.jpg",
+  },
+  {
+    label: "Branded Notebooks",
+    gradient: "linear-gradient(135deg, #1a1a1a 0%, #4F7C81 60%, #E8AE3F 100%)",
+    imageUrl: "/hero/notebooks.jpg",
+  },
+  {
+    label: "Premium Drinkware",
+    gradient: "linear-gradient(135deg, #4F7C81 0%, #A8472A 60%, #FBF7EE 100%)",
+    imageUrl: "/hero/bottle.jpg",
+  },
+  {
+    label: "Event Branding",
+    gradient: "linear-gradient(135deg, #4F7C81 0%, #7FA8AD 50%, #FBF7EE 100%)",
+    imageUrl: "/hero/banner.jpg",
+  },
+  {
+    label: "Wristbands",
+    gradient: "linear-gradient(135deg, #7FA8AD 0%, #4F7C81 50%, #1F2A2E 100%)",
+    imageUrl: "/hero/wristbands.jpg",
   },
 ];
 
@@ -121,7 +130,7 @@ export default function Hero() {
               className="absolute inset-0"
               style={{
                 background: slide.imageUrl
-                  ? `url(${slide.imageUrl}) center/cover no-repeat`
+                  ? `url(${assetPath(slide.imageUrl)}) center/cover no-repeat`
                   : slide.gradient,
                 opacity: isActive ? 1 : 0,
                 transition: `opacity ${TRANSITION_DURATION}ms ease-in-out`,
