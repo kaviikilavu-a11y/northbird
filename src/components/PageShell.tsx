@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import NorthbirdFlightController from "./mascot/NorthbirdFlightController";
 import LoadingIntro from "./motion/LoadingIntro";
 import BackToTop from "./motion/BackToTop";
+import PageTransition from "./motion/PageTransition";
 import RequestProductSection from "./RequestProductSection";
 import BundlePanel from "./bundle/BundlePanel";
 import BundleToast from "./bundle/BundleToast";
@@ -15,7 +16,9 @@ export default function PageShell({ children }: { children: React.ReactNode }) {
       <Nav />
       {/* Single persistent mascot instance — fixed, anchored near nav */}
       <NorthbirdFlightController />
-      <main className="pt-20">{children}</main>
+      <main className="pt-20">
+        <PageTransition>{children}</PageTransition>
+      </main>
       <RequestProductSection />
       <Footer />
       <BackToTop />
