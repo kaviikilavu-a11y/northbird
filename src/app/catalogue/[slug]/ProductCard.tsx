@@ -130,8 +130,13 @@ export default function ProductCard({
           </div>
         )}
 
-        <p className="font-bold text-base mt-1" style={{ color: "var(--rust)" }}>
+        <p className="font-bold text-base mt-1 flex items-baseline gap-1.5 flex-wrap" style={{ color: "var(--rust)" }}>
           {product.customQuote || product.price === undefined ? "Request a Quote" : formatKES(product.price)}
+          {!product.customQuote && product.price !== undefined && (
+            <span className="font-normal text-[10px]" style={{ color: "#aaa" }}>
+              incl. branding
+            </span>
+          )}
         </p>
 
         <p className="text-[10px] leading-snug" style={{ color: "#999" }}>

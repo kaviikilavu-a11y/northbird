@@ -57,7 +57,7 @@ export default async function CategoryPage({ params }: Props) {
       {cat.itemized && products.length > 0 ? (
         <>
           <p className="text-xs mb-10" style={{ color: "#aaa" }}>
-            All prices in KES. Minimum order quantities and bulk pricing available — ask us on WhatsApp.
+            All prices in KES and inclusive of branding. Minimum order quantities and bulk pricing available — ask us on WhatsApp.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -81,8 +81,11 @@ export default async function CategoryPage({ params }: Props) {
           <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--orange)" }}>
             Full range available on request
           </p>
-          <p className="font-bold text-2xl mb-3" style={{ color: "var(--rust)" }}>
+          <p className="font-bold text-2xl mb-1" style={{ color: "var(--rust)" }}>
             {categoryStartingPrice(cat)}
+          </p>
+          <p className="text-xs mb-6" style={{ color: "#aaa" }}>
+            Inclusive of branding
           </p>
           <p className="text-sm leading-relaxed mb-8" style={{ color: "#666" }}>
             We haven&apos;t photographed and itemised every {cat.name.toLowerCase()} option yet — but the range is real

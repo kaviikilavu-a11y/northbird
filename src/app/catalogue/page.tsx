@@ -21,8 +21,8 @@ export default function CataloguePage() {
             Catalogue
           </h1>
           <p className="text-sm mb-10 max-w-xl" style={{ color: "#666" }}>
-            {CATEGORIES.length} categories — click any to see products, colours and pricing. Every order starts and ends
-            on WhatsApp.
+            {CATEGORIES.length} categories — click any to see products, colours and pricing. All prices are inclusive
+            of branding. Every order starts and ends on WhatsApp.
           </p>
         </div>
       </Reveal>

@@ -94,9 +94,16 @@ function ProductDetailModal({
                 </h2>
               </div>
 
-              <p className="font-bold text-xl" style={{ color: "var(--rust)" }}>
-                {product.customQuote || product.price === undefined ? "Request a Quote" : formatKES(product.price)}
-              </p>
+              <div>
+                <p className="font-bold text-xl" style={{ color: "var(--rust)" }}>
+                  {product.customQuote || product.price === undefined ? "Request a Quote" : formatKES(product.price)}
+                </p>
+                {!product.customQuote && product.price !== undefined && (
+                  <p className="text-xs mt-0.5" style={{ color: "#aaa" }}>
+                    Inclusive of branding
+                  </p>
+                )}
+              </div>
 
               {product.description && (
                 <p className="text-sm leading-relaxed" style={{ color: "#666" }}>
