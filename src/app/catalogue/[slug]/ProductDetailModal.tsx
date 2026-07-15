@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { formatKES, brandingMethodsForCategory, type ProductVariant } from "@/lib/catalogue-data";
+import { formatKES, brandingMethodsForCategory, isBrandingIncluded, type ProductVariant } from "@/lib/catalogue-data";
 import { getWhatsAppLink, assetPath } from "@/lib/site-config";
 
 function ProductDetailModal({
@@ -98,7 +98,7 @@ function ProductDetailModal({
                 <p className="font-bold text-xl" style={{ color: "var(--rust)" }}>
                   {product.customQuote || product.price === undefined ? "Request a Quote" : formatKES(product.price)}
                 </p>
-                {!product.customQuote && product.price !== undefined && (
+                {!product.customQuote && product.price !== undefined && isBrandingIncluded(categorySlug) && (
                   <p className="text-xs mt-0.5" style={{ color: "#aaa" }}>
                     Inclusive of branding
                   </p>

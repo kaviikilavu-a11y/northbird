@@ -33,14 +33,14 @@ export const CATEGORIES: Category[] = [
     description: "Everyday hydration that carries your brand from the office to the gym.",
     itemized: true,
     products: [
-      { id: "wb-aluminum-750", name: "750ml Aluminum Water Bottle", price: 700, colors: ["Blue", "Red", "Black"], description: "Lightweight aluminium body, full-wrap print or single-colour logo.", imageUrl: "/products/wb-aluminum-750.jpg" },
-      { id: "wb-kids-620", name: "Kids Bottle 620ml", price: 560, colors: ["Pink", "Blue", "Yellow", "Mint"], description: "Playful colourways sized for school and family giveaways.", bestValue: true, imageUrl: "/products/wb-kids-620.jpg" },
-      { id: "wb-silver-sub-750", name: "750ml Silver Sublimation Bottle", price: 560, colors: ["Silver"], description: "Sublimation-ready surface for full-colour, edge-to-edge branding.", imageUrl: "/products/wb-silver-sub-750.jpg" },
-      { id: "wb-ring-750", name: "Small Ring Bottles 750ml", price: 658, colors: ["Black", "Blue", "Red"], description: "Ring-top carry handle, matte finish.", imageUrl: "/products/wb-ring-750.jpg" },
-      { id: "wb-thermal", name: "Thermal Bottles", price: 1260, colors: ["Black"], description: "Double-wall insulation, keeps drinks cold through the workday." },
-      { id: "wb-plastic-1000", name: "Plastic Water Bottle 1000ml", price: 980, colors: ["Red", "Orange", "Grey", "White", "Royal Blue"], description: "Large-capacity flip-lid sports bottle, five colourways.", imageUrl: "/products/wb-plastic-1000.jpg" },
-      { id: "wb-plastic-750", name: "Sports Water Bottle 750ml", price: 840, colors: ["Blue", "Red", "Grey", "Green", "White"], description: "Flip-straw sports bottle with carry strap.", imageUrl: "/products/wb-plastic-750.jpg" },
-      { id: "wb-plastic-800", name: "Plastic Water Bottle 800ml", price: 840, colors: ["Red", "Grey", "Black", "Blue"], description: "Tinted flip-lid sports bottle with carry strap.", imageUrl: "/products/wb-plastic-800.jpg" },
+      { id: "wb-aluminum-750", name: "750ml Aluminum Water Bottle", price: 800, colors: ["Blue", "Red", "Black"], description: "Lightweight aluminium body, full-wrap print or single-colour logo.", imageUrl: "/products/wb-aluminum-750.jpg" },
+      { id: "wb-kids-620", name: "Kids Bottle 620ml", price: 660, colors: ["Pink", "Blue", "Yellow", "Mint"], description: "Playful colourways sized for school and family giveaways.", bestValue: true, imageUrl: "/products/wb-kids-620.jpg" },
+      { id: "wb-silver-sub-750", name: "750ml Silver Sublimation Bottle", price: 660, colors: ["Silver"], description: "Sublimation-ready surface for full-colour, edge-to-edge branding.", imageUrl: "/products/wb-silver-sub-750.jpg" },
+      { id: "wb-ring-750", name: "Small Ring Bottles 750ml", price: 758, colors: ["Black", "Blue", "Red"], description: "Ring-top carry handle, matte finish.", imageUrl: "/products/wb-ring-750.jpg" },
+      { id: "wb-thermal", name: "Thermal Bottles", price: 1360, colors: ["Black"], description: "Double-wall insulation, keeps drinks cold through the workday." },
+      { id: "wb-plastic-1000", name: "Plastic Water Bottle 1000ml", price: 1080, colors: ["Red", "Orange", "Grey", "White", "Royal Blue"], description: "Large-capacity flip-lid sports bottle, five colourways.", imageUrl: "/products/wb-plastic-1000.jpg" },
+      { id: "wb-plastic-750", name: "Sports Water Bottle 750ml", price: 940, colors: ["Blue", "Red", "Grey", "Green", "White"], description: "Flip-straw sports bottle with carry strap.", imageUrl: "/products/wb-plastic-750.jpg" },
+      { id: "wb-plastic-800", name: "Plastic Water Bottle 800ml", price: 940, colors: ["Red", "Grey", "Black", "Blue"], description: "Tinted flip-lid sports bottle with carry strap.", imageUrl: "/products/wb-plastic-800.jpg" },
     ],
   },
   {
@@ -168,14 +168,14 @@ export const CATEGORIES: Category[] = [
     itemized: true,
     coverImage: "/products/gift-set-box.jpg",
     products: [
-      { id: "gs-flask-power-flash-pen", name: "Gift Set with Flask, Power Bank, Flash Drive & Pen", price: 5880, colors: ["Black", "Green"], description: "Flask, wireless mouse, 8GB flash drive, power bank and pen in a branded box." },
-      { id: "gs-flask-pen-notebook", name: "Gift Set with Flask, Pen & Executive Notebook", customQuote: true, colors: ["Black"], description: "Flask, pen and executive notebook, gift-boxed together." },
-      { id: "gs-notebook-pen-powerbank", name: "Gift Set with Notebook, Pen & Power Bank", customQuote: true, colors: ["Black", "Blue"], description: "Notebook, pen and power bank in a matched colourway, gift-boxed.", imageUrl: "/products/gs-notebook-pen-powerbank.jpg" },
-      { id: "gs-exec-a5-organiser", name: "Executive A5 Organiser", price: 5600, colors: ["Custom"], description: "A5 organiser gift set for executive orders." },
-      { id: "gs-013", name: "Executive Gift Set 013", price: 2520, colors: ["Green"], description: "Notebook, business cardholder, keyholder & pen, gift-boxed.", imageUrl: "/products/gs-013.jpg" },
-      { id: "gs-gf028", name: "Executive Gift Set GF028", price: 3500, colors: ["Black / Bamboo"], description: "Thermal mug, notebook, pen & keyholder, gift-boxed.", imageUrl: "/products/gs-gf028.jpg" },
-      { id: "gs-021", name: "Executive Gift Set 021", price: 3640, colors: ["Black / Bamboo"], description: "Thermal tumbler, notebook, pen & keyholder, gift-boxed.", imageUrl: "/products/gs-021.jpg" },
-      { id: "gs-011", name: "Executive Gift Set 011", price: 4900, colors: ["Blue"], description: "Thermal flask, notebook, business cardholder, pen & keyholder, gift-boxed.", imageUrl: "/products/gs-011.jpg" },
+      { id: "gs-flask-power-flash-pen", name: "Gift Set with Flask, Power Bank, Flash Drive & Pen", price: 5880, colors: ["Black", "Green"], description: "Flask, wireless mouse, 8GB flash drive, power bank and pen in a branded box. Branding quoted per order." },
+      { id: "gs-flask-pen-notebook", name: "Gift Set with Flask, Pen & Executive Notebook", customQuote: true, colors: ["Black"], description: "Flask, pen and executive notebook, gift-boxed together. Branding quoted per order." },
+      { id: "gs-notebook-pen-powerbank", name: "Gift Set with Notebook, Pen & Power Bank", customQuote: true, colors: ["Black", "Blue"], description: "Notebook, pen and power bank in a matched colourway, gift-boxed. Branding quoted per order.", imageUrl: "/products/gs-notebook-pen-powerbank.jpg" },
+      { id: "gs-exec-a5-organiser", name: "Executive A5 Organiser", price: 5600, colors: ["Custom"], description: "A5 organiser gift set for executive orders. Branding quoted per order." },
+      { id: "gs-013", name: "Executive Gift Set 013", price: 2520, colors: ["Green"], description: "Notebook, business cardholder, keyholder & pen, gift-boxed. Branding quoted per order.", imageUrl: "/products/gs-013.jpg" },
+      { id: "gs-gf028", name: "Executive Gift Set GF028", price: 3500, colors: ["Black / Bamboo"], description: "Thermal mug, notebook, pen & keyholder, gift-boxed. Branding quoted per order.", imageUrl: "/products/gs-gf028.jpg" },
+      { id: "gs-021", name: "Executive Gift Set 021", price: 3640, colors: ["Black / Bamboo"], description: "Thermal tumbler, notebook, pen & keyholder, gift-boxed. Branding quoted per order.", imageUrl: "/products/gs-021.jpg" },
+      { id: "gs-011", name: "Executive Gift Set 011", price: 4900, colors: ["Blue"], description: "Thermal flask, notebook, business cardholder, pen & keyholder, gift-boxed. Branding quoted per order.", imageUrl: "/products/gs-011.jpg" },
     ],
   },
   {
@@ -310,6 +310,13 @@ export function formatKES(n: number): string {
 // public site (listings, cover images, counts, starting prices) — no placeholder/emoji stand-ins.
 export function publishedProducts(cat: Category): ProductVariant[] {
   return cat.products.filter((p) => !!p.imageUrl);
+}
+
+// Gift sets bundle several branded items per box, so branding is quoted per-order rather than
+// folded into one advertised price — every other itemized category's price includes branding.
+const BRANDING_SEPARATE_CATEGORIES = new Set(["gift-sets"]);
+export function isBrandingIncluded(categorySlug: string): boolean {
+  return !BRANDING_SEPARATE_CATEGORIES.has(categorySlug);
 }
 
 export function categoryStartingPrice(cat: Category): string | undefined {

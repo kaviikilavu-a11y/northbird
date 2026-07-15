@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { formatKES, brandingMethodsForCategory, type ProductVariant } from "@/lib/catalogue-data";
+import { formatKES, brandingMethodsForCategory, isBrandingIncluded, type ProductVariant } from "@/lib/catalogue-data";
 import { getWhatsAppLink, assetPath } from "@/lib/site-config";
 import { useBundle } from "@/lib/bundle-context";
 import QuantityStepper from "@/components/bundle/QuantityStepper";
@@ -132,7 +132,7 @@ export default function ProductCard({
 
         <p className="font-bold text-base mt-1 flex items-baseline gap-1.5 flex-wrap" style={{ color: "var(--rust)" }}>
           {product.customQuote || product.price === undefined ? "Request a Quote" : formatKES(product.price)}
-          {!product.customQuote && product.price !== undefined && (
+          {!product.customQuote && product.price !== undefined && isBrandingIncluded(categorySlug) && (
             <span className="font-normal text-[10px]" style={{ color: "#aaa" }}>
               incl. branding
             </span>
