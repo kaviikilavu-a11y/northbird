@@ -1,0 +1,88 @@
+category_slug,category_name,product_id,product_name,price_kes,request_quote,colors,description,image_filename,best_value
+water-bottles,Water Bottles,wb-aluminum-750,750ml Aluminum Water Bottle,700,no,Blue; Red; Black,"Lightweight aluminium body, full-wrap print or single-colour logo.",wb-aluminum-750.jpg,no
+water-bottles,Water Bottles,wb-kids-620,Kids Bottle 620ml,560,no,Pink; Blue; Yellow; Mint,Playful colourways sized for school and family giveaways.,wb-kids-620.jpg,yes
+water-bottles,Water Bottles,wb-silver-sub-750,750ml Silver Sublimation Bottle,560,no,Silver,"Sublimation-ready surface for full-colour, edge-to-edge branding.",wb-silver-sub-750.jpg,no
+water-bottles,Water Bottles,wb-ring-750,Small Ring Bottles 750ml,658,no,Black; Blue; Red,"Ring-top carry handle, matte finish.",wb-ring-750.jpg,no
+water-bottles,Water Bottles,wb-thermal,Thermal Bottles,1260,no,Black,"Double-wall insulation, keeps drinks cold through the workday.",,no
+water-bottles,Water Bottles,wb-plastic-1000,Plastic Water Bottle 1000ml,980,no,Red; Orange; Grey; White; Royal Blue,"Large-capacity flip-lid sports bottle, five colourways.",wb-plastic-1000.jpg,no
+water-bottles,Water Bottles,wb-plastic-750,Sports Water Bottle 750ml,840,no,Blue; Red; Grey; Green; White,Flip-straw sports bottle with carry strap.,wb-plastic-750.jpg,no
+water-bottles,Water Bottles,wb-plastic-800,Plastic Water Bottle 800ml,840,no,Red; Grey; Black; Blue,Tinted flip-lid sports bottle with carry strap.,wb-plastic-800.jpg,no
+flasks,Flasks,fl-jug-500,Jug Flask 500ml,1330,no,Gold; Red; White; Black,"Wide-mouth jug-style flask, easy to fill and clean.",fl-jug-500.jpg,no
+flasks,Flasks,fl-straw-500,Straw Flask 500ml,1120,no,White,"Built-in straw lid, one-hand drinking on the move.",fl-straw-500.jpg,no
+flasks,Flasks,fl-thermal,Thermal Flask,1190,no,Black; Blue; White; Red,"Vacuum insulation, screw-top lid doubles as a cup.",fl-thermal.jpg,no
+flasks,Flasks,fl-skin-feel-750,750ml Skin Feel Flasks,1540,no,Black; Blue; White; Red,"Soft-touch matte coating, premium desk presence.",fl-skin-feel-750.jpg,no
+flasks,Flasks,fl-matte,Matte Flask,1260,no,Blue; White; Red,"Clean matte finish, laser-engraved or printed logo.",,no
+flasks,Flasks,fl-kids-350,Kids Flask 350ml,1050,no,Blue; Pink; Yellow; Orange; Black,"Right-sized for school runs, five bright colourways.",fl-kids-350.jpg,no
+flasks,Flasks,fl-stainless,Stainless Flask,1400,no,Blue; White; Red; Silver,"Food-grade stainless steel, keeps hot 6+ hours.",fl-stainless.jpg,no
+flasks,Flasks,fl-bamboo,Bamboo Flask,1400,no,Black; White; Silver,Bamboo-accented lid for an eco-forward gifting story.,fl-bamboo.jpg,yes
+flasks,Flasks,fl-metallic-800,Metallic Water Bottle 800ml,672,no,Black; Blue; Grey; White; Red,Steel flip-cap bottle with carry strap.,fl-metallic-800.jpg,no
+flasks,Flasks,fl-wooden-thermal,Thermal Flask (Wooden Finish),1470,no,Wooden Brown,"Wood-grain steel flask, warm desk presence.",fl-wooden-thermal.jpg,no
+flasks,Flasks,fl-tf014-550,Thermal Flask TF014 550ml,1260,no,Black; Blue; Green; Grey; White; Red,"Bamboo-base steel flask, six colourways.",fl-tf014-550.jpg,no
+flasks,Flasks,fl-magnetic-750,Magnetic Flask 750ml,1680,no,Blue; Red; White; Black,Steel flask with magnetic ring-pull lid.,fl-magnetic-750.jpg,no
+mugs-tumblers,Mugs & Tumblers,mt-led-510,LED Tumbler 510ml,1190,no,White; Cream,"Light-up base, a genuine stand-out at evening events.",mt-led-510.jpg,no
+mugs-tumblers,Mugs & Tumblers,mt-stanley-1200,Stanley Mugs 1.2L,1820,no,Black; Pink; Blue; White; Orange; Red,"Large-format insulated mug, six colourways to match any brand palette.",mt-stanley-1200.jpg,yes
+mugs-tumblers,Mugs & Tumblers,mt-thermal,Thermal Tumbler,910,no,Black; Blue; Gold; White; Yellow; Dark Green; Dark Pink,"Double-wall tumbler, condensation-free exterior.",mt-thermal.jpg,no
+mugs-tumblers,Mugs & Tumblers,mt-300,Tumblers 300ml,1162,no,Gold,"Compact gold-finish tumbler, premium gift-set anchor.",mt-300.jpg,no
+mugs-tumblers,Mugs & Tumblers,mt-long-650,Long Tumblers 650ml,1190,no,White; Black,"Tall-format tumbler, straw-lid compatible.",,no
+mugs-tumblers,Mugs & Tumblers,mt-concave-magic,Concave Magic Mug,336,no,Blue; Red; Black,"Colour-change ceramic mug, concave grip.",mt-concave-magic.jpg,no
+mugs-tumblers,Mugs & Tumblers,mt-enamel-500,Enamel Mug 500ml,560,no,Black; Red; Cyan; Yellow; White,Camp-style enamel mug with coloured rim.,mt-enamel-500.jpg,no
+mugs-tumblers,Mugs & Tumblers,mt-magic-mug,Magic Mug (Colour-Change),280,no,Black,Heat-reveal colour-change ceramic mug.,mt-magic-mug.jpg,no
+mugs-tumblers,Mugs & Tumblers,mt-insulated-travel,Insulated Travel Mug,1260,no,Black; Pink; Blue; Cream,Tapered steel travel mug with flip-straw lid.,mt-insulated-travel.jpg,no
+keyholders,Key Holders,kh-long,Long Keyholder,154,no,Yellow; Red/Black; White/Blue,"Durable long-format number-plate style keyholder, full-colour or single-tone branding.",,yes
+keyholders,Key Holders,kh-chain,Chain Key Holder,154,no,Custom,Glass-block keyholder with a chain-linked charm — brand the medallion with your logo.,,no
+keyholders,Key Holders,kh-custom-wood,Customized Key Holders,700,no,Yellow; Rose,"Wooden number-plate style keyholder, personalised per order.",kh-custom-wood.jpg,no
+keyholders,Key Holders,kh-opener,Opener Key Holder,154,no,Silver; Custom,Glass-block keyholder with a built-in bottle opener charm.,,no
+keyholders,Key Holders,kh-metallic-square,Metallic Square Keyholders,154,no,Custom,"Square metal tag keyholder, laser-etched with your logo.",,no
+keyholders,Key Holders,kh-keychain-dogtag,Keychain Key Holder,154,no,Custom,Glass-block keyholder with a dog-tag style charm on a chain.,,no
+signage-display,Signage & Display,sd-teardrop-05,Teardrop Banner 0.5M,2100,no,Custom,"Compact teardrop banner, ideal for entrances and counters.",,no
+signage-display,Signage & Display,sd-rollup,Broadbase Banner (Roll Up),5880,no,Custom,"Retractable roll-up banner stand, carry case included.",sd-broadbase-rollup.jpg,no
+signage-display,Signage & Display,sd-display-stand,Branded Display Stand,35700,no,Custom,Full custom-branded retail display stand.,,no
+signage-display,Signage & Display,sd-kiosk,Branded Kiosk,18900,no,Custom,Freestanding branded kiosk for activations and pop-ups.,,no
+signage-display,Signage & Display,sd-broadbase,Broadbase Banner,9100,no,Custom,Large-format broadbase banner for high-visibility placement.,,no
+signage-display,Signage & Display,sd-promo-kiosk,Promotional Kiosk,10500,no,Custom,"Lightweight promotional kiosk, ideal for mall and event activations.",,no
+signage-display,Signage & Display,sd-lstand,L-Stand Banner,6020,no,Custom,"L-shaped stand banner, stable footprint for indoor and outdoor use.",,no
+signage-display,Signage & Display,sd-s-banner,S-Banner,37800,no,Custom,Tall S-curve banner for rooftop and outdoor activations — stand and print included.,sd-s-banner.jpg,no
+signage-display,Signage & Display,sd-teardrop-flags,Teardrop Feather Flags,,yes,Multiple sizes,Feather-flag signage in multiple sizes — priced to your exact spec.,,no
+signage-display,Signage & Display,sd-popup,Pop Up Banners,,yes,Custom sizes,Curved pop-up banner walls for exhibitions and trade shows.,,no
+signage-display,Signage & Display,sd-gazebo-white-2x2,White Gazebo Tent (2m x 2m),25900,no,White,Foldable event gazebo — branding priced separately.,sd-gazebo-white-2x2.jpg,no
+signage-display,Signage & Display,sd-gazebo-black-3x3,"Gazebo Tent (3m x 3m, Black Frame)",28000,no,White canopy / Black frame,"Foldable event gazebo, steel frame — branding priced separately.",sd-gazebo-black-3x3.jpg,no
+signage-display,Signage & Display,sd-gazebo-white-3x3,White Gazebo Tent (3m x 3m),31500,no,White,Foldable event gazebo — branding priced separately.,sd-gazebo-white-3x3.jpg,no
+signage-display,Signage & Display,sd-gazebo-aluminium,Aluminium Gazebo Tent (3m x 3m),42000,no,White,Premium aluminium-frame event gazebo — branding priced separately.,sd-gazebo-aluminium.jpg,no
+spin-wheels,Spin Wheels,sw-table-30,Table Spin Wheel,,yes,,30cm diameter tabletop prize wheel with pointer and stand.,sw-table-30.jpg,no
+spin-wheels,Spin Wheels,sw-big-table-42,Big Table Spin Wheel,,yes,,42cm diameter tabletop prize wheel — bigger footprint for busier activations.,sw-big-table-42.jpg,no
+notebooks,Notebooks & Journals,nb-m02,A5 Notebook — Model 02,489,no,Orange; Blue,"Soft-touch A5 notebook, ruled pages.",nb-m02.jpg,no
+notebooks,Notebooks & Journals,nb-m09,A5 Notebook — Model 09,630,no,Green; White; Red; Grey; Blue; Black; Brown,"Seven colourways, classic hardcover finish.",nb-m09.jpg,no
+notebooks,Notebooks & Journals,nb-m08,A5 Notebook — Model 08,630,no,White; Yellow; Green; Blue; Red; Grey; Orange; Black,"Widest colour range in the range, great for multi-department orders.",nb-m08.jpg,no
+notebooks,Notebooks & Journals,nb-m05,A5 Notebook — Model 05,770,no,Beige; Blue; Black; Green,"Premium textured cover, ribbon bookmark.",nb-m05.jpg,no
+notebooks,Notebooks & Journals,nb-m04,A5 Notebook — Model 04,630,no,Grey; Black; Blue; Green,"Understated cover finish, boardroom-ready.",nb-m04.jpg,no
+notebooks,Notebooks & Journals,nb-m06,A5 Notebook — Model 06,630,no,Grey; Red; Green; Brown; Black; White; Blue; Yellow; Orange,Nine colourways for large mixed-department orders.,nb-m06.jpg,no
+notebooks,Notebooks & Journals,nb-m01,A5 Notebook — Model 01,700,no,Grey; Blue; Red; Brown; Black,Our original best-seller — the one clients reorder most.,nb-m01.jpg,no
+notebooks,Notebooks & Journals,nb-m07,A5 Notebook — Model 07,630,no,Blue; Grey; Green,"Minimal three-colour range, understated corporate finish.",nb-m07.jpg,no
+notebooks,Notebooks & Journals,nb-m03,A5 Notebook — Model 03,489,no,Green; Red; Black; Blue; Yellow; White; Grey; Orange,"Entry price point, eight colourways.",nb-m03.jpg,yes
+notebooks,Notebooks & Journals,nb-double-flip,A5 Double Flip Semi Executive,770,no,Light Green; Yellow; Red,Dual-flip layout for planners who split work and personal notes.,nb-double-flip.jpg,no
+notebooks,Notebooks & Journals,nb-exec-curved,A5 Executive Curved,700,no,Red; Black; Blue; Grey; Green; Brown,"Curved-edge executive cover, six colourways.",nb-exec-curved.jpg,no
+gift-sets,Gift Sets,gs-flask-power-flash-pen,"Gift Set with Flask, Power Bank, Flash Drive & Pen",5880,no,Black; Green,"Flask, wireless mouse, 8GB flash drive, power bank and pen in a branded box.",,no
+gift-sets,Gift Sets,gs-flask-pen-notebook,"Gift Set with Flask, Pen & Executive Notebook",,yes,Black,"Flask, pen and executive notebook, gift-boxed together.",,no
+gift-sets,Gift Sets,gs-notebook-pen-powerbank,"Gift Set with Notebook, Pen & Power Bank",,yes,Black; Blue,"Notebook, pen and power bank in a matched colourway, gift-boxed.",gs-notebook-pen-powerbank.jpg,no
+gift-sets,Gift Sets,gs-exec-a5-organiser,Executive A5 Organiser,5600,no,Custom,A5 organiser gift set for executive orders.,,no
+gift-sets,Gift Sets,gs-013,Executive Gift Set 013,2520,no,Green,"Notebook, business cardholder, keyholder & pen, gift-boxed.",gs-013.jpg,no
+gift-sets,Gift Sets,gs-gf028,Executive Gift Set GF028,3500,no,Black / Bamboo,"Thermal mug, notebook, pen & keyholder, gift-boxed.",gs-gf028.jpg,no
+gift-sets,Gift Sets,gs-021,Executive Gift Set 021,3640,no,Black / Bamboo,"Thermal tumbler, notebook, pen & keyholder, gift-boxed.",gs-021.jpg,no
+gift-sets,Gift Sets,gs-011,Executive Gift Set 011,4900,no,Blue,"Thermal flask, notebook, business cardholder, pen & keyholder, gift-boxed.",gs-011.jpg,no
+pens,Pens,pn-ballpoint-gold,Branded Ballpoint Pen,36,no,Black/Gold,"Matte-black barrel with a gold clip and trim, logo engraved or printed along the body.",pen-black-gold.jpg,no
+pens,Pens,pn-mp08,Metal Pens MP08,140,no,Black; Gold; Silver; White; Red,"Fountain-style metal pen, five colourways.",pn-mp08.jpg,no
+pens,Pens,pn-mp15,Metal Pens MP15,280,no,White; Blue; Black,Gold-trim metal ballpoint pen.,pn-mp15.jpg,no
+pens,Pens,pn-mp17,Metal Pens MP17,350,no,Black; Navy; Teal; Grey; White,"Slim clip-top metal pen, five colourways.",pn-mp17.jpg,no
+pens,Pens,pn-mp01,Metal Pens MP01,378,no,White; Red; Blue; Silver; Gold,"Fountain-style metal pen, seven colourways.",pn-mp01.jpg,no
+pens,Pens,pn-mp07,Metal Pens MP07,560,no,Black/Gold,"Premium fountain-style metal pen, gold trim.",pn-mp07.jpg,no
+wristbands,Wristbands,wr-silicone,Silicone Wristband,52,no,Teal; Rust; Cream; Black,"Debossed or printed silicone wristband, sized for events and campaign giveaways.",wristbands-stack.jpg,no
+wristbands,Wristbands,wr-event-tyvek,Event Wristband (Tyvek),14,no,Gold; Silver; Green; Teal; Pink; Purple; Blue,"Paper-style tear-resistant event wristband, seven colourways.",wr-event-tyvek.jpg,no
+wristbands,Wristbands,wr-plastic-snap,Plastic Event Wristband (Snap),21,no,Purple; Pink; Cyan; Orange; Red,Adjustable vinyl snap-closure event wristband.,wr-plastic-snap.jpg,no
+business-cards,Business Cards,bc-standard,Business Cards (100pc),1500,no,Custom,"Full-colour double-sided business cards, matte or gloss finish.",business-card.jpg,no
+flyers-brochures,Flyers & Brochures,fb-trifold,Tri-Fold Brochure,25,no,Custom,"Full-colour tri-fold brochure printing, priced per piece.",brochure-tryfold.jpg,no
+apparel,Branded Apparel,ap-tee,Branded T-Shirt,,yes,,Embroidered or screen-printed crew-neck tee — chest and sleeve placement shown.,apparel-tee.jpg,no
+caps,Caps,cp-embroidered,Embroidered Cap,,yes,,Structured six-panel cap with embroidered logo on the front panel.,caps-esp.jpg,no
+stickers-labels,Stickers & Labels,sl-roll,Branded Stickers (Roll),50,no,Custom,"Round or square logo stickers, supplied on a roll or as individual sheets.",stickers-roll.jpg,no
+lanyards,Lanyards & ID Holders,ln-lanyard-id-set,Lanyard & ID Card Holder Set,140,no,Cream/Teal,Woven lanyard with a leather-look ID card holder — logo printed along the strap.,lanyard-id-holder.jpg,no
+promotional-giveaways,Promotional Giveaways,pg-giveaway-set,"Giveaway Set (Tote, Pen, Stress Ball, Flash Drive)",95,no,Custom,"Mix-and-match small giveaways — canvas tote, pen, stress ball and flash drive, priced from the entry item.",giveaways-set.jpg,no
+umbrellas,Umbrellas,um-golf-compact,Branded Golf Umbrella,440,no,Navy/Cream/Teal; Black (Compact),"Large golf umbrella with a panelled canopy, plus a black compact folding option — both logo-branded.",umbrella-branded.jpg,no
