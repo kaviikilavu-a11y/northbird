@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import { PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE, assetPath } from "@/lib/site-config";
-import NorthbirdMascot from "@/components/mascot/NorthbirdMascot";
 import CatalogueMegaMenu from "@/components/CatalogueMegaMenu";
 import MobileNavPanel from "@/components/MobileNavPanel";
 import Magnetic from "@/components/motion/Magnetic";
@@ -94,24 +93,14 @@ export default function Nav() {
       >
         <motion.div animate={{ scale: scrolled ? 0.92 : 1 }} transition={{ duration: 0.35, ease: "easeOut" }}>
           <Link href="/" className="flex items-center shrink-0" aria-label="Northbird & Co home" onClick={() => setMenuOpen(false)}>
-            {onHomeHero ? (
-              // The lockup's wordmark ink is dark charcoal, baked into the artwork — illegible
-              // over the dark hero photo even with a transparent background. Use the mascot +
-              // wordmark treatment there, and the exact lockup image everywhere else.
-              <span className="flex items-center gap-2">
-                <NorthbirdMascot size={30} />
-                <span className="font-display font-semibold text-lg tracking-tight" style={{ color: textColor }}>
-                  Northbird & Co
-                </span>
-              </span>
-            ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={assetPath("/brand/northbird-logo-lockup.png")}
-                alt="Northbird & Co — A Visiora Enterprises Company"
-                className="h-9 md:h-10 w-auto"
-              />
-            )}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={assetPath(
+                onHomeHero ? "/brand/northbird-logo-lockup-cream-ink.png" : "/brand/northbird-logo-lockup.png"
+              )}
+              alt="Northbird & Co — A Visiora Enterprises Company"
+              className="h-9 md:h-10 w-auto"
+            />
           </Link>
         </motion.div>
 

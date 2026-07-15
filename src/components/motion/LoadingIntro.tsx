@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import NorthbirdMascot from "@/components/mascot/NorthbirdMascot";
-import { BRAND } from "@/lib/site-config";
+import { BRAND, assetPath } from "@/lib/site-config";
 
 const SESSION_KEY = "nb-intro-seen";
 const HOLD_MS = 900;
@@ -55,15 +54,13 @@ export default function LoadingIntro() {
           role="presentation"
         >
           <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center gap-4">
-            <motion.p
-              className="font-display text-2xl font-medium"
-              style={{ color: "var(--cream)" }}
-              variants={item}
-            >
-              {BRAND.name}
-            </motion.p>
             <motion.div variants={item}>
-              <NorthbirdMascot size={56} flapOnce />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={assetPath("/brand/northbird-logo-lockup-cream-ink.png")}
+                alt={`${BRAND.name} — ${BRAND.parent}`}
+                className="h-12 md:h-14 w-auto"
+              />
             </motion.div>
             <motion.p
               className="font-display italic text-sm"

@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { BRAND, PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/site-config";
+import { BRAND, PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE, assetPath } from "@/lib/site-config";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
-import NorthbirdMascot from "@/components/mascot/NorthbirdMascot";
 
 const LINKS = [
   { href: "/catalogue/", label: "Catalogue" },
@@ -46,14 +45,14 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto px-4 py-12">
           <StaggerGroup className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr] gap-10 pb-10" stagger={0.08}>
             <StaggerItem variant="up">
-              <div className="flex items-center gap-2.5">
-                <NorthbirdMascot size={28} />
-                <p className="font-display text-xl font-medium" style={{ color: "var(--cream)" }}>
-                  {BRAND.name}
-                </p>
-              </div>
-              <p className="font-display italic text-sm mt-2 opacity-70">{BRAND.slogan}</p>
-              <p className="text-xs opacity-40 mt-3">{BRAND.parent} · {BRAND.location}</p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={assetPath("/brand/northbird-logo-lockup-cream-ink.png")}
+                alt={`${BRAND.name} — ${BRAND.parent}`}
+                className="h-10 w-auto"
+              />
+              <p className="font-display italic text-sm mt-3 opacity-70">{BRAND.slogan}</p>
+              <p className="text-xs opacity-40 mt-3">{BRAND.location}</p>
             </StaggerItem>
             <StaggerItem variant="up">
               <p className="text-[11px] font-semibold tracking-widest uppercase opacity-50 mb-4">Site</p>
