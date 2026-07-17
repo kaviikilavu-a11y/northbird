@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { BRAND, PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE, assetPath } from "@/lib/site-config";
 import Magnetic from "@/components/motion/Magnetic";
 
@@ -133,7 +133,13 @@ export default function Hero() {
                   ? `url(${assetPath(slide.imageUrl)}) center/cover no-repeat`
                   : slide.gradient,
                 opacity: isActive ? 1 : 0,
-                transition: `opacity ${TRANSITION_DURATION}ms ease-in-out`,
+                // A slight tilt-and-scale that settles flat as the slide becomes active — like a
+                // product being set down, not just a flat crossfade. The transform keeps easing
+                // in briefly after the opacity fade completes, for that settling feel.
+                transform: isActive ? "scale(1) rotate(0deg)" : "scale(1.035) rotate(0.6deg)",
+                transition: reducedMotion
+                  ? undefined
+                  : `opacity ${TRANSITION_DURATION}ms ease-in-out, transform ${TRANSITION_DURATION + 500}ms cubic-bezier(0.16,1,0.3,1)`,
               }}
             />
           );
@@ -239,9 +245,19 @@ export default function Hero() {
               ))}
             </div>
           )}
-          <p className="text-xs font-medium tracking-wide uppercase hidden sm:block" style={{ color: "rgba(251,247,238,0.45)" }}>
-            {reducedMotion ? SLIDES[0].label : SLIDES[activeIndex].label}
-          </p>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={reducedMotion ? "static" : activeIndex}
+              initial={reducedMotion ? undefined : { opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reducedMotion ? undefined : { opacity: 0 }}
+              transition={{ duration: 0.4, delay: reducedMotion ? 0 : 0.3, ease: "easeOut" }}
+              className="text-xs font-medium tracking-wide uppercase hidden sm:block"
+              style={{ color: "rgba(251,247,238,0.45)" }}
+            >
+              {reducedMotion ? SLIDES[0].label : SLIDES[activeIndex].label}
+            </motion.p>
+          </AnimatePresence>
         </div>
 
         <div

@@ -95,7 +95,7 @@ function CollectionCard({ collection }: { collection: Collection }) {
       href={`/catalogue/${collection.primarySlug}/`}
       onMouseEnter={startCycle}
       onMouseLeave={stopCycle}
-      className="group relative block rounded-2xl overflow-hidden min-h-[280px] md:min-h-0 h-full"
+      className="group relative block rounded-2xl overflow-hidden min-h-[280px] md:min-h-0 h-full transition-transform duration-300 ease-out hover:-translate-y-1"
     >
       <div className="collections-accordion-image absolute inset-0" style={{ background: "var(--cream-deep)" }}>
         <AnimatePresence mode="wait">

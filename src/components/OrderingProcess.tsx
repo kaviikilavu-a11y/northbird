@@ -1,11 +1,8 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import { Reveal } from "@/components/motion/Reveal";
 import SectionLabel from "@/components/motion/SectionLabel";
+import PinnedProcessStrip, { type ProcessStep } from "@/components/motion/PinnedProcessStrip";
 
-const STEPS = [
+const STEPS: ProcessStep[] = [
   {
     n: "01",
     title: "Choose Products",
@@ -34,14 +31,6 @@ const STEPS = [
 ];
 
 export default function OrderingProcess() {
-  const reduceMotion = useReducedMotion();
-  const trackRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start 0.75", "end 0.4"],
-  });
-  const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
   return (
     <section className="py-16 md:py-24 px-4 max-w-6xl mx-auto">
       <Reveal variant="up">
@@ -59,38 +48,7 @@ export default function OrderingProcess() {
         </div>
       </Reveal>
 
-      <div ref={trackRef} className="relative">
-        <div
-          className="hidden sm:block absolute top-5 left-[10%] right-[10%] h-px"
-          style={{ background: "var(--cream-deep)" }}
-          aria-hidden="true"
-        >
-          <motion.div
-            className="h-full origin-left"
-            style={{ background: "var(--rust)", scaleX: reduceMotion ? 1 : lineScale }}
-          />
-        </div>
-
-        <StaggerGroup className="grid grid-cols-1 sm:grid-cols-5 gap-8 sm:gap-4 relative">
-          {STEPS.map((s) => (
-            <StaggerItem key={s.n} variant="up" className="relative">
-              <span
-                className="font-display text-3xl font-medium flex items-center justify-center w-10 h-10 rounded-full mb-4 relative z-10"
-                style={{ color: "var(--cream)", background: "var(--rust)", fontSize: "1rem" }}
-                aria-hidden="true"
-              >
-                {s.n}
-              </span>
-              <h3 className="font-semibold text-base mb-2" style={{ color: "var(--teal-dark)" }}>
-                {s.title}
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#666" }}>
-                {s.body}
-              </p>
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
-      </div>
+      <PinnedProcessStrip steps={STEPS} />
     </section>
   );
 }

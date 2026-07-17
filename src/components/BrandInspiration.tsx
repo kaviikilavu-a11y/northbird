@@ -83,9 +83,10 @@ export default function BrandInspiration() {
         </Reveal>
 
         <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.08}>
-          {REASONS.map((r) => (
+          {REASONS.map((r, i) => (
             <StaggerItem key={r.title} variant="up">
               <motion.div
+                data-mascot-station={`brand-badge-${i}`}
                 className="h-full rounded-2xl p-6 border transition-colors duration-300"
                 style={{ borderColor: "rgba(251,247,238,0.12)", background: "rgba(251,247,238,0.03)" }}
                 whileHover={{ y: -4, borderColor: "rgba(232,174,63,0.4)" }}
