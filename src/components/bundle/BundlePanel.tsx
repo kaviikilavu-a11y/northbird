@@ -133,6 +133,7 @@ export default function BundlePanel() {
                           </p>
                           <p className="text-[11px] mb-2" style={{ color: "#999" }}>
                             {item.categoryName}
+                            {item.color ? ` · ${item.color}` : ""}
                           </p>
                           <div className="flex items-center justify-between">
                             <QuantityStepper value={item.quantity} onChange={(q) => updateQuantity(item.id, q)} size="sm" />

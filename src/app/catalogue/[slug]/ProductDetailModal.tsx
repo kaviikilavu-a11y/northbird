@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { formatKES, brandingMethodsForCategory, isBrandingIncluded, type ProductVariant } from "@/lib/catalogue-data";
 import { getWhatsAppLink, assetPath } from "@/lib/site-config";
+import { swatchColor } from "@/lib/color-swatch";
 
 function ProductDetailModal({
   product,
@@ -24,7 +25,18 @@ function ProductDetailModal({
   onSelectRelated: (p: ProductVariant) => void;
 }) {
   const reduceMotion = useReducedMotion();
-  const waLink = getWhatsAppLink(`Hi! I'd like to order the ${product.name}.`);
+  const [selectedColor, setSelectedColor] = useState<string | undefined>(product.colors?.[0]);
+
+  // The modal is reused for related-product switches (onSelectRelated swaps `product`
+  // without unmounting), so the color selection needs to reset for the new product's palette.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelectedColor(product.colors?.[0]);
+  }, [product.id, product.colors]);
+
+  const waLink = getWhatsAppLink(
+    `Hi! I'd like to order the ${product.name}${selectedColor ? ` in ${selectedColor}` : ""}.`
+  );
 
   return (
     <AnimatePresence>
@@ -114,11 +126,34 @@ function ProductDetailModal({
               {product.colors && product.colors.length > 0 && (
                 <div>
                   <p className="text-[11px] font-semibold tracking-widest uppercase mb-2" style={{ color: "#999" }}>
-                    Available colours
+                    Choose a colour
                   </p>
-                  <p className="text-sm" style={{ color: "var(--teal-dark)" }}>
-                    {product.colors.join(" · ")}
-                  </p>
+                  <div className="flex items-center gap-2 flex-wrap" role="group" aria-label="Choose a colour">
+                    {product.colors.map((c) => {
+                      const selected = selectedColor === c;
+                      return (
+                        <button
+                          key={c}
+                          type="button"
+                          aria-pressed={selected}
+                          onClick={() => setSelectedColor(c)}
+                          className="flex items-center gap-1.5 pl-1.5 pr-3 py-1 rounded-full border text-xs font-medium transition-all"
+                          style={{
+                            borderColor: selected ? "var(--rust)" : "var(--cream-deep)",
+                            background: selected ? "rgba(168,71,42,0.06)" : "transparent",
+                            color: "var(--teal-dark)",
+                          }}
+                        >
+                          <span
+                            className="w-3.5 h-3.5 rounded-full shrink-0"
+                            style={{ background: swatchColor(c), boxShadow: "0 0 0 1px rgba(0,0,0,0.12)" }}
+                            aria-hidden="true"
+                          />
+                          {c}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
 

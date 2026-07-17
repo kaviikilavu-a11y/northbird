@@ -5,20 +5,9 @@ import { motion } from "framer-motion";
 import { formatKES, brandingMethodsForCategory, isBrandingIncluded, type ProductVariant } from "@/lib/catalogue-data";
 import { getWhatsAppLink, assetPath } from "@/lib/site-config";
 import { useBundle } from "@/lib/bundle-context";
+import { swatchColor } from "@/lib/color-swatch";
 import QuantityStepper from "@/components/bundle/QuantityStepper";
 import ProductDetailModal from "./ProductDetailModal";
-
-const COLOR_SWATCH: Record<string, string> = {
-  black: "#1a1a1a", white: "#f5f5f5", red: "#c0392b", blue: "#2c5f8a", silver: "#c9cdd1",
-  gold: "#d4af37", pink: "#e39fb3", yellow: "#e8c547", mint: "#a8d5c0", grey: "#9aa0a3",
-  gray: "#9aa0a3", green: "#4a7a5c", orange: "#d97b2b", brown: "#6b4a34", beige: "#d9c9a8",
-  "light green": "#a8c98a",
-};
-
-function swatchColor(name: string): string {
-  const key = name.toLowerCase().split("/")[0].trim();
-  return COLOR_SWATCH[key] ?? "#b8b8b8";
-}
 
 export default function ProductCard({
   product,
@@ -35,22 +24,24 @@ export default function ProductCard({
   siblingProducts?: ProductVariant[];
 }) {
   const [qty, setQty] = useState(1);
+  const [selectedColor, setSelectedColor] = useState<string | undefined>(product.colors?.[0]);
   const [detailProduct, setDetailProduct] = useState<ProductVariant | null>(null);
   const [justAdded, setJustAdded] = useState(false);
   const { addItem } = useBundle();
-  const waMessage = `Hi! I'd like to order the ${product.name}.`;
+  const waMessage = `Hi! I'd like to order the ${product.name}${selectedColor ? ` in ${selectedColor}` : ""}.`;
   const waLink = getWhatsAppLink(waMessage);
   const related = siblingProducts.filter((p) => p.id !== product.id);
 
   const handleAddToBundle = () => {
     addItem(
       {
-        id: product.id,
+        id: selectedColor ? `${product.id}__${selectedColor}` : product.id,
         name: product.name,
         categorySlug,
         categoryName,
         imageUrl: product.imageUrl,
         emoji: categoryEmoji,
+        color: selectedColor,
       },
       qty
     );
@@ -118,15 +109,32 @@ export default function ProductCard({
         )}
 
         {product.colors && product.colors.length > 0 && (
-          <div className="flex items-center gap-1.5 flex-wrap mt-1" aria-label={`Colours: ${product.colors.join(", ")}`}>
-            {product.colors.map((c) => (
-              <span
-                key={c}
-                title={c}
-                className="w-3.5 h-3.5 rounded-full border transition-transform duration-200 hover:scale-125"
-                style={{ background: swatchColor(c), borderColor: "rgba(0,0,0,0.12)" }}
-              />
-            ))}
+          <div className="flex items-center gap-1.5 flex-wrap mt-1" role="group" aria-label="Choose a colour">
+            {product.colors.map((c) => {
+              const selected = selectedColor === c;
+              return (
+                <button
+                  key={c}
+                  type="button"
+                  title={c}
+                  aria-label={c}
+                  aria-pressed={selected}
+                  onClick={() => setSelectedColor(c)}
+                  className="w-4 h-4 rounded-full transition-transform duration-200 hover:scale-125"
+                  style={{
+                    background: swatchColor(c),
+                    boxShadow: selected
+                      ? "0 0 0 2px var(--cream), 0 0 0 3.5px var(--rust)"
+                      : "0 0 0 1px rgba(0,0,0,0.12)",
+                  }}
+                />
+              );
+            })}
+            {selectedColor && (
+              <span className="text-[10px] ml-0.5" style={{ color: "#999" }}>
+                {selectedColor}
+              </span>
+            )}
           </div>
         )}
 

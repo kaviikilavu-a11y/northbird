@@ -20,6 +20,7 @@ export interface BundleItem {
   imageUrl?: string;
   emoji: string;
   quantity: number;
+  color?: string;
 }
 
 interface BundleContextValue {
@@ -130,6 +131,8 @@ export function useBundle() {
 }
 
 export function buildBundleWhatsAppMessage(items: BundleItem[]): string {
-  const lines = items.map((i) => `• ${i.name}\nQuantity: ${i.quantity}`).join("\n\n");
+  const lines = items
+    .map((i) => `• ${i.name}${i.color ? ` (${i.color})` : ""}\nQuantity: ${i.quantity}`)
+    .join("\n\n");
   return `Hello ${BRAND.name},\n\nI would like a quotation for the following products:\n\n${lines}\n\nPlease send me pricing, branding options and estimated delivery timelines.\n\nThank you.`;
 }
