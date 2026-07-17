@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BRAND, PRIMARY_CTA, getWhatsAppLink } from "@/lib/site-config";
 import WhatsAppSection from "@/components/WhatsAppSection";
+import ReplyTimeIndicator from "@/components/ReplyTimeIndicator";
 
 export const metadata: Metadata = {
   title: "Contact — Northbird & Co",
@@ -15,33 +16,36 @@ export default function ContactPage() {
           Get in touch
         </h1>
         <p className="text-sm mb-10" style={{ color: "#666" }}>
-          The fastest way to reach us is WhatsApp — we typically respond within a few hours during business hours.
+          The fastest way to reach us is WhatsApp — we typically respond within a few hours during business hours.{" "}
           {BRAND.parent} · {BRAND.location}.
         </p>
 
         <div className="space-y-4">
           <div
-            className="rounded-2xl border p-6 flex items-center gap-4"
+            className="rounded-2xl border p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl"
             style={{ borderColor: "var(--teal-light)", background: "white" }}
           >
-            <span className="text-2xl">💬</span>
-            <div className="flex-1">
-              <p className="font-semibold text-sm" style={{ color: "var(--teal-dark)" }}>WhatsApp (preferred)</p>
-              <p className="text-xs mt-0.5" style={{ color: "#888" }}>{BRAND.whatsapp}</p>
+            <div className="flex items-center gap-4">
+              <span className="text-2xl">💬</span>
+              <div className="flex-1">
+                <p className="font-semibold text-sm" style={{ color: "var(--teal-dark)" }}>WhatsApp (preferred)</p>
+                <p className="text-xs mt-0.5" style={{ color: "#888" }}>{BRAND.whatsapp}</p>
+              </div>
+              <a
+                href={getWhatsAppLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-full text-xs font-semibold"
+                style={{ background: "#25D366", color: "white" }}
+              >
+                {PRIMARY_CTA}
+              </a>
             </div>
-            <a
-              href={getWhatsAppLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 rounded-full text-xs font-semibold"
-              style={{ background: "#25D366", color: "white" }}
-            >
-              {PRIMARY_CTA}
-            </a>
+            <ReplyTimeIndicator />
           </div>
 
           <div
-            className="rounded-2xl border p-6 flex items-center gap-4"
+            className="rounded-2xl border p-6 flex items-center gap-4 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl"
             style={{ borderColor: "var(--teal-light)", background: "white" }}
           >
             <span className="text-2xl">✉️</span>
