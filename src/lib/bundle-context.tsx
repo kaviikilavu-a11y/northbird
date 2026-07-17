@@ -23,6 +23,12 @@ export interface BundleItem {
   color?: string;
 }
 
+export interface FlyEvent {
+  fromRect: { top: number; left: number; width: number; height: number };
+  imageUrl?: string;
+  token: number;
+}
+
 interface BundleContextValue {
   items: BundleItem[];
   totalProducts: number;
@@ -35,6 +41,11 @@ interface BundleContextValue {
   removeItem: (id: string) => void;
   clearBundle: () => void;
   lastAdded: { name: string; quantity: number; token: number } | null;
+  flyEvent: FlyEvent | null;
+  /** Kicks off the "product arcs toward the Bundle button" micro-interaction. */
+  triggerFly: (fromRect: DOMRect, imageUrl?: string) => void;
+  /** Clears the fly event once its animation has finished. */
+  clearFly: () => void;
 }
 
 const BundleContext = createContext<BundleContextValue | null>(null);
@@ -63,6 +74,7 @@ export function BundleProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<BundleItem[]>([]);
   const [panelOpen, setPanelOpen] = useState(false);
   const [lastAdded, setLastAdded] = useState<BundleContextValue["lastAdded"]>(null);
+  const [flyEvent, setFlyEvent] = useState<FlyEvent | null>(null);
 
   // Hydrate from localStorage once the client has mounted — this can't be derived
   // during render without a server/client markup mismatch, since localStorage
@@ -101,6 +113,16 @@ export function BundleProvider({ children }: { children: ReactNode }) {
 
   const clearBundle = useCallback(() => setItems([]), []);
 
+  const triggerFly = useCallback((fromRect: DOMRect, imageUrl?: string) => {
+    setFlyEvent({
+      fromRect: { top: fromRect.top, left: fromRect.left, width: fromRect.width, height: fromRect.height },
+      imageUrl,
+      token: Date.now(),
+    });
+  }, []);
+
+  const clearFly = useCallback(() => setFlyEvent(null), []);
+
   const totalProducts = items.length;
   const totalQuantity = items.reduce((sum, i) => sum + i.quantity, 0);
 
@@ -117,8 +139,24 @@ export function BundleProvider({ children }: { children: ReactNode }) {
       removeItem,
       clearBundle,
       lastAdded,
+      flyEvent,
+      triggerFly,
+      clearFly,
     }),
-    [items, totalProducts, totalQuantity, panelOpen, addItem, updateQuantity, removeItem, clearBundle, lastAdded]
+    [
+      items,
+      totalProducts,
+      totalQuantity,
+      panelOpen,
+      addItem,
+      updateQuantity,
+      removeItem,
+      clearBundle,
+      lastAdded,
+      flyEvent,
+      triggerFly,
+      clearFly,
+    ]
   );
 
   return <BundleContext.Provider value={value}>{children}</BundleContext.Provider>;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { formatKES, brandingMethodsForCategory, isBrandingIncluded, type ProductVariant } from "@/lib/catalogue-data";
 import { getWhatsAppLink, assetPath } from "@/lib/site-config";
@@ -27,12 +27,15 @@ export default function ProductCard({
   const [selectedColor, setSelectedColor] = useState<string | undefined>(product.colors?.[0]);
   const [detailProduct, setDetailProduct] = useState<ProductVariant | null>(null);
   const [justAdded, setJustAdded] = useState(false);
-  const { addItem } = useBundle();
+  const { addItem, triggerFly } = useBundle();
+  const imageRef = useRef<HTMLDivElement>(null);
   const waMessage = `Hi! I'd like to order the ${product.name}${selectedColor ? ` in ${selectedColor}` : ""}.`;
   const waLink = getWhatsAppLink(waMessage);
   const related = siblingProducts.filter((p) => p.id !== product.id);
 
   const handleAddToBundle = () => {
+    const rect = imageRef.current?.getBoundingClientRect();
+    if (rect) triggerFly(rect, product.imageUrl);
     addItem(
       {
         id: selectedColor ? `${product.id}__${selectedColor}` : product.id,
@@ -62,7 +65,7 @@ export default function ProductCard({
         aria-label={`View details for ${product.name}`}
       >
         {product.imageUrl ? (
-          <div className="aspect-square overflow-hidden">
+          <div ref={imageRef} className="aspect-square overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={assetPath(product.imageUrl)}
@@ -73,6 +76,7 @@ export default function ProductCard({
           </div>
         ) : (
           <div
+            ref={imageRef}
             className="aspect-square flex items-center justify-center text-5xl overflow-hidden"
             style={{ background: "var(--cream-deep)" }}
             aria-hidden="true"

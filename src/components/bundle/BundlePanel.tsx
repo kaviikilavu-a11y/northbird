@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useBundle, buildBundleWhatsAppMessage } from "@/lib/bundle-context";
+import { AnimatePresence, motion, useAnimationControls, useReducedMotion } from "framer-motion";
+import { useBundle, buildBundleWhatsAppMessage, type FlyEvent } from "@/lib/bundle-context";
 import { getWhatsAppLink, assetPath } from "@/lib/site-config";
 import QuantityStepper from "./QuantityStepper";
 
@@ -16,25 +18,99 @@ function BagIcon() {
   );
 }
 
+// A short "ghost" arc from a product card's image to the floating Bundle button — a
+// confirmation cue on top of the (already verified working) bundle state, not a fix.
+function FlyGhost({ flyEvent, targetRef, onArrive }: {
+  flyEvent: FlyEvent;
+  targetRef: React.RefObject<HTMLButtonElement | null>;
+  onArrive: () => void;
+}) {
+  const [target, setTarget] = useState<{ left: number; top: number; width: number; height: number } | null>(null);
+
+  useEffect(() => {
+    const rect = targetRef.current?.getBoundingClientRect();
+    if (rect) setTarget({ left: rect.left, top: rect.top, width: rect.width, height: rect.height });
+  }, [targetRef]);
+
+  if (!target) return null;
+  const size = 44;
+  const startX = flyEvent.fromRect.left + flyEvent.fromRect.width / 2 - size / 2;
+  const startY = flyEvent.fromRect.top + flyEvent.fromRect.height / 2 - size / 2;
+  const endX = target.left + target.width / 2 - size / 2;
+  const endY = target.top + target.height / 2 - size / 2;
+
+  return (
+    <motion.div
+      className="fixed z-[60] rounded-full overflow-hidden pointer-events-none"
+      style={{ width: size, height: size, background: "var(--cream-deep)", boxShadow: "0 8px 20px -6px rgba(0,0,0,0.4)" }}
+      initial={{ x: startX, y: startY, opacity: 1, scale: 1 }}
+      animate={{ x: endX, y: endY, opacity: [1, 1, 0], scale: [1, 0.85, 0.35] }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      onAnimationComplete={onArrive}
+    >
+      {flyEvent.imageUrl && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={assetPath(flyEvent.imageUrl)} alt="" className="w-full h-full object-cover" />
+      )}
+    </motion.div>
+  );
+}
+
 export default function BundlePanel() {
-  const { items, totalProducts, totalQuantity, panelOpen, openPanel, closePanel, updateQuantity, removeItem, clearBundle } =
-    useBundle();
+  const {
+    items,
+    totalProducts,
+    totalQuantity,
+    panelOpen,
+    openPanel,
+    closePanel,
+    updateQuantity,
+    removeItem,
+    clearBundle,
+    flyEvent,
+    clearFly,
+  } = useBundle();
   const reduceMotion = useReducedMotion();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const controls = useAnimationControls();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Portal rendering requires a real DOM node, only available after client mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    controls.start({ opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : 0.3 } });
+  }, [controls, reduceMotion]);
+
+  const receiveGhost = () => {
+    if (!reduceMotion) {
+      controls.start({ scale: [1, 1.16, 0.97, 1], transition: { duration: 0.45, ease: "easeOut" } });
+    }
+    clearFly();
+  };
 
   const waLink = getWhatsAppLink(items.length > 0 ? buildBundleWhatsAppMessage(items) : undefined);
 
   return (
     <>
+      {mounted &&
+        flyEvent &&
+        !reduceMotion &&
+        createPortal(<FlyGhost key={flyEvent.token} flyEvent={flyEvent} targetRef={triggerRef} onArrive={receiveGhost} />, document.body)}
+
       {/* Floating trigger */}
       <motion.button
+        ref={triggerRef}
         type="button"
         onClick={openPanel}
         aria-label={`Open your bundle, ${totalQuantity} items`}
         className="btn-press fixed bottom-6 right-6 z-40 flex items-center gap-2 pl-4 pr-5 h-12 rounded-full"
         style={{ background: "var(--rust)", color: "var(--cream)", boxShadow: "0 8px 24px -8px rgba(0,0,0,0.45)" }}
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : 0.3 }}
+        animate={controls}
         whileHover={{ y: -3 }}
       >
         <BagIcon />
