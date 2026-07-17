@@ -7,17 +7,18 @@ import NorthbirdMascot, { NorthbirdMascotHandle } from "./NorthbirdMascot";
 const HOME_TOP = 72; // px from top
 const HOME_RIGHT = 20; // px from right
 
-interface Station {
-  id: string;
-  top: number; // computed from IntersectionObserver entry
-}
-
+/**
+ * Any element with a `data-mascot-station="<id>"` attribute becomes a stop the mascot
+ * flies to while it's in view. When several stations are in view at once, the mascot
+ * perches at whichever is closest to the top of the viewport. The station id "footer"
+ * gets special bottom-pinned placement (matches the footer's own layout); every other
+ * id perches near the element's top edge.
+ */
 export default function NorthbirdFlightController() {
   const mascotRef = useRef<NorthbirdMascotHandle>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const currentStation = useRef<string | null>(null);
-  const whatsappObserver = useRef<IntersectionObserver | null>(null);
-  const footerObserver = useRef<IntersectionObserver | null>(null);
+  const inViewStations = useRef<Set<string>>(new Set());
 
   const flyHome = useCallback(() => {
     if (currentStation.current === "home") return;
@@ -36,7 +37,7 @@ export default function NorthbirdFlightController() {
     setTimeout(() => mascotRef.current?.idle(), 700);
   }, []);
 
-  const flyToStation = useCallback((stationId: string, top: number, isBottom = false) => {
+  const flyToStation = useCallback((stationId: string, viewportTop: number, isBottom = false) => {
     if (currentStation.current === stationId) return;
     currentStation.current = stationId;
     const el = wrapperRef.current;
@@ -52,70 +53,64 @@ export default function NorthbirdFlightController() {
       el.style.bottom = "20px";
     } else {
       el.style.bottom = "auto";
-      el.style.top = `${Math.max(top - 40, HOME_TOP)}px`;
+      // The wrapper is position:fixed, so this needs a viewport-relative offset, not a
+      // page-absolute scroll position — clamped to stay on-screen top and bottom.
+      const clamped = Math.min(Math.max(viewportTop - 40, HOME_TOP), window.innerHeight - 100);
+      el.style.top = `${clamped}px`;
     }
 
     setTimeout(() => mascotRef.current?.land(), 600);
   }, []);
 
   useEffect(() => {
-    let whatsappInView = false;
-    let footerInView = false;
-
     const resolve = () => {
-      if (footerInView) {
-        flyToStation("footer", 0, true);
-      } else if (whatsappInView) {
-        const el = document.querySelector("[data-mascot-station='whatsapp']");
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          flyToStation("whatsapp", window.scrollY + rect.top);
-        } else {
-          flyToStation("whatsapp", window.scrollY + window.innerHeight * 0.6);
-        }
-      } else {
+      if (inViewStations.current.size === 0) {
         flyHome();
+        return;
       }
+      const candidates = Array.from(inViewStations.current)
+        .map((id) => {
+          const el = document.querySelector(`[data-mascot-station="${id}"]`);
+          if (!el) return null;
+          const rect = el.getBoundingClientRect();
+          return { id, isBottom: id === "footer", viewportTop: rect.top };
+        })
+        .filter((c): c is NonNullable<typeof c> => c !== null)
+        .sort((a, b) => a.viewportTop - b.viewportTop);
+
+      const best = candidates[0];
+      if (best) flyToStation(best.id, best.viewportTop, best.isBottom);
     };
 
-    whatsappObserver.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => { whatsappInView = e.isIntersecting; });
+        entries.forEach((e) => {
+          const id = (e.target as HTMLElement).dataset.mascotStation;
+          if (!id) return;
+          if (e.isIntersecting) inViewStations.current.add(id);
+          else inViewStations.current.delete(id);
+        });
         resolve();
       },
       { threshold: 0.3 }
     );
 
-    footerObserver.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => { footerInView = e.isIntersecting; });
-        resolve();
-      },
-      { threshold: 0.2 }
-    );
-
     const attachObservers = () => {
-      document.querySelectorAll("[data-mascot-station='whatsapp']").forEach((el) => {
-        whatsappObserver.current?.observe(el);
-      });
-      document.querySelectorAll("[data-mascot-station='footer']").forEach((el) => {
-        footerObserver.current?.observe(el);
-      });
+      document.querySelectorAll("[data-mascot-station]").forEach((el) => observer.observe(el));
     };
 
     attachObservers();
 
     // Re-attach after route changes (Next.js navigation)
     const mutObserver = new MutationObserver(() => {
-      whatsappObserver.current?.disconnect();
-      footerObserver.current?.disconnect();
+      observer.disconnect();
+      inViewStations.current.clear();
       attachObservers();
     });
     mutObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      whatsappObserver.current?.disconnect();
-      footerObserver.current?.disconnect();
+      observer.disconnect();
       mutObserver.disconnect();
     };
   }, [flyHome, flyToStation]);
