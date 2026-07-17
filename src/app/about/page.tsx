@@ -29,6 +29,30 @@ const WEEK: { image: string; caption: string; align: "left" | "right" }[] = [
   { image: "/lifestyle/lifestyle-05-after-hours.jpg", caption: "Saturday night. Off duty, still yours.", align: "right" },
 ];
 
+/** A phrase begins, a photo interlude plays, the phrase completes — one scroll beat. */
+function SplitHeadlineReveal({ before, image, after }: { before: string; image: string; after: string }) {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-3 md:gap-5 text-center px-4">
+      <Reveal variant="up">
+        <span className="font-display font-medium" style={{ color: "var(--teal-dark)", fontSize: "clamp(1.75rem, 4.5vw, 3.25rem)" }}>
+          {before}
+        </span>
+      </Reveal>
+      <Reveal variant="scale" delay={0.15}>
+        <span className="inline-block w-16 h-16 md:w-24 md:h-24 rounded-2xl overflow-hidden align-middle" style={{ boxShadow: "0 10px 30px -12px rgba(31,42,46,0.3)" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={assetPath(image)} alt="" className="w-full h-full object-cover" loading="lazy" />
+        </span>
+      </Reveal>
+      <Reveal variant="up" delay={0.3}>
+        <span className="font-display font-medium" style={{ color: "var(--teal-dark)", fontSize: "clamp(1.75rem, 4.5vw, 3.25rem)" }}>
+          {after}
+        </span>
+      </Reveal>
+    </div>
+  );
+}
+
 export default function AboutPage() {
   return (
     <div>
@@ -60,6 +84,10 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
+
+      <section className="py-16 md:py-20">
+        <SplitHeadlineReveal before="From your logo" image="/lifestyle/lifestyle-06-seated-alt.jpg" after="to their desk." />
+      </section>
 
       {/* "One Bird, Every Day" — real product-in-life photography, not client casework */}
       <section className="py-16 md:py-24 px-4" style={{ background: "var(--cream-deep)" }}>

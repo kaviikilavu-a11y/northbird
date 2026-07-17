@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { CATEGORIES, getCategoryBySlug, publishedProducts, categoryStartingPrice, isBrandingIncluded } from "@/lib/catalogue-data";
+import { CATEGORIES, getCategoryBySlug, publishedProducts, categoryStartingPrice, isBrandingIncluded, brandingMethodsForCategory } from "@/lib/catalogue-data";
+import { occasionTag } from "@/lib/occasion-tags";
 import { getWhatsAppLink } from "@/lib/site-config";
 import ProductCard from "./ProductCard";
 import type { Metadata } from "next";
@@ -42,9 +43,14 @@ export default async function CategoryPage({ params }: Props) {
       </nav>
 
       {/* Header */}
-      <div className="flex items-center gap-4 mb-3">
+      <div className="flex items-center gap-4 mb-4">
         <span className="text-5xl">{cat.emoji}</span>
         <div>
+          {occasionTag(cat.slug) && (
+            <p className="text-[11px] font-semibold uppercase tracking-wide mb-1" style={{ color: "var(--teal-light)" }}>
+              {occasionTag(cat.slug)}
+            </p>
+          )}
           <h1 className="font-display text-3xl font-semibold" style={{ color: "var(--teal-dark)" }}>
             {cat.name}
           </h1>
@@ -52,6 +58,19 @@ export default async function CategoryPage({ params }: Props) {
             {cat.description}
           </p>
         </div>
+      </div>
+
+      {/* Chip row — what's included, at a glance, rather than buried in body text */}
+      <div className="flex items-center gap-2 flex-wrap mb-8">
+        {brandingMethodsForCategory(cat.slug).map((method) => (
+          <span
+            key={method}
+            className="text-[11px] font-medium px-3 py-1 rounded-full border"
+            style={{ borderColor: "var(--cream-deep)", color: "var(--teal-dark)", background: "var(--cream-deep)" }}
+          >
+            {method}
+          </span>
+        ))}
       </div>
 
       {cat.itemized && products.length > 0 ? (

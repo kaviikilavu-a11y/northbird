@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CATEGORIES, categoryStartingPrice, categoryCoverImage, publishedProducts } from "@/lib/catalogue-data";
 import { assetPath } from "@/lib/site-config";
+import { occasionTag } from "@/lib/occasion-tags";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import type { Metadata } from "next";
 
@@ -34,15 +35,15 @@ export default function CataloguePage() {
         {CATEGORIES.map((cat) => {
           const cover = categoryCoverImage(cat);
           const publishedCount = publishedProducts(cat).length;
+          const occasion = occasionTag(cat.slug);
           return (
             <StaggerItem key={cat.id} variant="up">
-              <Link
-                href={`/catalogue/${cat.slug}/`}
-                className="group block rounded-2xl border overflow-hidden flex flex-col transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
-                style={{ borderColor: "var(--teal-light)", background: "white" }}
-              >
+              <Link href={`/catalogue/${cat.slug}/`} className="group block">
                 {cover ? (
-                  <div className="h-36 overflow-hidden relative">
+                  <div
+                    className="h-36 overflow-hidden rounded-2xl transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_18px_40px_-14px_rgba(31,42,46,0.32)]"
+                    style={{ boxShadow: "0 10px 30px -12px rgba(31,42,46,0.22)" }}
+                  >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={assetPath(cover)}
@@ -50,47 +51,39 @@ export default function CataloguePage() {
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                     />
-                    {cat.bestValue && (
-                      <span
-                        className="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded-full"
-                        style={{ background: "var(--gold)", color: "var(--charcoal)" }}
-                      >
-                        Best value
-                      </span>
-                    )}
                   </div>
                 ) : (
-                  <div className="pt-6 px-6 flex items-start justify-between gap-2">
+                  <div className="h-36 rounded-2xl flex items-center px-6" style={{ background: "var(--cream-deep)" }}>
                     <span className="text-4xl inline-block transition-transform duration-300 group-hover:scale-110">
                       {cat.emoji}
                     </span>
+                  </div>
+                )}
+                <div className="pt-3 flex flex-col gap-1">
+                  {occasion && (
+                    <span className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: "var(--teal-light)" }}>
+                      {occasion}
+                    </span>
+                  )}
+                  <h2
+                    className="font-semibold text-sm leading-snug transition-colors duration-200 group-hover:[color:var(--rust)]"
+                    style={{ color: "var(--teal-dark)" }}
+                  >
+                    {cat.name}
                     {cat.bestValue && (
-                      <span
-                        className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full"
-                        style={{ background: "var(--gold)", color: "var(--charcoal)" }}
-                      >
+                      <span className="ml-1.5 text-[10px] font-bold uppercase tracking-wide align-middle" style={{ color: "var(--rust)" }}>
                         Best value
                       </span>
                     )}
-                  </div>
-                )}
-                <div className="p-6 pt-4 flex-1 flex flex-col gap-3">
-                  <div>
-                    <h2
-                      className="font-semibold text-sm leading-snug transition-colors duration-200 group-hover:[color:var(--rust)]"
-                      style={{ color: "var(--teal-dark)" }}
-                    >
-                      {cat.name}
-                    </h2>
-                    <p className="text-xs mt-1" style={{ color: "#888" }}>
-                      {cat.itemized && publishedCount > 0
-                        ? `${publishedCount} product${publishedCount === 1 ? "" : "s"}`
-                        : "Ask us on WhatsApp"}
-                    </p>
-                    <p className="text-xs mt-1.5 font-semibold" style={{ color: "var(--rust)" }}>
-                      {categoryStartingPrice(cat)}
-                    </p>
-                  </div>
+                  </h2>
+                  <p className="text-xs" style={{ color: "#888" }}>
+                    {cat.itemized && publishedCount > 0
+                      ? `${publishedCount} product${publishedCount === 1 ? "" : "s"}`
+                      : "Ask us on WhatsApp"}
+                  </p>
+                  <p className="text-xs font-semibold" style={{ color: "var(--rust)" }}>
+                    {categoryStartingPrice(cat)}
+                  </p>
                 </div>
               </Link>
             </StaggerItem>
