@@ -17,9 +17,11 @@ export const BRAND = {
     charcoal: "#1F2A2E",
   },
   whatsapp: "+254764092265",
-  email: "hello@northbirdandco.com",
+  email: "hello@northbird.co.ke",
   location: "Nairobi, Kenya",
 };
+
+export const SITE_URL = "https://northbird.co.ke";
 
 export const PRIMARY_CTA = "Talk to Northbird";
 
