@@ -20,12 +20,9 @@ const REMAINING = CATEGORIES.filter(
   (c) => c.slug !== FEATURED_SLUG && !HIGHLIGHTED_SLUGS.includes(c.slug)
 );
 
-const TINTS: Record<string, string> = {
-  flasks: "var(--teal-dark)",
-  keyholders: "var(--rust)",
-  "mugs-tumblers": "var(--orange)",
-  "gift-sets": "var(--gold)",
-};
+// One consistent accent across all highlighted cards — not a different hue per card,
+// which reads as several colors competing rather than one deliberate accent.
+const HIGHLIGHT_BG = "var(--teal-dark)";
 
 function HighlightedCard({ cat }: { cat: Category }) {
   const cover = categoryCoverImage(cat);
@@ -34,7 +31,7 @@ function HighlightedCard({ cat }: { cat: Category }) {
       <Link
         href={`/catalogue/${cat.slug}/`}
         className="group relative block rounded-2xl overflow-hidden p-8 flex flex-col justify-between min-h-[220px]"
-        style={{ background: TINTS[cat.slug] ?? "var(--teal-dark)" }}
+        style={{ background: HIGHLIGHT_BG }}
       >
         {cover && (
           // eslint-disable-next-line @next/next/no-img-element

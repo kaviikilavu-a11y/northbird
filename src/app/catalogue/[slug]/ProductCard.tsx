@@ -54,10 +54,7 @@ export default function ProductCard({
   };
 
   return (
-    <article
-      className="group rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]"
-      style={{ borderColor: "var(--teal-light)", background: "white" }}
-    >
+    <article className="group flex flex-col">
       <button
         type="button"
         onClick={() => setDetailProduct(product)}
@@ -66,7 +63,11 @@ export default function ProductCard({
         aria-label={`View details for ${product.name}`}
       >
         {product.imageUrl ? (
-          <div ref={imageRef} className="aspect-square overflow-hidden">
+          <div
+            ref={imageRef}
+            className="aspect-square overflow-hidden rounded-2xl transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_18px_40px_-14px_rgba(31,42,46,0.32)]"
+            style={{ boxShadow: "0 10px 30px -12px rgba(31,42,46,0.22)" }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={assetPath(product.imageUrl)}
@@ -78,8 +79,8 @@ export default function ProductCard({
         ) : (
           <div
             ref={imageRef}
-            className="aspect-square flex items-center justify-center text-5xl overflow-hidden"
-            style={{ background: "var(--cream-deep)" }}
+            className="aspect-square flex items-center justify-center text-5xl overflow-hidden rounded-2xl"
+            style={{ background: "var(--cream-deep)", boxShadow: "0 10px 30px -12px rgba(31,42,46,0.22)" }}
             aria-hidden="true"
           >
             <span className="inline-block transition-transform duration-500 ease-out group-hover:scale-110">
@@ -89,7 +90,7 @@ export default function ProductCard({
         )}
       </button>
 
-      <div className="p-4 flex flex-col flex-1 gap-2">
+      <div className="flex flex-col flex-1 gap-2 pt-3">
         <div className="flex items-start justify-between gap-2">
           <h2
             className="font-semibold text-sm leading-snug flex-1 transition-colors duration-200 group-hover:[color:var(--rust)]"
@@ -99,8 +100,8 @@ export default function ProductCard({
           </h2>
           {product.bestValue && (
             <span
-              className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full"
-              style={{ background: "var(--gold)", color: "var(--charcoal)" }}
+              className="shrink-0 text-[10px] font-bold uppercase tracking-wide"
+              style={{ color: "var(--rust)" }}
             >
               Best value
             </span>
