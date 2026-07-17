@@ -16,6 +16,11 @@ export default function HomePage() {
       <TrustedBy />
       <WhyNorthbird />
       <CuratedCollections />
+      <PullQuoteSection
+        image="/lifestyle/lifestyle-08-corner-store.jpg"
+        quote="Snack run. Full fit anyway."
+        imageAlign="right"
+      />
       <Industries />
       <BrandInspiration />
       <MadeForEveryBrand />
