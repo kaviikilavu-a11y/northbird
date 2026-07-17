@@ -5,7 +5,7 @@
  * separate taxonomies.
  */
 export const OCCASION_TAGS: Record<string, string> = {
-  notebooks: "Client Gifting",
+  notebooks: "Client Meetings",
   pens: "Office Essentials",
   "water-bottles": "Team Onboarding",
   "mugs-tumblers": "Office Essentials",
@@ -21,8 +21,8 @@ export const OCCASION_TAGS: Record<string, string> = {
   "business-cards": "Office Essentials",
   "flyers-brochures": "Marketing Collateral",
   "stickers-labels": "Marketing Collateral",
-  "promotional-giveaways": "Client Gifting",
-  umbrellas: "Client Gifting",
+  "promotional-giveaways": "Client Meetings",
+  umbrellas: "Client Meetings",
 };
 
 export function occasionTag(categorySlug: string): string | undefined {

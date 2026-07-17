@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BRAND, assetPath } from "@/lib/site-config";
 import { Reveal } from "@/components/motion/Reveal";
 import PinnedProcessStrip, { type ProcessStep } from "@/components/motion/PinnedProcessStrip";
+import MaterialsRow from "@/components/MaterialsRow";
 
 export const metadata: Metadata = {
   title: "About — Northbird & Co",
@@ -130,6 +131,10 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="py-16 md:py-20">
+        <MaterialsRow />
       </section>
 
       <section className="py-16 md:py-24 px-4 max-w-5xl mx-auto" data-mascot-station="about-process">

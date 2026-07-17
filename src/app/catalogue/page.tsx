@@ -3,6 +3,7 @@ import { CATEGORIES, categoryStartingPrice, categoryCoverImage, publishedProduct
 import { assetPath } from "@/lib/site-config";
 import { occasionTag } from "@/lib/occasion-tags";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import OccasionBundleStarters from "@/components/OccasionBundleStarters";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 
 export default function CataloguePage() {
   return (
+    <>
     <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
       <Reveal variant="up">
         <div>
@@ -91,5 +93,8 @@ export default function CataloguePage() {
         })}
       </StaggerGroup>
     </div>
+
+    <OccasionBundleStarters />
+    </>
   );
 }
