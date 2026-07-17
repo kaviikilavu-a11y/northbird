@@ -24,7 +24,7 @@ const STEPS = [
   {
     n: "04",
     title: "Production",
-    body: "Review and approve your branded artwork, then production runs under strict quality control.",
+    body: "Confirm payment (100% upfront) and approve your artwork — production then runs under strict quality control.",
   },
   {
     n: "05",
