@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { getWhatsAppLink } from "@/lib/site-config";
+import CountUp from "@/components/motion/CountUp";
+import PolicySideNav from "@/components/PolicySideNav";
 
 export const metadata: Metadata = {
   title: "Policies — Northbird & Co",
@@ -7,6 +9,13 @@ export const metadata: Metadata = {
 };
 
 const POLICY_WHATSAPP_MESSAGE = "Hi! I have a question about an order.";
+
+const NAV_ITEMS = [
+  { id: "delivery", label: "Delivery" },
+  { id: "payment", label: "Payment" },
+  { id: "changes", label: "Changes & Cancellations" },
+  { id: "how-it-works", label: "How Ordering Works" },
+];
 
 function WhatsAppIcon() {
   return (
@@ -16,9 +25,9 @@ function WhatsAppIcon() {
   );
 }
 
-function PolicySection({ title, children }: { title: string; children: React.ReactNode }) {
+function PolicySection({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <div className="mb-12">
+    <div id={id} className="mb-12 scroll-mt-28">
       <h2 className="font-display text-2xl font-medium mb-4" style={{ color: "var(--teal-dark)" }}>
         {title}
       </h2>
@@ -27,72 +36,106 @@ function PolicySection({ title, children }: { title: string; children: React.Rea
   );
 }
 
+function StatCallout({ children, label }: { children: React.ReactNode; label: string }) {
+  return (
+    <div className="text-center px-2">
+      <p className="font-display text-2xl md:text-3xl font-semibold" style={{ color: "var(--rust)" }}>
+        {children}
+      </p>
+      <p className="text-[11px] mt-1 tracking-wide uppercase" style={{ color: "#999" }}>
+        {label}
+      </p>
+    </div>
+  );
+}
+
 export default function PoliciesPage() {
   return (
-    <div className="max-w-3xl mx-auto px-4 py-16">
+    <div className="max-w-5xl mx-auto px-4 py-16">
       <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--orange)" }}>
         Policies
       </p>
-      <h1 className="font-display text-3xl md:text-4xl font-semibold mb-10" style={{ color: "var(--teal-dark)" }}>
+      <h1 className="font-display text-3xl md:text-4xl font-semibold mb-8" style={{ color: "var(--teal-dark)" }}>
         Ordering, Delivery & Payment
       </h1>
 
-      <PolicySection title="Delivery">
-        <ul className="space-y-3 leading-relaxed list-disc pl-5" style={{ color: "#444" }}>
-          <li>We deliver across all <strong>47 counties</strong> in Kenya.</li>
-          <li>Orders above <strong>KES 10,000</strong> qualify for <strong>free delivery</strong>, anywhere in the 47 counties.</li>
-          <li>Orders below KES 10,000 — delivery within Nairobi is free; delivery outside Nairobi is charged at courier cost, confirmed with you before dispatch.</li>
-          <li>Standard production and delivery timeline is <strong>5–10 working days</strong> from order confirmation and payment, depending on product and quantity. Large-format items (banners, gazebos, apparel runs) may take longer — we&apos;ll confirm an exact date when you order.</li>
-          <li>Rush orders may be possible for an additional fee — ask on WhatsApp before ordering.</li>
-        </ul>
-      </PolicySection>
+      {/* Key numbers up front — only the county count animates; the rest stay static, bold
+          typography, since animating every number on a trust/legal page undermines the
+          credibility it's meant to build. */}
+      <div
+        className="grid grid-cols-2 md:grid-cols-4 gap-6 rounded-2xl border p-6 md:p-8 mb-14"
+        style={{ borderColor: "var(--cream-deep)", background: "white" }}
+      >
+        <StatCallout label="Counties delivered">
+          <CountUp to={47} />
+        </StatCallout>
+        <StatCallout label="Payment upfront">100%</StatCallout>
+        <StatCallout label="VAT included">16%</StatCallout>
+        <StatCallout label="Working days">2–10</StatCallout>
+      </div>
 
-      <PolicySection title="Payment">
-        <ul className="space-y-3 leading-relaxed list-disc pl-5" style={{ color: "#444" }}>
-          <li><strong>Full payment (100%)</strong> is required to confirm and begin production on any order.</li>
-          <li>Once payment is confirmed, production begins immediately — no second payment to track.</li>
-          <li>Prices shown include <strong>16% VAT</strong>.</li>
-          <li>Payment is accepted via bank transfer or M-Pesa — details shared directly on WhatsApp once your order is confirmed.</li>
-          <li>All prices are in Kenyan Shillings (KES) and subject to confirmation at time of order — bulk and custom orders may be quoted individually.</li>
-        </ul>
-      </PolicySection>
+      <div className="flex gap-12">
+        <PolicySideNav items={NAV_ITEMS} />
 
-      <PolicySection title="Changes & Cancellations">
-        <ul className="space-y-3 leading-relaxed list-disc pl-5" style={{ color: "#444" }}>
-          <li>Orders can be changed or cancelled free of charge <strong>before production begins</strong> (i.e. before payment is confirmed and work starts).</li>
-          <li><strong>Once production has started, orders cannot be cancelled or refunded</strong> — branded/personalised items can&apos;t be resold to another customer.</li>
-          <li>If we make an error on our side (wrong logo, wrong colour, defective item), we will reprint or replace it at no extra cost.</li>
-          <li>Please review your logo files, text, and colours carefully before confirming — we&apos;ll always send a proof for approval before printing.</li>
-        </ul>
-      </PolicySection>
+        <div className="flex-1 min-w-0">
+          <PolicySection id="delivery" title="Delivery">
+            <ul className="space-y-3 leading-relaxed list-disc pl-5" style={{ color: "#444" }}>
+              <li>We deliver across all <strong>47 counties</strong> in Kenya.</li>
+              <li>Orders above <strong>KES 10,000</strong> qualify for <strong>free delivery</strong>, anywhere in the 47 counties.</li>
+              <li>Orders below KES 10,000 — delivery within Nairobi is free; delivery outside Nairobi is charged at courier cost, confirmed with you before dispatch.</li>
+              <li>Standard production and delivery timeline is <strong>2–10 working days</strong> from order confirmation and payment, depending on the scope of the order. Large-format items (banners, gazebos, apparel runs) may take longer — we&apos;ll confirm an exact date when you order.</li>
+              <li>Rush orders may be possible for an additional fee — ask on WhatsApp before ordering.</li>
+            </ul>
+          </PolicySection>
 
-      <PolicySection title="How Ordering Works">
-        <ol className="space-y-3 leading-relaxed list-decimal pl-5" style={{ color: "#444" }}>
-          <li>Browse the catalogue and message us on WhatsApp for the product(s) you want.</li>
-          <li>Send your logo, brand colours, or design file.</li>
-          <li>We confirm pricing, quantity, and timeline — usually the same day.</li>
-          <li>You approve a design proof and pay in full to begin production.</li>
-          <li>We deliver (or you collect) once the balance is settled.</li>
-        </ol>
-      </PolicySection>
+          <PolicySection id="payment" title="Payment">
+            <ul className="space-y-3 leading-relaxed list-disc pl-5" style={{ color: "#444" }}>
+              <li><strong>Full payment (100%)</strong> is required to confirm and begin production on any order.</li>
+              <li>Once payment is confirmed, production begins immediately — no second payment to track.</li>
+              <li>Prices shown include <strong>16% VAT</strong>.</li>
+              <li>Payment is accepted via bank transfer or M-Pesa — details shared directly on WhatsApp once your order is confirmed.</li>
+              <li>All prices are in Kenyan Shillings (KES) and subject to confirmation at time of order — bulk and custom orders may be quoted individually.</li>
+            </ul>
+          </PolicySection>
 
-      <div className="rounded-2xl p-8" style={{ background: "var(--charcoal)" }}>
-        <p className="font-display text-xl mb-2" style={{ color: "var(--cream)" }}>
-          Questions about an order?
-        </p>
-        <p className="text-sm mb-5" style={{ color: "rgba(251,247,238,0.6)" }}>
-          We&apos;re quickest to reach on WhatsApp — most questions get answered within minutes.
-        </p>
-        <a
-          href={getWhatsAppLink(POLICY_WHATSAPP_MESSAGE)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-colors"
-          style={{ background: "#25D366", color: "#fff" }}
-        >
-          <WhatsAppIcon />
-          Ask on WhatsApp
-        </a>
+          <PolicySection id="changes" title="Changes & Cancellations">
+            <ul className="space-y-3 leading-relaxed list-disc pl-5" style={{ color: "#444" }}>
+              <li>Orders can be changed or cancelled free of charge <strong>before production begins</strong> (i.e. before payment is confirmed and work starts).</li>
+              <li><strong>Once production has started, orders cannot be cancelled or refunded</strong> — branded/personalised items can&apos;t be resold to another customer.</li>
+              <li>If we make an error on our side (wrong logo, wrong colour, defective item), we will reprint or replace it at no extra cost.</li>
+              <li>Please review your logo files, text, and colours carefully before confirming — we&apos;ll always send a proof for approval before printing.</li>
+            </ul>
+          </PolicySection>
+
+          <PolicySection id="how-it-works" title="How Ordering Works">
+            <ol className="space-y-3 leading-relaxed list-decimal pl-5" style={{ color: "#444" }}>
+              <li>Browse the catalogue and message us on WhatsApp for the product(s) you want.</li>
+              <li>Send your logo, brand colours, or design file.</li>
+              <li>We confirm pricing, quantity, and timeline — usually the same day.</li>
+              <li>You approve a design proof and pay in full to begin production.</li>
+              <li>We deliver (or you collect) once the balance is settled.</li>
+            </ol>
+          </PolicySection>
+
+          <div className="rounded-2xl p-8" style={{ background: "var(--charcoal)" }} data-mascot-station="policies-whatsapp">
+            <p className="font-display text-xl mb-2" style={{ color: "var(--cream)" }}>
+              Questions about an order?
+            </p>
+            <p className="text-sm mb-5" style={{ color: "rgba(251,247,238,0.6)" }}>
+              We&apos;re quickest to reach on WhatsApp — most questions get answered within minutes.
+            </p>
+            <a
+              href={getWhatsAppLink(POLICY_WHATSAPP_MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-colors"
+              style={{ background: "#25D366", color: "#fff" }}
+            >
+              <WhatsAppIcon />
+              Ask on WhatsApp
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
