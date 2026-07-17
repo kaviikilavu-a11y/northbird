@@ -19,7 +19,10 @@ export default function HomePage() {
       <Industries />
       <BrandInspiration />
       <MadeForEveryBrand />
-      <PullQuoteSection />
+      <PullQuoteSection
+        image="/lifestyle/lifestyle-07-notebook-close.jpg"
+        quote="Yeah, it's got my name on it."
+      />
       <OrderingProcess />
       <WhatsAppSection />
     </>
