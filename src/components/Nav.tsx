@@ -148,6 +148,7 @@ export default function Nav() {
               href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor=""
               className="inline-block px-4 py-2 rounded-full text-xs font-semibold transition-all hover:shadow-[0_0_0_4px_rgba(168,71,42,0.18)] active:scale-95"
               style={{ background: "var(--rust)", color: "var(--cream)" }}
             >

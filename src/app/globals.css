@@ -167,6 +167,13 @@ h1, h2, h3, .font-display {
   animation-iteration-count: infinite;
 }
 
+/* Native cursor is hidden only once CustomCursor.tsx has a real position to paint at —
+   this class gets toggled on by JS after the first mousemove, never applied statically. */
+.nb-custom-cursor,
+.nb-custom-cursor * {
+  cursor: none !important;
+}
+
 /* ── "Our Collections" hover-accordion (desktop only; mobile stays a static stack) ── */
 @media (min-width: 768px) {
   .collections-accordion {

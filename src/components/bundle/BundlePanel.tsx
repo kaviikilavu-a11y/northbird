@@ -107,6 +107,7 @@ export default function BundlePanel() {
         type="button"
         onClick={openPanel}
         aria-label={`Open your bundle, ${totalQuantity} items`}
+        data-cursor="Bundle"
         className="btn-press fixed bottom-6 right-6 z-40 flex items-center gap-2 pl-4 pr-5 h-12 rounded-full"
         style={{ background: "var(--rust)", color: "var(--cream)", boxShadow: "0 8px 24px -8px rgba(0,0,0,0.45)" }}
         initial={{ opacity: 0, y: 20 }}

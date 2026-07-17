@@ -5,6 +5,7 @@ import LoadingIntro from "./motion/LoadingIntro";
 import BackToTop from "./motion/BackToTop";
 import PageTransition from "./motion/PageTransition";
 import SmoothScroll from "./motion/SmoothScroll";
+import CustomCursor from "./motion/CustomCursor";
 import RequestProductSection from "./RequestProductSection";
 import BundlePanel from "./bundle/BundlePanel";
 import BundleToast from "./bundle/BundleToast";
@@ -14,6 +15,7 @@ export default function PageShell({ children }: { children: React.ReactNode }) {
   return (
     <BundleProvider>
       <SmoothScroll>
+        <CustomCursor />
         <LoadingIntro />
         <Nav />
         {/* Single persistent mascot instance — fixed, anchored near nav */}

@@ -191,6 +191,7 @@ export default function Hero() {
                 href={getWhatsAppLink(DEFAULT_WHATSAPP_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-cursor=""
                 className="group px-8 py-4 rounded-full font-semibold text-sm inline-flex items-center gap-2"
                 style={{ background: "var(--rust)", color: "var(--cream)" }}
                 onMouseEnter={stopIdlePulse}

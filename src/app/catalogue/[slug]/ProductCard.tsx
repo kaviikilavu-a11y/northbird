@@ -61,6 +61,7 @@ export default function ProductCard({
       <button
         type="button"
         onClick={() => setDetailProduct(product)}
+        data-cursor="View"
         className="block w-full text-left cursor-zoom-in"
         aria-label={`View details for ${product.name}`}
       >
@@ -169,6 +170,7 @@ export default function ProductCard({
           <motion.button
             type="button"
             onClick={handleAddToBundle}
+            data-cursor="Add"
             animate={justAdded ? { scale: [1, 1.04, 1] } : { scale: 1 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="btn-press flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl font-semibold text-xs transition-all duration-200 hover:shadow-[0_4px_16px_-4px_rgba(79,124,129,0.5)] hover:-translate-y-0.5"
