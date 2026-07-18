@@ -6,7 +6,6 @@ import { CATEGORIES, categoryStartingPrice, categoryCoverImage, publishedProduct
 import { assetPath } from "@/lib/site-config";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import SectionLabel from "@/components/motion/SectionLabel";
-import BorderBeam from "@/components/motion/BorderBeam";
 
 // Brand-bible "Collection-flow" homepage concept: one large featured collection,
 // tinted highlighted collections, then everything else in a scannable grid.
@@ -42,7 +41,6 @@ function HighlightedCard({ cat }: { cat: Category }) {
             className="absolute inset-0 w-full h-full object-cover opacity-30 transition-transform duration-500 group-hover:scale-110"
           />
         )}
-        {cat.bestValue && <BorderBeam size={110} duration={6} />}
         <div className="relative">
           <p className="text-[11px] font-semibold tracking-widest uppercase mb-3" style={{ color: "rgba(251,247,238,0.7)" }}>
             {cat.bestValue ? "Best value" : "Highlighted"}

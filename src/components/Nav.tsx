@@ -27,15 +27,23 @@ function useMounted() {
 function MenuIcon({ open }: { open: boolean }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-      <motion.path
-        d="M4 6h16"
-        animate={open ? { d: "M6 6l12 12" } : { d: "M4 6h16" }}
+      <motion.line
+        x1="4"
+        y1="6"
+        x2="20"
+        y2="6"
+        style={{ originX: "50%", originY: "50%" }}
+        animate={open ? { y: 6, rotate: 45 } : { y: 0, rotate: 0 }}
         transition={{ duration: 0.25 }}
       />
-      <motion.path d="M4 12h16" animate={{ opacity: open ? 0 : 1 }} transition={{ duration: 0.15 }} />
-      <motion.path
-        d="M4 18h16"
-        animate={open ? { d: "M6 18L18 6" } : { d: "M4 18h16" }}
+      <motion.line x1="4" y1="12" x2="20" y2="12" animate={{ opacity: open ? 0 : 1 }} transition={{ duration: 0.15 }} />
+      <motion.line
+        x1="4"
+        y1="18"
+        x2="20"
+        y2="18"
+        style={{ originX: "50%", originY: "50%" }}
+        animate={open ? { y: -6, rotate: -45 } : { y: 0, rotate: 0 }}
         transition={{ duration: 0.25 }}
       />
     </svg>
