@@ -93,14 +93,14 @@ export default function ProductCard({
       <div className="flex flex-col flex-1 gap-2 pt-3">
         <div className="flex items-start justify-between gap-2">
           <h2
-            className="font-semibold text-sm leading-snug flex-1 transition-colors duration-200 group-hover:[color:var(--rust)]"
+            className="font-semibold text-base leading-snug flex-1 transition-colors duration-200 group-hover:[color:var(--rust)]"
             style={{ color: "var(--teal-dark)" }}
           >
             {product.name}
           </h2>
           {product.bestValue && (
             <span
-              className="shrink-0 text-[10px] font-bold uppercase tracking-wide"
+              className="shrink-0 text-xs font-bold uppercase tracking-wide"
               style={{ color: "var(--rust)" }}
             >
               Best value
@@ -109,7 +109,7 @@ export default function ProductCard({
         </div>
 
         {product.description && (
-          <p className="text-xs leading-relaxed flex-1" style={{ color: "#666" }}>
+          <p className="text-sm leading-relaxed flex-1" style={{ color: "#666" }}>
             {product.description}
           </p>
         )}
@@ -137,23 +137,23 @@ export default function ProductCard({
               );
             })}
             {selectedColor && (
-              <span className="text-[10px] ml-0.5" style={{ color: "#999" }}>
+              <span className="text-xs ml-0.5" style={{ color: "#999" }}>
                 {selectedColor}
               </span>
             )}
           </div>
         )}
 
-        <p className="font-bold text-base mt-1 flex items-baseline gap-1.5 flex-wrap" style={{ color: "var(--rust)" }}>
+        <p className="font-bold text-lg mt-1 flex items-baseline gap-1.5 flex-wrap" style={{ color: "var(--rust)" }}>
           {product.customQuote || product.price === undefined ? "Request a Quote" : formatKES(product.price)}
           {!product.customQuote && product.price !== undefined && isBrandingIncluded(categorySlug) && (
-            <span className="font-normal text-[10px]" style={{ color: "#aaa" }}>
+            <span className="font-normal text-xs" style={{ color: "#aaa" }}>
               incl. branding
             </span>
           )}
         </p>
 
-        <p className="text-[10px] leading-snug" style={{ color: "#999" }}>
+        <p className="text-xs leading-snug" style={{ color: "#999" }}>
           Branding:{" "}
           <span className="transition-colors duration-300 group-hover:[color:var(--rust)]">
             {brandingMethodsForCategory(categorySlug).join(" · ")}
@@ -161,7 +161,7 @@ export default function ProductCard({
         </p>
 
         <div className="flex items-center justify-between mt-2 gap-2">
-          <span className="text-[11px] font-medium" style={{ color: "#888" }}>
+          <span className="text-xs font-medium" style={{ color: "#888" }}>
             Qty
           </span>
           <QuantityStepper value={qty} onChange={setQty} size="sm" />
@@ -174,7 +174,7 @@ export default function ProductCard({
             data-cursor="Add"
             animate={justAdded ? { scale: [1, 1.04, 1] } : { scale: 1 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="btn-press flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl font-semibold text-xs transition-all duration-200 hover:shadow-[0_4px_16px_-4px_rgba(79,124,129,0.5)] hover:-translate-y-0.5"
+            className="btn-press flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 hover:shadow-[0_4px_16px_-4px_rgba(79,124,129,0.5)] hover:-translate-y-0.5"
             style={{ background: "var(--teal-dark)", color: "var(--cream)" }}
           >
             {justAdded ? "Added ✓" : "Add to Bundle"}
@@ -184,7 +184,7 @@ export default function ProductCard({
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-press flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl font-semibold text-xs transition-all duration-200 hover:shadow-[0_4px_16px_-4px_rgba(37,211,102,0.55)] hover:-translate-y-0.5"
+            className="btn-press flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 hover:shadow-[0_4px_16px_-4px_rgba(37,211,102,0.55)] hover:-translate-y-0.5"
             style={{ background: "#25D366", color: "white" }}
           >
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">

@@ -23,7 +23,7 @@ export default function CataloguePage() {
           <h1 className="font-display text-3xl md:text-4xl font-semibold mb-3" style={{ color: "var(--teal-dark)" }}>
             Catalogue
           </h1>
-          <p className="text-sm mb-10 max-w-xl" style={{ color: "#666" }}>
+          <p className="text-base mb-10 max-w-xl" style={{ color: "#666" }}>
             {CATEGORIES.length} categories — click any to see products, colours and pricing. All prices are inclusive
             of branding. Every order starts and ends on WhatsApp.
           </p>
@@ -63,27 +63,27 @@ export default function CataloguePage() {
                 )}
                 <div className="pt-3 flex flex-col gap-1">
                   {occasion && (
-                    <span className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: "var(--teal-light)" }}>
+                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--teal-light)" }}>
                       {occasion}
                     </span>
                   )}
                   <h2
-                    className="font-semibold text-sm leading-snug transition-colors duration-200 group-hover:[color:var(--rust)]"
+                    className="font-semibold text-base leading-snug transition-colors duration-200 group-hover:[color:var(--rust)]"
                     style={{ color: "var(--teal-dark)" }}
                   >
                     {cat.name}
                     {cat.bestValue && (
-                      <span className="ml-1.5 text-[10px] font-bold uppercase tracking-wide align-middle" style={{ color: "var(--rust)" }}>
+                      <span className="ml-1.5 text-xs font-bold uppercase tracking-wide align-middle" style={{ color: "var(--rust)" }}>
                         Best value
                       </span>
                     )}
                   </h2>
-                  <p className="text-xs" style={{ color: "#888" }}>
+                  <p className="text-sm" style={{ color: "#888" }}>
                     {cat.itemized && publishedCount > 0
                       ? `${publishedCount} product${publishedCount === 1 ? "" : "s"}`
                       : "Ask us on WhatsApp"}
                   </p>
-                  <p className="text-xs font-semibold" style={{ color: "var(--rust)" }}>
+                  <p className="text-sm font-semibold" style={{ color: "var(--rust)" }}>
                     {categoryStartingPrice(cat)}
                   </p>
                 </div>

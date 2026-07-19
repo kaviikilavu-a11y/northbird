@@ -47,14 +47,14 @@ export default async function CategoryPage({ params }: Props) {
         <span className="text-5xl">{cat.emoji}</span>
         <div>
           {occasionTag(cat.slug) && (
-            <p className="text-[11px] font-semibold uppercase tracking-wide mb-1" style={{ color: "var(--teal-light)" }}>
+            <p className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: "var(--teal-light)" }}>
               {occasionTag(cat.slug)}
             </p>
           )}
           <h1 className="font-display text-3xl font-semibold" style={{ color: "var(--teal-dark)" }}>
             {cat.name}
           </h1>
-          <p className="text-sm mt-1" style={{ color: "#666" }}>
+          <p className="text-base mt-1" style={{ color: "#666" }}>
             {cat.description}
           </p>
         </div>
@@ -65,7 +65,7 @@ export default async function CategoryPage({ params }: Props) {
         {brandingMethodsForCategory(cat.slug).map((method) => (
           <span
             key={method}
-            className="text-[11px] font-medium px-3 py-1 rounded-full border"
+            className="text-xs font-medium px-3 py-1 rounded-full border"
             style={{ borderColor: "var(--cream-deep)", color: "var(--teal-dark)", background: "var(--cream-deep)" }}
           >
             {method}
@@ -75,7 +75,7 @@ export default async function CategoryPage({ params }: Props) {
 
       {cat.itemized && products.length > 0 ? (
         <>
-          <p className="text-xs mb-10" style={{ color: "#aaa" }}>
+          <p className="text-sm mb-10" style={{ color: "#aaa" }}>
             All prices in KES{isBrandingIncluded(cat.slug) ? " and inclusive of branding" : ""}. Minimum order
             quantities and bulk pricing available — ask us on WhatsApp.
             {!isBrandingIncluded(cat.slug) && " Branding is quoted per order."}
@@ -105,10 +105,10 @@ export default async function CategoryPage({ params }: Props) {
           <p className="font-bold text-2xl mb-1" style={{ color: "var(--rust)" }}>
             {categoryStartingPrice(cat)}
           </p>
-          <p className="text-xs mb-6" style={{ color: "#aaa" }}>
+          <p className="text-sm mb-6" style={{ color: "#aaa" }}>
             {isBrandingIncluded(cat.slug) ? "Inclusive of branding" : "Branding quoted per order"}
           </p>
-          <p className="text-sm leading-relaxed mb-8" style={{ color: "#666" }}>
+          <p className="text-base leading-relaxed mb-8" style={{ color: "#666" }}>
             We haven&apos;t photographed and itemised every {cat.name.toLowerCase()} option yet — but the range is real
             and priced. Send us your quantity and logo on WhatsApp and we&apos;ll come back with options the same day.
           </p>
