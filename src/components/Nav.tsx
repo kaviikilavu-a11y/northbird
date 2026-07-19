@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
@@ -8,6 +8,7 @@ import { PRIMARY_CTA, getWhatsAppLink, DEFAULT_WHATSAPP_MESSAGE, assetPath } fro
 import CatalogueMegaMenu from "@/components/CatalogueMegaMenu";
 import MobileNavPanel from "@/components/MobileNavPanel";
 import Magnetic from "@/components/motion/Magnetic";
+import { useMounted } from "@/lib/use-mounted";
 
 const links = [
   { href: "/", label: "Home" },
@@ -16,13 +17,6 @@ const links = [
   { href: "/policies/", label: "Policies" },
   { href: "/contact/", label: "Contact" },
 ];
-
-// True only once the client has hydrated — avoids a server/client markup mismatch
-// for the pathname-dependent transparent-nav styling below.
-const subscribeNever = () => () => {};
-function useMounted() {
-  return useSyncExternalStore(subscribeNever, () => true, () => false);
-}
 
 function MenuIcon({ open }: { open: boolean }) {
   return (

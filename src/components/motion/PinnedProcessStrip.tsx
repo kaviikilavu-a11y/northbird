@@ -3,6 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { StaggerGroup, StaggerItem } from "./Reveal";
+import { useMounted } from "@/lib/use-mounted";
+
+// The static-list vs. scroll-pinned branch below renders genuinely different DOM (not just
+// different animation values), so it can't use the "always render the same element" trick
+// Reveal.tsx uses. Instead, gate it on mount: both server and the client's first pass render
+// the same thing, and only after hydration is guaranteed complete do we read the real
+// reduceMotion value — avoiding the hydration mismatch (React error #418) that a
+// synchronously-resolved useReducedMotion() would otherwise cause.
 
 export interface ProcessStep {
   n: string;
@@ -56,6 +64,8 @@ export default function PinnedProcessStrip({
   accentColor?: string;
 }) {
   const reduceMotion = useReducedMotion();
+  const mounted = useMounted();
+  const useStaticList = !mounted || reduceMotion;
   const outerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [maxTranslate, setMaxTranslate] = useState(0);
@@ -84,23 +94,28 @@ export default function PinnedProcessStrip({
         <StaticStepList steps={steps} accentColor={accentColor} />
       </div>
 
-      {reduceMotion ? (
-        <div className="hidden md:block">
-          <StaticStepList steps={steps} accentColor={accentColor} />
+      {/* Both variants stay mounted (toggled via CSS, not conditional rendering) so the
+          useScroll target ref is always attached from the first paint onward — a ref that's
+          sometimes absent from the tree makes useScroll warn that its target "is defined but
+          not hydrated." */}
+      <div className={useStaticList ? "hidden md:block" : "hidden"}>
+        <StaticStepList steps={steps} accentColor={accentColor} />
+      </div>
+      <div
+        className={useStaticList ? "hidden" : "hidden md:block relative"}
+        ref={outerRef}
+        style={{ height: `${Math.max(steps.length * 55, 200)}vh` }}
+      >
+        <div className="sticky top-28 h-[60vh] flex flex-col justify-center overflow-hidden">
+          <motion.div ref={trackRef} className="flex gap-14 lg:gap-20 w-max" style={{ x }}>
+            {steps.map((s) => (
+              <div key={s.n} className="shrink-0 w-[280px] lg:w-[320px]">
+                <StepCard step={s} accentColor={accentColor} />
+              </div>
+            ))}
+          </motion.div>
         </div>
-      ) : (
-        <div className="hidden md:block relative" ref={outerRef} style={{ height: `${Math.max(steps.length * 55, 200)}vh` }}>
-          <div className="sticky top-28 h-[60vh] flex flex-col justify-center overflow-hidden">
-            <motion.div ref={trackRef} className="flex gap-14 lg:gap-20 w-max" style={{ x }}>
-              {steps.map((s) => (
-                <div key={s.n} className="shrink-0 w-[280px] lg:w-[320px]">
-                  <StepCard step={s} accentColor={accentColor} />
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      )}
+      </div>
     </>
   );
 }

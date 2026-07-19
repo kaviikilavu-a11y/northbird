@@ -58,9 +58,12 @@ export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [idlePulse, setIdlePulse] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
+  // Must default to false (matching the server, which has no window) rather than reading
+  // matchMedia synchronously here — that would make the client's first render diverge from
+  // the server-rendered HTML whenever prefers-reduced-motion is on, a hydration mismatch
+  // (React error #418) that can cascade and break sibling components. The real value is
+  // picked up in the effect below, after hydration is guaranteed complete.
+  const [reducedMotion, setReducedMotion] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -73,6 +76,8 @@ export default function Hero() {
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setReducedMotion(mq.matches);
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
@@ -158,8 +163,8 @@ export default function Hero() {
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
         <motion.div
           className="max-w-2xl"
-          initial={reducedMotion ? undefined : "hidden"}
-          animate={reducedMotion ? undefined : "visible"}
+          initial={reducedMotion ? "visible" : "hidden"}
+          animate="visible"
           variants={textStagger}
         >
           <motion.div className="flex items-center gap-3 mb-6" variants={textItem}>
@@ -249,9 +254,9 @@ export default function Hero() {
           <AnimatePresence mode="wait">
             <motion.p
               key={reducedMotion ? "static" : activeIndex}
-              initial={reducedMotion ? undefined : { opacity: 0, y: 4 }}
+              initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={reducedMotion ? undefined : { opacity: 0 }}
+              exit={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.4, delay: reducedMotion ? 0 : 0.3, ease: "easeOut" }}
               className="text-xs font-medium tracking-wide uppercase hidden sm:block"
               style={{ color: "rgba(251,247,238,0.45)" }}

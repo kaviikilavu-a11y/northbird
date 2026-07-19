@@ -2,6 +2,17 @@
 
 import { motion, useReducedMotion, type TargetAndTransition, type Variants } from "framer-motion";
 import type { CSSProperties, ReactNode } from "react";
+import { useMounted } from "@/lib/use-mounted";
+
+// useReducedMotion() itself resolves synchronously from matchMedia on the client's first
+// render (before hydration completes), so trusting it directly can still diverge from the
+// server's render whenever prefers-reduced-motion is on. Only trust it once mount is
+// confirmed on both sides.
+function useSafeReducedMotion(): boolean {
+  const reduceMotion = useReducedMotion();
+  const mounted = useMounted();
+  return mounted && !!reduceMotion;
+}
 
 export type RevealVariant = "up" | "left" | "right" | "scale" | "blur";
 
@@ -36,16 +47,15 @@ export function Reveal({
   delay?: number;
   className?: string;
 }) {
-  const reduceMotion = useReducedMotion();
-  if (reduceMotion) return <div className={className}>{children}</div>;
+  const reduceMotion = useSafeReducedMotion();
 
   return (
     <motion.div
       className={className}
-      initial={HIDDEN[variant]}
+      initial={reduceMotion ? SHOWN : HIDDEN[variant]}
       whileInView={SHOWN}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay, ease: EASE }}
+      transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : delay, ease: EASE }}
     >
       {children}
     </motion.div>
@@ -56,8 +66,11 @@ function staggerContainer(stagger: number): Variants {
   return { hidden: {}, visible: { transition: { staggerChildren: stagger } } };
 }
 
-function itemVariants(variant: RevealVariant): Variants {
-  return { hidden: HIDDEN[variant], visible: SHOWN };
+function itemVariants(variant: RevealVariant, reduceMotion: boolean): Variants {
+  return {
+    hidden: reduceMotion ? SHOWN : HIDDEN[variant],
+    visible: reduceMotion ? { ...SHOWN, transition: { duration: 0 } } : SHOWN,
+  };
 }
 
 /** Stagger container — pairs with StaggerItem to reveal a list progressively, not all at once. */
@@ -72,8 +85,7 @@ export function StaggerGroup({
   style?: CSSProperties;
   stagger?: number;
 }) {
-  const reduceMotion = useReducedMotion();
-  if (reduceMotion) return <div className={className} style={style}>{children}</div>;
+  const reduceMotion = useSafeReducedMotion();
 
   return (
     <motion.div
@@ -82,7 +94,7 @@ export function StaggerGroup({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
-      variants={staggerContainer(stagger)}
+      variants={staggerContainer(reduceMotion ? 0 : stagger)}
     >
       {children}
     </motion.div>
@@ -98,11 +110,10 @@ export function StaggerItem({
   className?: string;
   variant?: RevealVariant;
 }) {
-  const reduceMotion = useReducedMotion();
-  if (reduceMotion) return <div className={className}>{children}</div>;
+  const reduceMotion = useSafeReducedMotion();
 
   return (
-    <motion.div className={className} variants={itemVariants(variant)}>
+    <motion.div className={className} variants={itemVariants(variant, !!reduceMotion)}>
       {children}
     </motion.div>
   );
