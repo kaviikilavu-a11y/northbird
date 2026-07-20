@@ -177,11 +177,11 @@ export default function CuratedCollections() {
         </div>
       </div>
 
-      {/* 4. Infinite marquee — category names, low-opacity, purely textural */}
+      {/* 4. Infinite marquee — category names, decorative */}
       <div className="overflow-hidden scrollbar-hide mt-16 py-6 border-y" style={{ borderColor: "var(--cream-deep)" }} aria-hidden="true">
         <div className="flex gap-10 w-max animate-marquee">
           {marqueeNames.map((name, i) => (
-            <span key={`${name}-${i}`} className="font-display text-3xl md:text-4xl whitespace-nowrap" style={{ color: "var(--cream-deep)" }}>
+            <span key={`${name}-${i}`} className="font-display text-3xl md:text-4xl whitespace-nowrap" style={{ color: "var(--teal-dark)" }}>
               {name}
             </span>
           ))}
